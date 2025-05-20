@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
 
   const fetchUserData = async (token) => {
     try {
-      const response = await fetch('http://localhost:4000/person/profile', {
+      const response = await fetch('https://ed-b.onrender.com/person/profile', {
         headers: {
           Authorization: `Bearer ${token}`
         }

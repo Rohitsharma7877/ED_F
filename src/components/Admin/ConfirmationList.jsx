@@ -19,7 +19,7 @@ const ConfirmationList = () => {
   useEffect(() => {
     const fetchConfirmations = async () => {
       try {
-        const response = await fetch("http://localhost:4000/api/form-data");
+        const response = await fetch("https://ed-b.onrender.com/api/form-data");
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
@@ -78,7 +78,7 @@ const ConfirmationList = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:4000/api/update-process-status",
+        "https://ed-b.onrender.com/api/update-process-status",
         {
           method: "PUT",
           headers: {

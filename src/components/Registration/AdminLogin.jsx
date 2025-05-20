@@ -62,14 +62,6 @@ function AdminLogin() {
     setFormData({ ...formData, [name]: value });
   };
 
- 
-
-  
-
-  
-
-  
-
 
   return (
     <div className="adminLogin-main">

@@ -13,7 +13,7 @@ const ViewAmbulanceService = () => {
   useEffect(() => {
     const fetchAmbulanceRequests = async () => {
       try {
-        const response = await fetch("http://localhost:4000/api/ambulance-services");
+        const response = await fetch("https://ed-b.onrender.com/api/ambulance-services");
         if (response.ok) {
           const data = await response.json();
           setRequests(data);

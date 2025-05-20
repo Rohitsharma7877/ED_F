@@ -10,7 +10,7 @@ function ViewAdmins() {
   useEffect(() => {
     // Fetch the list of admins when the component mounts
     axios
-      .get("http://localhost:4000/api/create-admin") // Assuming your backend is running on localhost:5000
+      .get("https://ed-b.onrender.com/api/create-admin") // Assuming your backend is running on localhost:5000
       .then((response) => {
         setAdmins(response.data);
         setLoading(false);

@@ -14,7 +14,7 @@ const ViewHomeCollection = () => {
   // Fetch home collection data from the backend
   const fetchHomeCollections = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/home-collection");
+      const response = await fetch("https://ed-b.onrender.com/api/home-collection");
       if (!response.ok) {
         throw new Error("Failed to fetch home collection data");
       }

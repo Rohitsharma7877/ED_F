@@ -14,7 +14,7 @@ const ViewAppointments = () => {
     const fetchAppointments = async () => {
       try {
         const response = await fetch(
-          "http://localhost:4000/api/book-appointment"
+          "https://ed-b.onrender.com/api/book-appointment"
         );
 
         if (response.ok) {

@@ -42,7 +42,7 @@ const ExpertServiceList = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:4000/api/expertServiceLists"
+          "https://ed-b.onrender.com/api/expertServiceLists"
         );
         if (!response.ok) {
           throw new Error("Failed to fetch data");
@@ -89,8 +89,8 @@ const ExpertServiceList = () => {
     try {
       const url =
         editIndex !== null
-          ? `http://localhost:4000/api/expertServiceLists/${expertPackageList[editIndex]._id}`
-          : "http://localhost:4000/api/expertServiceLists";
+          ? `https://ed-b.onrender.com/api/expertServiceLists/${expertPackageList[editIndex]._id}`
+          : "https://ed-b.onrender.com/api/expertServiceLists";
 
       const method = editIndex !== null ? "PUT" : "POST";
 
@@ -166,7 +166,7 @@ const ExpertServiceList = () => {
   const handleDelete = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:4000/api/expertServiceLists/${id}`,
+        `https://ed-b.onrender.com/api/expertServiceLists/${id}`,
         {
           method: "DELETE",
         }

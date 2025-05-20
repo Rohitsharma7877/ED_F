@@ -41,7 +41,7 @@ const XRayHeader = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:4000/api/service-bookings",
+        "https://ed-b.onrender.com/api/service-bookings",
         {
           method: "POST",
           headers: {

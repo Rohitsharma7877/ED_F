@@ -11,7 +11,7 @@ const UploadPrescriptionDashboard = () => {
   // Define all functions before they're used
   const fetchPrescriptions = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/prescriptions");
+      const response = await fetch("https://ed-b.onrender.com/api/prescriptions");
       const data = await response.json();
       if (response.ok) {
         setPrescriptions(data.data || []);
@@ -26,7 +26,7 @@ const UploadPrescriptionDashboard = () => {
   const handleStatusChange = async (id, status) => {
     try {
       const response = await fetch(
-        `http://localhost:4000/api/prescriptions/${id}/status`,
+        `https://ed-b.onrender.com/api/prescriptions/${id}/status`,
         {
           method: "PUT",
           headers: {
@@ -119,7 +119,7 @@ const UploadPrescriptionDashboard = () => {
               <td>
                 {prescription.file ? (
                   <a
-                    href={`http://localhost:4000/uploads/${prescription.file}`}
+                    href={`https://ed-b.onrender.com/uploads/${prescription.file}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >

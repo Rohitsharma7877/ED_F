@@ -70,7 +70,7 @@ const BookAppointment = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:4000/api/book-appointment",
+        "https://ed-b.onrender.com/api/book-appointment",
         {
           method: "POST",
           headers: {

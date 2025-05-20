@@ -25,7 +25,7 @@ function BookingList() {
   // Function to fetch bookings
   const fetchBookings = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/bookings");
+      const response = await axios.get("https://ed-b.onrender.com/api/bookings");
       const bookingsData = response.data;
       setBookings(bookingsData);
       setLoading(false);

@@ -45,7 +45,7 @@ const SubCategory = () => {
   useEffect(() => {
     const fetchSubCategories = async () => {
       try {
-        const response = await fetch("http://localhost:4000/api/subcategories");
+        const response = await fetch("https://ed-b.onrender.com/api/subcategories");
         const data = await response.json();
         if (response.ok) {
           setSubCategoriesList(data.data);
@@ -133,7 +133,7 @@ const SubCategory = () => {
 
 
     try {
-      const response = await fetch("http://localhost:4000/api/subcategories", {
+      const response = await fetch("https://ed-b.onrender.com/api/subcategories", {
         method: "POST",
         body: formData,
       });
@@ -162,7 +162,7 @@ const SubCategory = () => {
 
       // Fetch updated list from backend
       const updatedResponse = await fetch(
-        "http://localhost:4000/api/subcategories"
+        "https://ed-b.onrender.com/api/subcategories"
       );
       const updatedData = await updatedResponse.json();
       if (updatedResponse.ok) {
@@ -235,7 +235,7 @@ const SubCategory = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:4000/api/subcategories/${subCategoriesList[editIndex]._id}`,
+        `https://ed-b.onrender.com/api/subcategories/${subCategoriesList[editIndex]._id}`,
         {
           method: "PUT",
           body: formData,
@@ -259,7 +259,7 @@ const SubCategory = () => {
         setEditIndex(null);
 
         const updatedResponse = await fetch(
-          "http://localhost:4000/api/subcategories"
+          "https://ed-b.onrender.com/api/subcategories"
         );
         const updatedData = await updatedResponse.json();
         if (updatedResponse.ok) {
@@ -282,7 +282,7 @@ const SubCategory = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:4000/api/subcategories/${subCategoriesList[index]._id}`,
+        `https://ed-b.onrender.com/api/subcategories/${subCategoriesList[index]._id}`,
         {
           method: "DELETE",
         }
@@ -290,7 +290,7 @@ const SubCategory = () => {
       if (response.ok) {
         alert("SubCategory deleted successfully!");
         const updatedResponse = await fetch(
-          "http://localhost:4000/api/subcategories"
+          "https://ed-b.onrender.com/api/subcategories"
         );
         const updatedData = await updatedResponse.json();
         if (updatedResponse.ok) {
@@ -566,7 +566,7 @@ const SubCategory = () => {
                     <td>
                       {subCategoryInput.image ? (
                         <img
-                          src={`http://localhost:4000/uploads/${subCategoryInput.image}`} // Use the correct URL
+                          src={`https://ed-b.onrender.com/uploads/${subCategoryInput.image}`} // Use the correct URL
                           alt="Uploaded Preview"
                           className="category-image"
                         />

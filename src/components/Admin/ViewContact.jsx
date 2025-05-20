@@ -11,7 +11,7 @@ const ViewContact = () => {
   useEffect(() => {
     const fetchContacts = async () => {
       try {
-        const response = await fetch("http://localhost:4000/api/contact");
+        const response = await fetch("https://ed-b.onrender.com/api/contact");
         const data = await response.json();
         
         if (!response.ok) {
@@ -31,7 +31,7 @@ const ViewContact = () => {
 
   const updateStatus = async (id, newStatus) => {
     try {
-      const response = await fetch(`http://localhost:4000/api/contact/${id}`, {
+      const response = await fetch(`https://ed-b.onrender.com/api/contact/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -62,7 +62,7 @@ const ViewContact = () => {
     if (!window.confirm("Are you sure you want to delete this contact?")) return;
     
     try {
-      const response = await fetch(`http://localhost:4000/api/contact/${id}`, {
+      const response = await fetch(`https://ed-b.onrender.com/api/contact/${id}`, {
         method: "DELETE",
       });
 

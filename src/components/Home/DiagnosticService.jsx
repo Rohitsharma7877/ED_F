@@ -190,7 +190,7 @@ const DiagnosticService = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:4000/api/form-data", {
+      const response = await fetch("https://ed-b.onrender.com/api/form-data", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

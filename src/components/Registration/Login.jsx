@@ -53,7 +53,7 @@ const Login = () => {
 
     try {
       // Call backend API to send OTP
-      const response = await axios.post("http://localhost:4000/person/send-otp", { 
+      const response = await axios.post("https://ed-b.onrender.com/person/send-otp", { 
         mobile,
         name,
         email 
@@ -86,7 +86,7 @@ const Login = () => {
   try {
     const { mobile, name, email } = formData;
     const response = await axios.post(
-      "http://localhost:4000/person/verify-otp",
+      "https://ed-b.onrender.com/person/verify-otp",
       { mobile, otp, name, email }
     );
 
@@ -128,7 +128,7 @@ const Login = () => {
   const handleResendOtp = async () => {
     try {
       const { mobile, name, email } = formData;
-      await axios.post("http://localhost:4000/person/send-otp", { 
+      await axios.post("https://ed-b.onrender.com/person/send-otp", { 
         mobile,
         name,
         email 

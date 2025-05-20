@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./whatElectrocardiogram.css";
-// import ecgImage from "./ecgImage2.jpg";
+import ecgImage from "./ecgImage2.jpg";
 
 const WhatElectrocardiogram = () => {
   const [showModal, setShowModal] = useState(false);

@@ -21,7 +21,7 @@ const AllTest = () => {
       setLoading(true);
       try {
         const categoryResponse = await fetch(
-          "http://localhost:4000/api/categories"
+          "https://ed-b.onrender.com/api/categories"
         );
         const categoryResult = await categoryResponse.json();
         console.log("Category API Response:", categoryResult);
@@ -50,12 +50,12 @@ const AllTest = () => {
 
     try {
       if (category === "All Test") {
-        const response = await fetch("http://localhost:4000/api/categories");
+        const response = await fetch("https://ed-b.onrender.com/api/categories");
         const result = await response.json();
         setData(result.data);
       } else {
         const response = await fetch(
-          `http://localhost:4000/api/categories?category=${category}`
+          `https://ed-b.onrender.com/api/categories?category=${category}`
         );
         const result = await response.json();
         setData(result.data); // ✅ Store only category data
@@ -71,7 +71,7 @@ const AllTest = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:4000/api/subcategories?category=${selectedCategory}&subCategory=${card.title}`
+        `https://ed-b.onrender.com/api/subcategories?category=${selectedCategory}&subCategory=${card.title}`
       );
       const result = await response.json();
 
@@ -198,7 +198,7 @@ const AllTest = () => {
                   <img
                     src={
                       card.image
-                        ? `http://localhost:4000/uploads/${card.image}`
+                        ? `https://ed-b.onrender.com/uploads/${card.image}`
                         : "default-image-url"
                     }
                     alt={card.title}

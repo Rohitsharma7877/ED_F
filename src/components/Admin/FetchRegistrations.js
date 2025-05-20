@@ -15,7 +15,7 @@ const FetchRegistrations = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/api/admin-registrations"
+          "https://ed-b.onrender.com/api/admin-registrations"
         );
         setRegistrations(response.data);
         setLoading(false);

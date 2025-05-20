@@ -39,7 +39,7 @@ const UploadPrescription = () => {
       formDataToSend.append("uploadDate", new Date().toISOString()); // Add current date
   
       try {
-        const response = await fetch("http://localhost:4000/api/prescriptions", {
+        const response = await fetch("https://ed-b.onrender.com/api/prescriptions", {
           method: "POST",
           body: formDataToSend,
         });

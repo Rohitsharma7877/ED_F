@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { IoClose } from "react-icons/io5"; // Import the close icon
-import doctor from './indianGroupDoctors.jpg'
-import './electrocardiogram.css'
+import doctor from "./indianGroupDoctors.jpg";
+import "./electrocardiogram.css";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { useNavigate } from "react-router-dom";
-
 
 const Electrocardiogram = () => {
   const [showForm, setShowForm] = useState(false);
@@ -43,7 +42,7 @@ const Electrocardiogram = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:4000/api/service-bookings",
+        "https://ed-b.onrender.com/api/service-bookings",
         {
           method: "POST",
           headers: {
@@ -73,17 +72,28 @@ const Electrocardiogram = () => {
           <div className="electrocardiogram-title-box">
             <h1 className="electrocardiogram-title">Electrocardiogram(ECG)</h1>
             <p className="electrocardiogram-title2">
-            An ECG (Electrocardiogram) is a medical test that records the electrical activity of the heart to detect abnormalities in its rhythm, rate, and structure. It is commonly used to diagnose heart conditions like arrhythmias, heart attacks, and other cardiac issues.
+              An ECG (Electrocardiogram) is a medical test that records the
+              electrical activity of the heart to detect abnormalities in its
+              rhythm, rate, and structure. It is commonly used to diagnose heart
+              conditions like arrhythmias, heart attacks, and other cardiac
+              issues.
             </p>
             <div className="electrocardiogram-buttons">
-            <button className="electrocardiogram-btn" onClick={() => setShowForm(true)}>Book Now</button>
-          </div>
+              <button
+                className="electrocardiogram-btn"
+                onClick={() => setShowForm(true)}
+              >
+                Book Now
+              </button>
+            </div>
           </div>
         </div>
       </div>
       {showForm && (
         <div className="electro-form-overlay">
-          <div className={`electro-form-wrapper ${isExpanded ? "expanded" : ""}`}>
+          <div
+            className={`electro-form-wrapper ${isExpanded ? "expanded" : ""}`}
+          >
             {/* Left Section: Image */}
             <div className="electro-form-image-section">
               <img src={doctor} alt="Doctors" className="patient-form-image" />
@@ -92,10 +102,15 @@ const Electrocardiogram = () => {
             {/* Right Section: Form */}
             <div className="electro-form-container">
               {/* Close Icon */}
-              <button className="electro-form-close-icon" onClick={handleCloseForm}>
+              <button
+                className="electro-form-close-icon"
+                onClick={handleCloseForm}
+              >
                 <IoClose size={24} color="#f44336" />
               </button>
-              <h2 className="electro-book-test-tittle">Book Your Appointment</h2>
+              <h2 className="electro-book-test-tittle">
+                Book Your Appointment
+              </h2>
               <form className="electro-book-test-form" onSubmit={handleBookNow}>
                 <div className="electro-book-form-name">
                   <label>Name:</label>
@@ -184,7 +199,7 @@ const Electrocardiogram = () => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Electrocardiogram
+export default Electrocardiogram;

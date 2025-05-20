@@ -85,7 +85,7 @@ const HomeCollection = () => {
     try {
       // API call to save the data to your database
       const response = await fetch(
-        "http://localhost:4000/api/home-collection",
+        "https://ed-b.onrender.com/api/home-collection",
         {
           method: "POST",
           headers: {

@@ -14,7 +14,7 @@ const ExpertPackageDetails = () => {
     const fetchPackageDetails = async () => {
       try {
         const response = await fetch(
-          `http://localhost:4000/api/expertServiceLists/${id}`
+          `https://ed-b.onrender.com/api/expertServiceLists/${id}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch package details");

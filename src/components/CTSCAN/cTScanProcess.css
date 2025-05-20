@@ -1,0 +1,111 @@
+/* Main container for the CT scan process */
+.ct-process-container {
+  display: flex;
+  flex-wrap: wrap; /* Wrap items for smaller screens */
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 30px;
+  margin: 20px auto;
+  max-width: 1200px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  gap: 20px;
+}
+
+/* Text section styles */
+.ct-process-text {
+  flex: 1;
+  max-width: 600px;
+  padding: 20px;
+}
+
+.ct-process-text h1 {
+  font-size: 2rem;
+  color: #eb7801;
+  font-weight: bold;
+  margin-bottom: 15px;
+  /* border-left: 5px solid #4caf50;  */
+  padding-left: 15px;
+  text-transform: capitalize;
+}
+
+.ct-process-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ct-process-list li {
+  font-size: 1rem;
+  color: black;
+  /* background: #ffffff; */
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);  */
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.checkmark-icon {
+  font-size: 1.2rem;
+  color: #603c86; /* Green checkmark */
+  font-weight: bold;
+}
+
+/* Image section styles */
+.ct-process-image {
+  flex: 1;
+  max-width: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.ct-process-image img {
+  width: 100%;
+  max-width: 700px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+}
+
+.ct-process-image img:hover {
+  transform: scale(1.05); /* Enlarge on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .ct-process-container {
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+  }
+
+  .ct-process-text h1 {
+    font-size: 1.5rem;
+  }
+
+  .ct-process-image img {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .ct-process-text h1 {
+    font-size: 1.2rem;
+  }
+
+  .ct-process-list li {
+    font-size: 0.9rem;
+  }
+
+  .checkmark-icon {
+    font-size: 1rem;
+  }
+}

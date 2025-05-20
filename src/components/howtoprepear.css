@@ -1,0 +1,80 @@
+.howtoprepareECG-main1{
+    height: 70vh; 
+    width: 100%; 
+    background-color: white; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    padding: 4%; 
+    box-sizing: border-box; 
+    /* border: 1px solid black; */
+}
+
+.howtoprepareECG-main2{
+    height: 100%; 
+    width: 96%; 
+    background-color: #603c86; 
+    margin: auto; 
+     /* border: 1px solid red;  */
+    box-sizing: border-box; 
+    display: flex;
+    border-radius: 3vh;
+}
+
+.howtoprepareECG-box1{
+    height: 100%;
+    width: 50%;
+    /* border: 1px solid green; */
+}
+
+.howtoprepareECG-box-image{
+   height: 98%;
+   width: 100%;
+   /* border: 1px solid black;  */
+   margin: 1% auto;
+   /* object-fit: contain; */
+}
+.howtoprepareECG-box-image img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+.howtoprepareECG-box2{
+    height: 100%;
+    width: 100%;
+    /* border: 1px solid green; */
+}
+.howtoprepareECG-box2-write{
+    height: 20%;
+    width: auto;
+    /* border: 1px solid black; */
+    align-items: center;
+    /* justify-content: center; */
+    padding-left: 5%;
+    padding-top: 2%;
+}
+.howtoprepareECG-header{
+    /* border: 1px solid black; */
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    
+}
+.howtoprepareECG-header h1{
+    font-size: 3.5vh;
+    font-weight: 800;
+    color: #eb7801;
+}
+
+.howtoprepareECG-point{
+    /* border: 1px solid red; */
+    height: 70%;
+    width: 90%;
+    margin: 2% auto;
+}
+.howtoprepareECG-point p{
+    font-size: 3vh;
+    font-weight: 600;
+    /* padding-left: 4%; */
+    color: rgb(228, 223, 223);
+}

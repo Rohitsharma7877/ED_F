@@ -1,0 +1,123 @@
+/* Container that holds both columns */
+.whatisTMT-container {
+    display: flex;
+    justify-content: space-between; /* Distribute the space between the columns */
+    align-items: center; /* Align items vertically in the center */
+    gap: 20px; /* Space between the two columns */
+    margin: 50px;
+  }
+  
+  /* Text column styles */
+  .whatisTMT-text {
+    flex: 1; /* Takes up available space */
+    padding: 20px;
+  }
+  
+  .whatisTMT-text h1 {
+    font-size: 24px;
+    color: #eb7801;
+    text-align: left; /* Align text to the left */
+    margin-bottom: 15px;
+  }
+  
+  .whatisTMT-text p {
+    font-size: 16px;
+    color: #000000;
+    line-height: 1.6;
+    text-align: left;
+  }
+  
+  /* Image column styles */
+  .whatisTMT-image {
+    flex: 1; /* Takes up available space */
+    display: flex;
+    justify-content: center; /* Center the image horizontally */
+  }
+  
+  .whatisTMT-image img {
+    width: 100%; /* Make image responsive */
+    max-width: 500px; /* Set a max width for the image */
+    border-radius: 10px; /* Add rounded corners to the image */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  }
+  
+  
+  .whatisTMT-scanlist ul {
+    list-style: none; /* Remove default bullets */
+    padding: 0;
+    margin: 0;
+  }
+  
+  .whatisTMT-scanlist li {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #000000;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    /* background: #f9f9f9; */
+    padding: 2px 10px;
+    /* border-radius: 5px; */
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+    transition: transform 0.2s ease, background 0.3s ease;
+  }
+  
+  .whatisTMT-scanlist li:hover {
+    transform: translateY(-3px);
+    background: #f3f3f3;
+  }
+  
+  .check-icon {
+    font-size: 1.2rem;
+    color: #603c86;
+    font-weight: bold;
+  }
+
+  /* Mobile Styles */
+@media (max-width: 768px) {
+  .whatisTMT-container {
+    flex-direction: column; /* Stack columns vertically */
+    margin: 20px; /* Reduce margin on mobile */
+  }
+
+  .whatisTMT-text {
+    padding: 10px;
+  }
+
+  .whatisTMT-text h1 {
+    font-size: 20px; /* Smaller font for mobile */
+    text-align: center;
+  }
+
+  .whatisTMT-text p {
+    font-size: 14px; /* Smaller text for mobile */
+    text-align: center;
+  }
+
+  .whatisTMT-image {
+    margin-top: 20px; /* Add margin for spacing */
+    width: 100%;
+  }
+
+  .whatisTMT-image img {
+    max-width: 100%; /* Make the image take full width */
+  }
+
+  .whatisTMT-scanlist li {
+    font-size: 0.9rem; /* Smaller font on mobile */
+    padding: 5px 10px;
+  }
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .whatisTMT-container {
+    flex-direction: row; /* Keep the layout as row for tablets */
+    gap: 15px;
+  }
+
+  .whatisTMT-image img {
+    max-width: 400px; /* Reduce image size on tablets */
+  }
+}

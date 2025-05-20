@@ -1,0 +1,91 @@
+/* Container that holds both columns */
+.advantage-mammography-container {
+  display: flex;
+  flex-wrap: wrap; /* Allows wrapping for responsive design */
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 50px;
+  /* Light background */
+  border-radius: 15px;
+  /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); */
+}
+
+/* Text column styles */
+.advantage-mammography-text {
+  flex: 1;
+  max-width: 600px;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.advantage-mammography-text h1 {
+  font-size: 28px;
+  color: #eb7801;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.advantage-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.advantage-list li {
+  font-size: 18px;
+  color: black;
+  line-height: 1.8;
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.tick-icon {
+  color: #603c86;
+  margin-right: 12px;
+  font-size: 20px;
+}
+
+/* Image column styles */
+.advantage-mammography-image {
+  flex: 1;
+  max-width: 600px;
+  display: flex;
+  height: 420px;
+  /* justify-content: center; */
+  /* align-items: center; */
+  overflow: hidden; /* To prevent the image from overflowing the container */
+}
+
+.advantage-mammography-image img {
+  width: 100%;
+  height: auto; /* Ensures the image maintains its aspect ratio */
+  max-height: 600px; /* Sets a maximum height */
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, height 0.3s ease; /* Adds transition effect for smooth height change */
+}
+
+.advantage-mammography-image img:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .advantage-mammography-container {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .advantage-mammography-text {
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .advantage-mammography-image {
+    max-width: 100%;
+    padding-top: 20px;
+  }
+}

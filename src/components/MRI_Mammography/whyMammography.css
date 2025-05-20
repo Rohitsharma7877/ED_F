@@ -1,0 +1,70 @@
+/* General section styling */
+.why-mammography-section {
+  padding: 4rem 2rem;
+  /* background: linear-gradient(135deg, #f3f4f6, #ffffff); */
+  text-align: center;
+}
+
+.why-mammography-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #eb7801;
+}
+
+/* Grid for features */
+.why-mammography-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Feature item box */
+.why-mammography-item {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.why-mammography-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Icon styling */
+.mammography-icon {
+  font-size: 3rem;
+  color: #603c86;
+  margin-bottom: 1rem;
+}
+
+/* Title of each feature */
+.why-mammography-item-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #eb7801;
+  margin-bottom: 0.5rem;
+}
+
+/* Description text */
+.why-mammography-item-description {
+  font-size: 1rem;
+  color: black;
+  line-height: 1.6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .why-mammography-title {
+    font-size: 2rem;
+  }
+
+  .why-mammography-item {
+    padding: 1.5rem;
+  }
+}

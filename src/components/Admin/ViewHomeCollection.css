@@ -1,0 +1,152 @@
+/* Home Collection Page Styles - Updated to match registration form style */
+.HomeCollection-view-main {
+  padding: 20px;
+  background-color: #f9f9f9;
+  /* min-height: 100vh; */
+  
+}
+
+/* Container Styles */
+.HomeCollection-container {
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  /* max-width: 1200px; */
+  margin: 20px auto;
+  /* border: 1px solid red; */
+  width: auto;
+}
+
+/* Heading */
+.HomeCollection-heading {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #eb7801;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Filter and Action Controls */
+.filter-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.search-filter {
+  flex: 1;
+  min-width: 250px;
+  padding: 10px;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.home-date-filter {
+  padding: 10px;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Buttons */
+.export-button,
+.back-button {
+  padding: 10px 15px;
+  background-color: #eb7801;
+  color: #fff;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.export-button:hover,
+.back-button:hover {
+  background-color: #eb7801;
+}
+
+/* Table Styles */
+.HomeCollection-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.HomeCollection-table th,
+.HomeCollection-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.HomeCollection-table th {
+  background-color: #eb7801;
+  color: white;
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+}
+
+.HomeCollection-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.HomeCollection-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .HomeCollection-container {
+    padding: 15px;
+  }
+
+  .filter-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-filter,
+  .home-date-filter {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .HomeCollection-table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .export-button,
+  .back-button {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
+
+/* Error and Loading States */
+.error-text {
+  color: #d32f2f;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.loading-text {
+  text-align: center;
+  margin: 20px 0;
+  color: #603c86;
+}

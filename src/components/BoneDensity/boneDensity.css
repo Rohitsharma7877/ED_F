@@ -1,0 +1,340 @@
+/* Main page styles */
+.boneDensity-main1 {
+    height: auto;
+    width: 100%;
+    padding-top: 17vh;
+    /* border: 1px solid black; */
+  }
+  
+  .boneDensity-main2 {
+    height: 70vh;
+    width: 100%;
+    background-image: url(./bonedensityimg1.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .boneDensity-box {
+    width: 50%;
+  }
+  
+  .boneDensity-title-box {
+    padding: 22% 5% 10% 10%;
+  }
+  
+  .boneDensity-title {
+    font-size: 10.5vh;
+    font-weight: 500;
+    color: #eb7801;
+  }
+  
+  .boneDensity-title2 {
+    color: #000000;
+  background-color: rgba(255, 255, 255, 0.3); /* Semi-transparent white */
+  backdrop-filter: blur(10px); /* Adjust blur intensity */
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Light box shadow */
+  display: flex;
+  padding: 1%;
+  }
+  
+  .boneDensity-buttons {
+    margin-top: 3%;
+  }
+  
+  .boneDensity-btn {
+    background-color: #5e2d89;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .boneDensity-btn:hover {
+    background-color: #7737a1;
+  }
+  
+ /* Modal Styles */
+.boneDen-form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.boneDen-form-wrapper {
+  display: flex;
+  flex-direction: row; /* Ensure sections are side by side in desktop */
+  width: 80%;
+  margin-top: 5%;
+  max-width: 800px; /* Increase max width for desktop */
+  max-height: 70%; /* Limit height for scrolling */
+  background: white;
+  border-radius: 8px;
+  overflow-y: auto; /* Enable scrolling for overflow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+
+
+
+/* Expanded Form for Larger Screens */
+.boneDen-form-wrapper.expanded {
+  max-width: 95%; /* Expanded width */
+}
+
+.boneDen-form-image-section {
+  flex: 1;
+  background: #f3f3f3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.boneDen-form-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.boneDen-form-container {
+  flex: 1;
+  padding: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left;
+  overflow-y: auto; /* Scroll within the form */
+  max-height: 100%;
+  /* border: 1px solid red; */
+}
+
+.boneDen-book-test-tittle{
+  font-size: larger;
+  font-weight: bold;
+  color: #603c86;
+}
+
+.boneDen-form-close-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.boneDen-book-test-form{
+  width: 85%;
+  
+  /* border: 1px solid red; */
+}
+.boneDen-book-test-form input,
+.boneDen-book-test-form textarea {
+  width: 100%;
+  margin: 1px 0;
+  padding: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+.boneDen-book-form-name {
+  width: 100%; /* Ensure fields take full container width */
+  margin-bottom: 10px;
+  /* text-align: start; */
+  /* width: 100%; */
+  /* display: flex; */
+  /* justify-content: center; */
+}
+
+/* Scrollbar Styling */
+.boneDen-form-wrapper::-webkit-scrollbar {
+  width: 5px; /* Scrollbar width */
+}
+
+.boneDen-form-wrapper::-webkit-scrollbar-thumb {
+  background: #5e2d89; /* Thumb color */
+  border-radius: 10px; /* Rounded corners */
+}
+
+.boneDen-form-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #7737a1; /* Hover color */
+}
+
+.boneDen-form-wrapper::-webkit-scrollbar-track {
+  background: #f3f3f3; /* Scrollbar track */
+}
+
+.boneDen-book-test-form .boneDen-form-submit-btn {
+  background-color: #5e2d89;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 10px; /* Add space between buttons */
+}
+
+.boneDen-book-test-form .boneDen-form-submit-reg-btn {
+  background-color: #5e2d89;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.boneDen-book-test-form button:hover {
+  background-color: #eb7801;
+}
+
+  /* Responsive styles using Media Queries */
+
+/* Mobile-first approach */
+@media (max-width: 768px) {
+  .boneDensity-main2 {
+    height: auto;
+    padding: 5vh 0;
+  }
+
+  .boneDensity-box {
+    width: 100%;
+    padding: 0 10%;
+  }
+
+  .boneDensity-title-box {
+    padding: 10% 5%;
+    text-align: center;
+  }
+
+  .boneDensity-title {
+    font-size: 6vh;
+  }
+
+  .boneDensity-title2 {
+    width: 90%;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .boneDensity-buttons {
+    justify-content: center;
+    margin-top: 5%;
+  }
+
+  .boneDensity-btn {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .boneDen-form-wrapper {
+    flex-direction: column;
+    width: 90%;
+    /* border: 1px solid red; */
+    margin-right: 2%;
+  }
+
+  .boneDen-form-image-section {
+    width: 100%;
+    height: 50%;
+  }
+
+  .boneDen-form-container {
+    width: 100%;
+    padding: 20px;
+  }
+}
+
+/* Tablet and larger devices */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .boneDensity-main2 {
+    height: auto;
+    padding: 10vh 0;
+  }
+
+  .boneDensity-box {
+    width: 60%;
+    padding: 0 10%;
+  }
+
+  .boneDensity-title {
+    font-size: 8vh;
+  }
+
+  .boneDensity-title2 {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .boneDensity-btn {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+
+  .form-wrapper {
+    width: 85%;
+  }
+
+  .form-container {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .book-test-form button {
+    font-size: 16px;
+  }
+}
+
+/* Desktop and larger devices */
+@media (min-width: 1025px) {
+  .boneDensity-main2 {
+    height: 80vh;
+  }
+
+  .boneDensity-box {
+    width: 50%;
+  }
+
+  .boneDensity-title {
+    font-size: 10.5vh;
+  }
+
+  .boneDensity-title2 {
+    font-size: 18px;
+  }
+
+  .boneDensity-btn {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+
+  .form-wrapper {
+    width: 60%;
+  }
+
+  .form-container {
+    padding: 20px;
+  }
+
+  .book-test-form button {
+    font-size: 16px;
+  }
+}
+
+  
+  

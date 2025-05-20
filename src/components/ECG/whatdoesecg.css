@@ -1,0 +1,128 @@
+.whatDoesECG-main1 {
+  height: auto;
+  width: 100%;
+  /* background-color: rgb(226, 240, 215); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4%;
+  box-sizing: border-box;
+  /* border: 1px solid black; */
+}
+
+.whatDoesECG-main2 {
+  height: 100%;
+  width: 98%;
+  /* background-color: rgb(243, 239, 239); */
+  margin: auto;
+  /* border: 1px solid red; */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  border-radius: 10px;
+  gap: 10px;
+}
+
+.whatDoesECG-box1 {
+  height: 100vh;
+  width: 60%; /* Left side for text */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /* border: 1px solid green; */
+}
+
+.whatDoesECG-box1-header {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.whatDoesECG-box1-header h1 {
+  font-size: 4vh;
+  font-weight: 700;
+  color: #eb7801;
+  text-align: center;
+  padding-top: 2%;
+  /* border: 1px solid red; */
+  font-family: 'El Messiri', sans-serif;
+}
+.whatDoesECG-box{
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  width: 90%;
+  border-radius: 10px;
+  /* border: 1px solid blue; */
+}
+
+.whatDoesECG-box1-pragha {
+  display: flex;
+  justify-content: flex-start; /* Align text to the start */
+  align-items: center;
+  padding: 15px 20px;
+  color: black;
+  /* border: 1px solid red; */
+}
+
+.whatDoesECG-box1-pragha p {
+  font-size: 2.5vh;
+  font-weight: 400;
+  font-family: 'El Messiri', sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  
+  font-family: 'El Messiri', sans-serif;
+}
+
+.whatDoesECG-checklist ul {
+  list-style: none;
+  
+  /* border: 1px solid red; */
+  padding-top: 2%;
+  padding-left: 25px; /* Indent list */
+  margin: 0;
+  font-family: 'El Messiri', sans-serif;
+}
+
+.whatDoesECG-checklist li {
+  position: relative;
+  color: black;
+  margin-bottom: 10px;
+  font-size: 2.5vh;
+  /* color: #333; */
+  line-height: 1.5;
+  padding-left: 30px;
+  font-family: 'El Messiri', sans-serif;
+}
+
+
+.whatDoesECG-checklist li:before {
+  content: '✔';
+  position: absolute;
+  left: 0;
+  color: #603c86;
+  font-size: 18px;
+}
+
+.whatDoesECG-box2 {
+  height: 100vh;
+  width: 40%; /* Right side for image */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  /* border: 1px solid green; */
+}
+
+.whatDoesECG-doctor {
+  width: 100%;
+  /* height: auto; */
+}
+
+.whatDoesECG-doctor img {
+  width: 100%;
+  height: 100vh;
+  /* height: auto; */
+  object-fit: cover;
+  border-radius: 10px;
+}

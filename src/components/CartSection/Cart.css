@@ -1,0 +1,84 @@
+.cart-main2 {
+    /* border: 1px solid red; */
+    height: auto;
+    display: flex;
+    justify-content: space-between; /* Ensures space between title and search bar */
+    align-items: center; /* Aligns items vertically */
+  }
+  
+  .cart-search-box {
+    border: 1px solid #ccc; 
+    border-radius: 40px;
+    background-color: white;
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
+    gap: 5px; 
+  }
+  
+  .cart-search-bar {
+    padding: 8px 12px;
+    /* border: 1px solid #ccc; */
+    border-radius: 25px;
+    outline: none;
+    border: none;
+    width: 200px; 
+  }
+  
+  .cart-search-bar:focus {
+    border-color: none; 
+    /* box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); */
+  }
+  
+  .cart-search-icon {
+    padding: 10px 12px;
+    background-color: #eb7801;
+    color: white;
+    border: none;
+    border-radius: 100%;
+    cursor: pointer;
+  }
+  
+  .cart-search-icon:hover {
+    background-color: #0056b3;
+  }
+  
+  @media (max-width: 768px) {
+    /* Main Container for User Details and Payment Section */
+    .user-details-container {
+      display: flex;
+      flex-direction: column; /* Stack the sections vertically */
+      gap: 20px; /* Add space between the sections */
+    }
+      /* Form Section */
+  .form-section {
+    order: 1; /* Ensure User Details Section appears first */
+  }
+
+  /* Payment Section */
+  .payment-section {
+    order: 2; /* Ensure Payment Details Section appears after User Details */
+    margin-top: 20px; /* Add space above the payment section */
+  }
+
+    /* Main Container for the Cart and Payment Sections */
+    .cart-container {
+      display: flex;
+      flex-direction: column; /* Stack the cart and payment details vertically */
+    }
+  
+    /* Cart Items Section */
+    .cart-items-section {
+      order: 1; /* Ensure the cart section appears first */
+    }
+  
+    /* Payment Details Section */
+    .payment-details-section {
+      order: 2; /* Move the payment section below the cart */
+      margin-top: 20px; /* Add spacing between sections */
+    }
+  }
+  
+  
+  
+  

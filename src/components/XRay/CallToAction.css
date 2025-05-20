@@ -1,0 +1,57 @@
+.xray-info-section {
+  background: #f0f4f8;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.xray-info-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.info-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #eb7801;
+  margin-bottom: 1.5rem;
+}
+
+.info-description {
+  font-size: 1.2rem;
+  color: black;
+  margin-bottom: 2rem;
+  font-weight: 300;
+}
+
+.xray-benefits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 0 2rem;
+}
+
+.benefit-item {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.benefit-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.benefit-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #603c86;
+  margin-bottom: 1rem;
+}
+
+.benefit-description {
+  font-size: 1rem;
+  color: black;
+  font-weight: 400;
+}

@@ -1,0 +1,44 @@
+/* App.css */
+@import url("https://fonts.googleapis.com/css2?family=El+Messiri:wght@400..700");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "El Messiri", serif;
+  /* color: black; */
+}
+
+.App {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50; /* Ensure it's on top of other elements */
+  height: 4rem; /* Match your navbar height */
+}
+
+/* Add padding to the content to ensure it doesn't overlap the navbar */
+.content {
+  padding-top: 4rem; /* Adjust based on the height of your navbar */
+  margin: 0;
+}
+
+body {
+  font-family: "El Messiri", serif;
+  background-color: #f8f8f8;
+
+}
+
+/* Optionally, for mobile responsiveness, you can add a media query */
+@media (max-width: 768px) {
+  .content {
+    padding-top: 3.5rem; /* Adjust for smaller screen sizes if necessary */
+  }
+}

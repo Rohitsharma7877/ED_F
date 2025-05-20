@@ -1,0 +1,108 @@
+/* General container styling */
+.adminreg-container {
+  padding: 20px;
+  /* background-color: #500606; */
+  /* background-color: #eb7801; */
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.adminreg-main {
+  background-color: #ffffff;
+}
+
+.adminreg-title {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 2rem;
+  color: #eb7801;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Form styling */
+.adminreg-form {
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px; /* Unified spacing between elements */
+}
+
+.adminreg-label {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #000;
+}
+
+.adminreg-input,
+.adminreg-select {
+  width: 100%;
+  padding: 10px;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  /* border: 1px solid #ddd; */
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.adminreg-input:focus,
+.adminreg-select:focus {
+  border-color: #603c86;
+  box-shadow: 0 0 4px rgba(96, 60, 134, 0.3);
+}
+
+/* Form rows for grouped inputs */
+.adminreg-form-row {
+  display: flex;
+  gap: 10px;
+}
+
+.adminreg-form-row .adminreg-form-group {
+  flex: 1;
+}
+
+/* Button styling */
+.adminreg-button {
+  padding: 10px;
+  background-color: #603c86;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.adminreg-button:hover {
+  background-color: #eb7801;
+}
+
+/* Toast message positioning */
+.Toastify__toast-container {
+  max-width: 90%;
+}
+
+.Toastify__toast {
+  font-size: 0.9rem;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .adminreg-container {
+    padding: 15px;
+  }
+
+  .adminreg-title {
+    font-size: 1.8rem;
+  }
+
+  .adminreg-form-row {
+    flex-direction: column;
+  }
+
+  .adminreg-button {
+    width: 100%;
+  }
+}

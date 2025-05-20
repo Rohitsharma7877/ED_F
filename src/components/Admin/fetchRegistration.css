@@ -1,0 +1,153 @@
+/* Fetch Registrations Container */
+.fetch-container {
+  padding: 15px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 100%; /* Allow full width */
+  margin: 20px auto;
+  overflow-x: auto; /* Enable horizontal scrolling if needed */
+}
+
+/* Title */
+.fetch-title {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 1.8rem;
+  color: #eb7801;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+/* Button and Filter Container */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.date-filter {
+  padding: 6px 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  width: 150px;
+}
+
+/* Search Container */
+.search-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.search-input {
+  padding: 6px;
+  font-size: 14px;
+  width: 200px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-right: 8px;
+}
+
+.excel-button {
+  background-color: #603c86;
+  color: white;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.excel-button:hover {
+  background-color: #eb7801;
+  transform: scale(1.05);
+}
+
+/* Table Styles */
+.fetch-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  font-size: 14px; /* Reduce font size */
+}
+
+.fetch-table th,
+.fetch-table td {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #f0f0f0;
+}
+
+.fetch-table th {
+  background-color: #eb7801;
+  color: white;
+  font-weight: bold;
+}
+
+.fetch-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.fetch-table tr:hover {
+  background-color: #ececec;
+}
+
+.fetch-table td {
+  color: #333;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .fetch-container {
+    padding: 10px;
+    margin: 10px;
+  }
+
+  .fetch-title {
+    font-size: 1.5rem;
+  }
+
+  .date-filter,
+  .search-input {
+    width: 100%; /* Full width for mobile */
+    margin-bottom: 10px;
+  }
+
+  .search-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .excel-button {
+    width: 100%;
+  }
+
+  .fetch-table {
+    font-size: 12px; /* Smaller font size for mobile */
+  }
+
+  .fetch-table th,
+  .fetch-table td {
+    padding: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fetch-table th,
+  .fetch-table td {
+    padding: 4px;
+    font-size: 10px; /* Smaller font for very small screens */
+  }
+}

@@ -1,0 +1,214 @@
+/* Wrapper Styling */
+.download-report-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start; /* Align items to the top */
+  justify-content: space-between;
+  min-height: 70vh; /* Reduced height */
+  padding: 20px; /* Reduced padding */
+  gap: 20px;
+  background: #f7f9fc;
+  max-width: 1100px; /* Reduced container width */
+  margin: 0 auto; /* Center the container */
+}
+
+/* Left Section Styling */
+.left-section {
+  flex: 1;
+  display: flex;
+  margin-top: 10%;
+  justify-content: center;
+  align-items: flex-start; /* Align to the top */
+  padding-right: 20px; /* Reduced padding on the right */
+}
+
+.hospital-image {
+  width: 100%; /* Reduced width */
+  height: 500px; /* Fixed height to reduce the image size */
+  max-height: 100%; /* Ensure image doesn’t exceed container height */
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  object-fit: cover;
+}
+
+/* Right Section Styling */
+.right-section {
+  flex: 1;
+  background: #ffffff;
+  margin-top: 10%;
+  border-radius: 8px;
+  padding: 15px; /* Reduced padding */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 400px; /* Retained width */
+}
+
+.right-section h1 {
+  font-size: 22px; /* Slightly smaller font size */
+  color: #eb7801;
+  font-weight: bolder;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Form Group Styling */
+.form-group {
+  /* border: 1px solid red; */
+  margin-bottom: 12px; /* Reduced margin */
+}
+
+.form-group label {
+  font-size: 13px; 
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+  display: block;
+}
+.form-group input{
+  /* padding-top: 10px; */
+}
+
+#patient-selector,
+#new-patient,
+#date-picker,
+#report-selector {
+  width: 100%;
+  padding: 8px;
+  font-size: 13px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#patient-selector:focus,
+#new-patient:focus,
+#date-picker:focus,
+#report-selector:focus {
+  border-color: #603c86;
+  outline: none;
+  box-shadow: 0 0 4px rgba(96, 60, 134, 0.3);
+  /* padding-top: 10px; */
+  /* border: 1px solid red; */
+}
+
+.add-patient {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.add-patient-btn {
+  background-color: #eb7801;
+  color: #fff;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-patient-btn:hover {
+  background-color: #603c86;
+  transform: translateY(-2px);
+}
+
+.add-patient-btn .add-icon {
+  color: white;
+  font-size: 16px;
+}
+
+/* Actions Section */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.download-btnn,
+.back-btnn {
+  background-color: #603c86;
+  color: #ffffff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.download-btnn:hover {
+  background-color: #eb7801;
+  transform: translateY(-2px);
+}
+
+.back-btnn:hover {
+  background-color: #eb7801;
+  transform: translateY(-2px);
+}
+
+.download-icon {
+  font-size: 16px;
+}
+
+/* Success Message */
+.success-message {
+  color: #4caf50;
+  font-size: 12px;
+  margin-top: 8px;
+  text-align: center;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 1024px) {
+  .download-report-wrapper {
+    flex-direction: column;
+    padding: 15px;
+    max-width: 100%; /* Ensure container takes full width on smaller screens */
+  }
+
+  .left-section,
+  .right-section {
+    width: 100%;
+  }
+
+  .right-section {
+    margin-top: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .add-patient {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .add-patient-btn {
+    width: 100%;
+  }
+
+  #patient-selector,
+  #new-patient,
+  #date-picker,
+  #report-selector {
+    font-size: 10px;
+  }
+
+  .download-btn,
+  .back-btn {
+    width: 100%;
+  }
+}

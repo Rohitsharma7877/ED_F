@@ -1,0 +1,398 @@
+
+/* Parent container (ensures the height is limited to the viewport) */
+.alltest-wrapper {
+    height: 100vh; /* Takes full height of the viewport */
+    display: flex;
+    flex-direction: column;
+    padding-top: 18vh;
+  }
+  
+/* Main layout */
+.alltest-main1 {
+    display: flex;
+    flex: 1; /* Ensures it fills the remaining space in the wrapper */
+    overflow: hidden; /* Prevents overflow of content */
+  }
+
+/* Sidebar */
+.alltest-box1 {
+    width: 20%;
+    border-right: 1px solid #ccc;
+    padding: 20px;
+    background: #f7f7f7;
+    height: auto;
+    position: sticky;
+    top: 0;
+    overflow-y: auto;
+  }
+
+/* Content area */
+.alltest-box2 {
+    width: 80%;
+    padding: 20px;
+    background: #fff;
+    overflow-y: auto; /* Enable scrolling for overflowing content */
+    /* border: 1px solid red; */
+  }
+
+/* Categories List */
+.categories-list {
+  list-style: none;
+  padding: 0;
+}
+
+.categories-list li {
+  padding: 10px 15px;
+  margin: 5px 0;
+  background: #603c86;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.categories-list li:hover {
+  background: #d06601;
+}
+
+/* Search Bar */
+.alltest-search-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.alltest-search-bar input {
+  width: 90%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.alltest-search-bar i {
+  color: #603c86;
+  font-size: 20px;
+}
+
+/* Dashboard Heading */
+.dashboard-heading {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #603c86;
+  margin-bottom: 20px;
+}
+
+/* Card Grid */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: #ffffff;
+  /* border: 1px solid #ccc; */
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 15px;
+ 
+}
+.card-content h3{
+ display: flex;
+ justify-content: start;
+ align-items: center;
+ font-size: 18px;
+ font-weight: bold;
+ color: #eb7801;
+ padding-bottom: 10px;
+}
+
+/* Price section layout */
+.card-price {
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
+  /* justify-content: center; */
+  gap: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  padding-bottom: 10px;
+  /* border: 1px solid red; */
+}
+/* Icon Styling */
+.price-icon {
+  font-size: 12px; /* Adjust size to match text */
+  vertical-align: middle;
+  /* border: 1px solid red; */
+}
+
+/* Original Price (Strikethrough) */
+.original-price {
+  /* text-decoration: line-through; */
+  color: #603c86;
+  font-size: 12px;
+  font-weight: bold;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid red; */
+  line-height: 1.4;
+  /* gap: 4px; */
+}
+
+/* Custom strikethrough line */
+.original-price::after {
+  content: "";
+  position: absolute;
+  width: 110%;
+  height: 2px;
+  background-color: orange;
+  top: 40%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+/* Discounted Price */
+.discounted-price {
+  color: #eb7801;
+  font-size: 15px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* margin-bottom: 10px; */
+  /* padding-top: 4px; */
+  /* border: 1px solid red; */
+  gap: -5px;
+  line-height: 1;
+}
+/* Discount Icon (Slightly Bigger) */
+.discount-icon {
+  font-size: 15px;
+  color: #603c86;
+  /* gap: -5px; */
+  /* vertical-align: 5c; */
+  /* border: 1px solid red; */
+  /* line-height: 1;  */
+  /* vertical-align: middle;  */
+  /* transform: translateY(1px); */
+  
+}
+
+.card-description {
+  font-size: 14px;
+  font-weight: bold;
+  color: #2e2c2c;
+  /* margin-top: 15px; */
+  height: 8vh;
+  width: 100%;
+  margin: 2%;
+  /* border: 1px solid red; */
+}
+
+/* BookFor Section */
+.book-for {
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  /* font-size: 8px; */
+  /* font-weight: bold; */
+  /* color: #603c86; */
+  background: #75db71;
+  margin-top: 5px;
+  width: 95%;
+  margin-bottom: 10px;
+  /* border: 1px solid red; */
+  border-radius: 20px;
+  gap: 0px;
+}
+
+.book-for-icon {
+  font-size: 20px;
+  color: #ffffff;
+  /* padding-right: 5px; */
+  margin-right: 4px; /* Reduce space */
+  width: auto; /* Remove fixed width */
+  height: auto; /* Prevent unnecessary space */
+  line-height: 1; /* Prevent extra spacing */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid red; */
+}
+
+.book-for-text {
+  font-size: 13px;
+  color: #ffffff;
+  padding-top: 2px; /* Reset padding */
+  margin: 0px; /* Ensure no extra spacing */
+  /* border: 1px solid red; */
+}
+
+
+.card-actions {
+  display: flex;
+  justify-content: center;
+  /* border: 1px solid red; */
+}
+
+.add-to-cart{
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  background: #603c86;
+  color: white;
+
+  cursor: pointer;
+}
+
+.add-to-cart {
+ 
+}
+
+.read-more {
+  background: #d06601;
+  color: white;
+}
+
+/* Pagination */
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-family: Arial, sans-serif;
+}
+
+.page-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%; /* Circular buttons */
+  border: 1px solid #ccc;
+  background: white;
+  color: #333;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.page-button.active {
+  background: #603c86; /* Active page button background */
+  color: white; /* White text for active page */
+  border: 1px solid #603c86; /* Border matches the background */
+}
+
+.page-button:hover {
+  background: #d06601; /* Hover effect for buttons */
+  color: white; /* White text on hover */
+}
+
+.page-button:disabled {
+  background: #f0f0f0;
+  color: #aaa;
+  border: 1px solid #f0f0f0;
+  cursor: not-allowed;
+}
+
+.pagination .ellipsis {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  color: #aaa;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: default;
+}
+
+.arrow-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%; /* Matches the circle design */
+  border: 1px solid #ccc;
+  background: white;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.arrow-button:hover {
+  background: #d06601; /* Hover effect for Previous/Next buttons */
+  color: white;
+}
+
+.arrow-button:disabled {
+  background: #f0f0f0;
+  color: #aaa;
+  border: 1px solid #f0f0f0;
+  cursor: not-allowed;
+}
+
+.suggestion-list {
+  list-style: none;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  position: absolute;
+  /* z-index: 10; */
+  width: 90%;
+  top: 40px; /* Adjust this value to position the dropdown below the input */
+}
+
+.suggestion-list li {
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.suggestion-list li:hover {
+  background: #f0f0f0;
+}
+
+@media (max-width: 768px) {
+    .alltest-main1 {
+      flex-direction: column;
+    }
+  
+    .alltest-box1 {
+      width: 100%;
+      border-right: none;
+      border-bottom: 1px solid #ccc;
+    }
+  
+    .alltest-box2 {
+      width: 100%;
+    }
+  }
+  

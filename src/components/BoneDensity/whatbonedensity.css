@@ -1,0 +1,250 @@
+.whatBoneDensity-main1{
+    height: auto;
+    /* border: 1px solid rgb(252, 250, 250); */
+    /* background-color: #e4dfdf; */
+    width: 100%; 
+}
+
+.whatBoneDensity-main2{
+    height: auto; 
+    width: 85%;
+    box-sizing: border-box;
+    margin: 4% auto;
+    /* border: 1px solid red; */
+    display: flex;
+    border-radius: 10px;
+    background-color: #ebe5e5;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.whatBoneDensity-box1 {
+    height: 100%;
+    width: 65%;
+    padding: 20px; /* Added padding for spacing */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center; /* Align content in the center */
+}
+
+
+.whatBoneDensity-header {
+    height: auto; 
+    width: 100%; 
+    text-align: center; /* Center text */
+    margin-bottom: 10px;
+}
+
+.whatBoneDensity-header h1 {
+    font-size: 4.5vh;
+    font-weight: 800;
+    margin: 0; 
+    font-family: 'El Messiri', sans-serif;
+    color: #eb7801; /* Optional: Add a matching color */
+}
+
+
+.whatBoneDensity-pragraph {
+    width: 100%;
+    text-align: center;
+    margin: 10px 0; 
+}
+.whatBoneDensity-pragraph p {
+    font-size: 2.5vh;
+    font-weight: 400;
+    margin: 0;
+    line-height: 1.9rem;
+    font-family: 'El Messiri', sans-serif;
+}
+.whatBoneDensity-line {
+    width: 100%;
+    height: 1px;
+    background-color: #b3aeb8; /* Match the theme color */
+    margin: 10px 0; /* Add spacing */
+}
+.bone-checklist {
+    width: 100%;
+    text-align: left; /* Align checklist items to the left */
+    margin: 10px 0;
+}
+
+.bone-checklist ul {
+    list-style: none; /* Remove default bullet points */
+    padding: 0;
+    margin: 0;
+}
+
+.bone-checklist li {
+    font-size: 2.5vh;
+    font-family: 'El Messiri', sans-serif;
+    font-weight: 400;
+    margin-bottom: 10px;
+    display: flex; /* Align items horizontally */
+    align-items: center; /* Align icon and text */
+    gap: 10px;
+}
+
+.bone-checklist li::before {
+    content: "✔"; /* Tick mark icon */
+    color: #eb7801; /* Match theme color */
+    font-size: 1.8vh;
+}
+
+.whatBoneDensity-form {
+    width: 100%;
+    margin-top: 20px;
+    text-align: center; /* Center align the form button */
+}
+
+.whatBoneDensity-buttons {
+    display: flex;
+    justify-content: center;
+    /* margin-top: 5%; */
+    /* gap: 5px; */
+  }
+  
+  .whatBoneDensity-btn {
+    background-color: #5e2d89;
+    color: #fff;
+    border: none;
+    /* margin: 2% 5% 10% 2%; */
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: 'El Messiri', sans-serif;
+  }
+  
+  .whatBoneDensity-btn:hover {
+    background-color: #7737a1;
+  }
+
+  .whatBoneDensity-box2{
+    height: 70vh;
+    width: 35%;
+    background-color: #ebe5e5;
+    border-radius: 10px;
+    /* border: 1px solid rgb(38, 0, 255); */
+    overflow: hidden;
+    /* border: 1px solid rgb(38, 0, 255); */
+}
+.whatBoneDensity-image{
+    height: 53vh; 
+    width: 95%;  
+    margin: 1% auto;
+    }
+.whatBoneDensity-image img {
+    width: 100%;
+    border-radius: 5%;
+    object-fit: cover; /* Ensures the image fits the container while maintaining aspect ratio */
+    object-position: center;
+}
+
+
+.whatBoneDensity-image-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 3%;
+    /* gap: 5px; */
+  }
+  
+  .whatBoneDensity-image-btn {
+    background-color: #5e2d89;
+    color: #fff;
+    border: none;
+    /* margin: 2% 5% 10% 2%; */
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .whatBoneDensity-image-btn:hover {
+    background-color: #7737a1;
+  }
+
+  /* Modal Background Blur */
+.blur-background {
+    filter: blur(4px); /* Blur the background */
+    pointer-events: none; /* Disable interactions with background content */
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #fff;
+    border-radius: 10px;
+    width: 40%;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #5e2d89;
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-content form input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+}
+
+.modal-content form button {
+    background-color: #5e2d89;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-content form button:hover {
+    background-color: #7737a1;
+}
+
+.modal-content p {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 18px;
+    background: transparent;
+    border: none;
+    color: #333;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #000;
+}

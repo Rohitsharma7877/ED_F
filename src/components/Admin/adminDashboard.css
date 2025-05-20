@@ -1,0 +1,399 @@
+/* Admin Dashboard Layout */
+.admin-dashboard {
+  display: flex;
+  height: 100vh;
+  /* border: 1px solid red; */
+}
+
+/* Dropdown Container for Admins */
+.dropdown-container-admins {
+  display: none;
+  margin-left: 20px;
+  background-color: #000000;
+  border-radius: 5px;
+  padding: 10px 0;
+  /* border: 1px solid red; */
+}
+
+.dropdown-container-admins.show {
+  display: block;
+}
+
+.dropdown-item-admin {
+  font-size: 14px;
+  padding: 12px 20px;
+  color: #ecf0f1;
+  text-decoration: none;
+  display: block;
+  transition: background 0.3s ease;
+}
+
+.dropdown-item-admin:hover {
+  background-color: #483d8b;
+}
+
+/* Sidebar Styling */
+.admin-sidebar {
+  width: 250px;
+  background: linear-gradient(135deg, #4b0082, #6a5acd);
+  color: #f0f4f8;
+  padding: 20px;
+  position: fixed;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid red; */
+  box-shadow: 4px 0 6px rgba(0, 0, 0, 0.1);
+  transition: width 0.3s ease;
+  overflow-y: auto; 
+  overflow-x: hidden; 
+  scrollbar-width: thin; 
+  scrollbar-color: #603c86 #f3f3f3;
+}
+
+/* Chrome, Edge, and Safari */
+.admin-sidebar::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+}
+
+.admin-sidebar::-webkit-scrollbar-thumb {
+  background: #603c86; /* Scrollbar thumb color */
+  border-radius: 20px; /* Rounded corners */
+}
+
+.admin-sidebar::-webkit-scrollbar-thumb:hover {
+  background: #d06601; /* Thumb hover color */
+}
+
+.admin-sidebar::-webkit-scrollbar-track {
+  background: #f3f3f3; /* Scrollbar track color */
+  border-radius: 20px; /* Rounded corners for track */
+}
+/* Sidebar Header */
+.sidebar-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+  margin-top: 50px;
+}
+
+.admin-image {
+  margin-top: 20px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  object-fit: cover;
+}
+
+.sidebar-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #eb7801;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+/* Sidebar Links */
+.sidebar-links {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.sidebar-link {
+  font-size: 16px;
+  padding: 12px;
+  cursor: pointer;
+  color: #ecf0f1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.sidebar-link:hover {
+  background-color: #5d3fd3;
+  color: #ffffff;
+}
+
+.arrow {
+  font-size: 14px;
+  transition: transform 0.3s ease;
+}
+
+/* Dropdown Container */
+.dropdown-container {
+  display: none;
+  margin-left: 20px;
+  background-color: #b0b0b0;
+  border-radius: 5px;
+  padding: 10px 0;
+}
+
+.dropdown-container.show {
+  display: block;
+}
+
+.dropdown-item {
+  font-size: 14px;
+  padding: 10px 20px;
+  color: #ecf0f1;
+  text-decoration: none;
+  display: block;
+  transition: background 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #6a5acd;
+}
+
+/* Content Area */
+.admin-content {
+  margin-left: 250px;
+  padding: 30px;
+  background-color: #f7f9fc;
+  flex: 1;
+  transition: margin-left 0.3s ease;
+}
+
+.admin-content h1 {
+  color: #2d3e50;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.admin-content p {
+  color: #7f8c8d;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Sidebar Sections for Doctors, Patients & Appointments */
+.sidebar-link-doctors,
+.sidebar-link-patients,
+.sidebar-link-appointments {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  padding: 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.3s ease;
+}
+
+.sidebar-link-doctors:hover,
+.sidebar-link-patients:hover,
+.sidebar-link-appointments:hover {
+  background-color: #6a5acd;
+}
+
+/* Icons for Doctors, Patients, and Appointments */
+.sidebar-link-doctors .icon {
+  color: #ff6347;
+}
+
+.sidebar-link-patients .icon {
+  color: #ffa07a;
+}
+
+.sidebar-link-appointments .icon {
+  color: #00bfff;
+}
+
+/* Dropdown Containers for Doctors, Patients, and Appointments */
+.dropdown-container-doctors,
+.dropdown-container-patients,
+.dropdown-container-appointments {
+  display: none;
+  margin-left: 20px;
+  background-color: #bfbfbf;
+  border-radius: 5px;
+  padding: 10px 0;
+}
+
+.dropdown-container-doctors.show,
+.dropdown-container-patients.show,
+.dropdown-container-appointments.show {
+  display: block;
+}
+
+.dropdown-item-doctor,
+.dropdown-item-patient,
+.dropdown-item-appointment {
+  font-size: 14px;
+  padding: 12px 20px;
+  color: #ecf0f1;
+  text-decoration: none;
+  display: block;
+  transition: background 0.3s ease;
+}
+
+.dropdown-item-doctor:hover,
+.dropdown-item-patient:hover,
+.dropdown-item-appointment:hover {
+  background-color: #483d8b;
+}
+
+/* Active Links */
+.sidebar-link.active,
+.dropdown-item.active {
+  background-color: #483d8b;
+  color: #ffffff;
+}
+
+.admin-dashboard .admin-sidebar .sidebar-link-signout {
+  padding: 10px 20px;
+  background-color: #eb7801;
+  width: 150px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  margin-top: 20px;
+  margin-left: 35px;
+  z-index: 10;
+}
+
+.admin-dashboard .admin-sidebar .sidebar-link-signout:hover {
+  background-color: #7f8c8d;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1024px) {
+  .admin-sidebar {
+    width: 230px;
+  }
+
+  .admin-content {
+    margin-left: 230px;
+    padding: 25px;
+  }
+
+  .sidebar-title {
+    font-size: 24px;
+  }
+
+  .admin-image {
+    width: 70px;
+    height: 70px;
+  }
+
+  .sidebar-link {
+    font-size: 15px;
+  }
+
+  .dropdown-item {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-sidebar {
+    width: 200px;
+  }
+
+  .admin-content {
+    margin-left: 200px;
+    padding: 20px;
+  }
+
+  .sidebar-title {
+    font-size: 18px;
+  }
+
+  .admin-image {
+    width: 50px;
+    height: 50px;
+  }
+
+  .sidebar-link {
+    font-size: 14px;
+  }
+
+  .dropdown-item {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-sidebar {
+    width: 100%;
+    position: relative;
+    height: auto;
+    padding: 15px;
+    display: block;
+  }
+
+  .admin-content {
+    margin-left: 0;
+    padding: 15px;
+  }
+
+  .sidebar-title {
+    font-size: 16px;
+  }
+
+  .admin-image {
+    width: 40px;
+    height: 40px;
+  }
+
+  .sidebar-link {
+    font-size: 12px;
+  }
+
+  .dropdown-item {
+    font-size: 12px;
+  }
+
+  .sidebar-link-signout {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 320px) {
+  .admin-sidebar {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .admin-content {
+    margin-left: 0;
+    padding: 10px;
+  }
+
+  .sidebar-title {
+    font-size: 14px;
+  }
+
+  .admin-image {
+    width: 35px;
+    height: 35px;
+  }
+
+  .sidebar-link {
+    font-size: 11px;
+  }
+
+  .dropdown-item {
+    font-size: 11px;
+  }
+
+  .sidebar-link-signout {
+    width: 100%;
+    font-size: 14px;
+  }
+}

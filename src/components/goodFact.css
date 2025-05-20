@@ -1,0 +1,120 @@
+body {
+    font-family: "El Messiri", sans-serif;
+}
+
+.mliora-main1 {
+    height: auto;
+    width: 100%;
+    padding-top: 1.5%;
+    /* border: 1px solid red; */
+}
+
+.mliora-main2 {
+    height: auto;
+    width: 90%;
+    box-sizing: border-box;
+    margin: 4% auto;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.mliora-box1 {
+    height: 5vh;
+    width: 30%;
+    /* margin-left: 10%; */
+}
+
+.mliora-box1 p {
+    text-align: left;
+    height: 100%;
+    width: 100%;
+    font-size: 3vh;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    font-family: "El Messiri", sans-serif;
+}
+
+.mliora-box2 {
+    height: auto;
+    width: 40%;
+    margin-top: 1%;
+    /* margin-left: 5%; */
+    /* border: 1px solid red; */
+}
+
+.mliora-box2 h1 {
+    text-align: left;
+    width: 100%;
+    font-size: 8vh;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    color: #eb7801;
+    font-family: "El Messiri", sans-serif;
+}
+
+.mliora-box3 {
+    background-image: url(assests/goodHealth.jpg);
+    height: 68vh;
+    width: 100%;
+    margin-top: 3%;
+    background-size: contain;
+    background-attachment: fixed;
+}
+
+
+.mliora-box4 {
+    height: 15vh;
+    width: 90%;
+    margin-left: 10%;
+    margin-top: 2%;
+}
+
+.mliora-box4 p {
+    height: 100%;
+    font-size: 3.1vh;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    color: gray;
+    font-family: "El Messiri", sans-serif;
+}
+
+.mliora-box5 {
+    height: auto;
+    width: 40%;
+    margin-left: 10%;
+    margin-top: 2%;
+    /* border: 1px solid red; */
+    
+}
+
+.mliora-list ul {
+    font-size: 2.4vh;
+    font-weight: bold;
+    /* font-weight: 900; */
+}
+
+.mliora-list ul li {
+    display: flex;
+    align-items: center;
+    /* font-weight: 800; */
+}
+
+.mliora-list ul p {
+    width: 5%;
+    margin-top: 2vh;
+    font-size: 3vh;
+    /* font-weight: 800; */
+}
+
+.mliora-list ul h1 {
+    text-align: center;
+    width: 90%;
+    text-align: left;
+    margin-top: 2vh;
+    font-family: "El Messiri", sans-serif;
+    
+}

@@ -1,0 +1,319 @@
+/* General Styling */
+.HomeCollection-main {
+  /* height: 90vh; */
+  width: 100%;
+  /* border: 1px solid red; */
+  padding-top: 17vh;
+}
+
+.HomeCollection-steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 50%;
+  /* border: 1px solid red; */
+  flex-wrap: wrap;
+  /* background-color: #e3f2fd; */
+
+  /* Centering */
+  margin: 0 auto; /* Centers the div horizontally */
+  position: relative;
+}
+
+.step {
+  text-align: center;
+  flex: 1;
+  /* min-width: 120px; */
+  /* max-width: 160px; */
+  /* position: relative; */
+}
+
+.circle {
+  width: 50px;
+  height: 50px;
+  background-color: #0077b6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 5px;
+  position: relative;
+}
+
+.circle img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+h4 {
+  /* margin: 10px 0 5px; */
+  font-size: 0.7rem;
+  color: #333;
+  font-weight: bold;
+}
+
+p {
+  font-size: 0.5rem;
+  color: #000000;
+  /* max-width: 150px; */
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Line between circles */
+.HomeCollection-steps::before {
+  content: "";
+  position: absolute;
+  top: 25px;
+  left: 5%;
+  width: 90%;
+  height: 0; /* Set height to 0 since border is used */
+  border-top: 2px dotted #000000; /* Dotted line */
+  z-index: -1;
+}
+
+.HomeCollection-container {
+  display: flex; /* Add flexbox */
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  /* height: 80vh; */
+  margin: 2rem auto;
+  /* border: 1px solid red; */
+  font-family: Arial, sans-serif;
+  color: #333;
+  gap: 2rem;
+}
+
+.HomeCollection-image-container {
+  width: 45%;
+  height: auto;
+  text-align: center;
+  /* border: 1px solid red; */
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.HomeCollection-image-container img {
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+  /* border: 1px solid red; */
+  border-radius: 10px;
+}
+
+.HomeCollection-form-container {
+  /* border: 1px solid red; */
+  height: auto;
+  width: 45%;
+}
+
+.HomeCollection-heading {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #eb7801; /* Accent color */
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+.HomeCollection-subheading {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+/* Form Container */
+.HomeCollection-form-container {
+  width: 60%;
+  gap: 2rem;
+}
+
+.HomeCollection-details-form {
+  width: 80%;
+  font-size: 0.8rem;
+  display: flex;
+  text-align: start;
+  flex-direction: column;
+  gap: 0.5%;
+}
+
+.HomeCollection-details-form label {
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+}
+
+.HomeCollection-details-form input {
+  padding: 0.5rem;
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  outline: none;
+  margin-bottom: 0.3rem;
+  /* border: 1px solid red; */
+}
+
+.HomeCollection-details-form select {
+  padding: 0.4rem;
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  outline: none;
+  margin-bottom: 0.3rem;
+}
+
+.HomeCollection-details-form input:focus {
+  border-color: #0072ce;
+}
+
+.HomeCollection-submit-btn {
+  padding: 0.8rem;
+  background: linear-gradient(90deg, #603c86, #d06601);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.HomeCollection-submit-btn:hover {
+  background-color: #6e2c94;
+}
+
+.HomeCollection-login-link {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.login-link {
+  color: #603c86;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.login-link:hover {
+  color: #d06601;
+}
+
+.HomeCollection-details-form div {
+  display: flex;
+  flex-direction: column;
+}
+
+.HomeCollection-details-form div input {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.HomeCollection-gender {
+  font-size: 0.8rem;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  color: #666;
+  margin-bottom: 0.3rem;
+  width: 100%;
+}
+.HomeCollection-bookNow {
+  font-size: 0.8rem;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  margin-bottom: 0.3rem;
+  border-radius: 4px;
+  outline: none;
+  color: #666;
+  width: 100%;
+}
+.HomeCollection-state {
+  font-size: 0.8rem;
+  width: 100%;
+
+  color: #666;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  margin-bottom: 0.3rem;
+}
+
+/* Mobile Version Styling */
+@media (max-width: 768px) {
+  .HomeCollection-steps {
+    flex-direction: column;
+    align-items: center;
+
+  }
+  .circle{
+    height: 30px;
+    width: 30px;
+  }
+  .circle img{
+    height: 20px;
+    width: 20px;
+  }
+
+  .HomeCollection-steps::before {
+    display: none; 
+  }
+
+  .HomeCollection-container {
+    flex-direction: column; /* Stack elements vertically */
+    width: 90%; /* Make container slightly smaller */
+    gap: 1.5rem; /* Reduce spacing */
+  }
+
+  .HomeCollection-image-container,
+  .HomeCollection-form-container {
+    width: 100%; /* Full width for mobile */
+    height: auto; /* Allow dynamic height */
+  }
+
+  .HomeCollection-image-container img {
+    height: auto; /* Allow image to scale */
+    max-height: 400px; /* Optional: Limit max height */
+  }
+
+  .HomeCollection-details-form input {
+    font-size: 0.8rem; /* Slightly smaller input fields */
+  }
+
+  .HomeCollection-submit-btn {
+    font-size: 0.9rem;
+
+    padding: 0.7rem;
+  }
+}
+
+/* Optional: Smaller Screens (e.g., Phones) */
+@media (max-width: 480px) {
+  .HomeCollection-main {
+    padding-top: 10vh; /* Adjust padding for smaller viewports */
+  }
+
+  .HomeCollection-heading {
+    font-size: 1.5rem; /* Smaller heading */
+  }
+
+  .HomeCollection-subheading {
+    font-size: 0.9rem;
+  }
+
+  .HomeCollection-submit-btn {
+    font-size: 0.8rem;
+  }
+}

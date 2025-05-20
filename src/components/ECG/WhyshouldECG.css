@@ -1,0 +1,150 @@
+.whyshouldECG-main1{
+    height: auto; 
+    width: 100%; 
+    background-color: white; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    padding: 4%; 
+    box-sizing: border-box; 
+    /* border: 1px solid black; */
+}
+
+.whyshouldECG-main2{
+    height: 100%; 
+    width: 96%; 
+    background-color: #603c86; 
+    margin: auto; 
+     /* border: 1px solid red;  */
+    box-sizing: border-box; 
+    display: flex;
+    border-radius: 3vh;
+}
+
+.whyshouldECG-box1{
+    height: 100%;
+    width: 50%;
+    /* border: 1px solid green; */
+}
+
+.whyshouldECG-box-image{
+   height: 98%;
+   width: 100%;
+   /* border: 1px solid black;  */
+   margin: 1% auto;
+   /* object-fit: contain; */
+}
+.whyshouldECG-box-image img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+.whyshouldECG-box2{
+    height: 100%;
+    width: 100%;
+    /* border: 1px solid green; */
+}
+.whyshouldECG-box2-write{
+    height: 20%;
+    width: auto;
+    /* border: 1px solid black; */
+    align-items: center;
+    /* justify-content: center; */
+    padding-left: 5%;
+    padding-top: 2%;
+}
+.whyshouldECG-header{
+    /* border: 1px solid black; */
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    
+}
+.whyshouldECG-header h1{
+    font-size: 4vh;
+    font-weight: 800;
+    color: #eb7801;
+    font-family: 'El Messiri', sans-serif;
+}
+
+.whyshouldECG-point{
+    /* border: 1px solid red; */
+    height: 70%;
+    width: 90%;
+    margin: 2% auto;
+}
+.whyshouldECG-point p{
+    font-size: 2.5vh;
+    font-weight: 400;
+    font-family: 'El Messiri', sans-serif;
+    /* padding-left: 4%; */
+    color: rgb(228, 223, 223);
+}
+
+.whyshouldECG-checklist ul {
+    list-style: none;
+    
+    /* border: 1px solid red; */
+    padding-top: 2%;
+    padding-left: 25px; /* Indent list */
+    margin: 0;
+    font-family: 'El Messiri', sans-serif;
+}
+
+.whyshouldECG-checklist li {
+    position: relative;
+    color: white;
+    margin-bottom: 10px;
+    font-size: 2.5vh;
+    /* color: #333; */
+    line-height: 1.5;
+    padding-left: 30px;
+    font-family: 'El Messiri', sans-serif;
+}
+
+
+.whyshouldECG-checklist li:before {
+    content: '✔';
+    position: absolute;
+    left: 0;
+    color: #eb7801;
+    font-size: 18px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .whyshouldECG-main2 {
+        flex-direction: column; /* Stack content vertically */
+    }
+
+    .whyshouldECG-box1,
+    .whyshouldECG-box2 {
+        width: 100%; /* Full width for mobile */
+    }
+
+    .whyshouldECG-header h1 {
+        font-size: 2rem; /* Adjust for smaller screens */
+    }
+
+    .whyshouldECG-point p {
+        font-size: 1rem;
+    }
+
+    .whyshouldECG-checklist li {
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .whyshouldECG-header h1 {
+        font-size: 1.8rem; /* Further adjust for very small screens */
+    }
+
+    .whyshouldECG-point p {
+        font-size: 0.9rem;
+    }
+
+    .whyshouldECG-checklist li {
+        font-size: 0.8rem;
+    }
+}

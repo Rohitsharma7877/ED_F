@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* styles.css */
+
+/* Define El Messiri font style */
+.el-messiri-navbar {
+    font-family: 'El Messiri', sans-serif; /* Apply El Messiri font */
+    font-weight: 400; /* Use font-weight 700 (bold) */
+    font-optical-sizing: auto; /* Ensure proper optical sizing */
+    font-style: normal; /* Ensure normal font style */
+  }
+  
+  

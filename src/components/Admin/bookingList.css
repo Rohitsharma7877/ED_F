@@ -1,0 +1,175 @@
+/* Booking List Container */
+/* Booking List Container */
+.booking-list-container {
+  padding: 20px; /* Reduced padding */
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  max-width: 1200px; /* Reduced maximum width */
+  margin: 4px auto 20px auto; /* Increased top margin to move it slightly down */
+  position: relative;
+}
+
+/* Title */
+.booking-list-container h2 {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 3rem; /* Reduced font size */
+  color: #eb7801;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  /* margin-bottom: 20px; */
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Button Container for positioning */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px; /* Reduced margin */
+}
+
+/* Booklist Button */
+.booklist-button {
+  color: white;
+  padding: 12px 20px; /* Reduced padding */
+  font-size: 1rem; /* Smaller font size */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin: 0;
+}
+
+.booklist-button:hover {
+  transform: scale(1.05);
+}
+
+/* Table styles */
+.booking-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px; /* Reduced margin */
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.booking-table th,
+.booking-table td {
+  padding: 12px; /* Reduced padding */
+  text-align: left;
+  font-size: 1rem; /* Smaller font size */
+  color: #000000;
+  border-bottom: 1px solid #f0f0f0;
+  border-right: 1px solid #f0f0f0;
+}
+
+.booking-table th {
+  background-color: #eb7801;
+  color: white;
+  font-weight: bold;
+}
+
+.booking-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.booking-table tr:hover {
+  background-color: #bdbdbd;
+}
+
+.booking-table tr:last-child td {
+  border-bottom: none;
+}
+
+.booking-table td:last-child {
+  border-right: none;
+}
+
+/* Filter Container */
+.filter-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px; /* Reduced margin */
+  align-items: center;
+}
+
+.book-date-filter,
+.search-filter {
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 20%;
+}
+
+/* Export and Back to Dashboard Buttons */
+.book-export-button {
+  background-color: #603c86;
+  color: white;
+  padding: 10px 18px; /* Reduced padding */
+  font-size: 1rem; /* Smaller font size */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin: 0;
+}
+
+.back-button {
+  background-color: #603c86;
+  color: white;
+  padding: 12px 18px; /* Reduced padding */
+  font-size: 1rem; /* Smaller font size */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-left: 20%;
+}
+
+.book-export-button:hover,
+.back-button:hover {
+  background-color: #eb7801;
+  transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .booking-list-container {
+    padding: 20px;
+    margin: 20px;
+  }
+
+  .booking-list-container h2 {
+    font-size: 1.8rem;
+  }
+
+  .booking-table th,
+  .booking-table td {
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  .export-button,
+  .back-button {
+    width: 180px;
+  }
+
+  .button-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .export-button,
+  .back-button {
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .booklist-button {
+    margin-top: 10px;
+    width: 100%;
+  }
+}

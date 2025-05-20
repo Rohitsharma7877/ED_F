@@ -1,0 +1,90 @@
+/* Section Container */
+.vision-mission-section {
+    padding: 40px 20px;
+    text-align: center;
+    /* font-size: 600vh; */
+    background-color: #f9f9f9;
+    /* border: 1px solid red; */
+  }
+  
+  /* Title Styling */
+  .sectionn-title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #eb7801;
+    margin-bottom: 20px;
+    font-family: 'El Messiri', sans-serif;
+    /* border: 1px solid red; */
+  }
+  
+  /* Cards Container */
+  .cardds-container {
+    display: flex;
+    justify-content: center;
+    /* text-align: center; */
+    /* align-items: center; */
+    gap: 20px;
+    flex-wrap: wrap;
+    /* border: 1px solid red; */
+  }
+  
+  /* Card Styling */
+  .cardd {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 300px;
+    text-align: center; /* Centers text and inline elements like the image */
+    display: flex; /* Enable flexbox for centering */
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
+    transition: transform 0.3s ease;
+    /* border: 1px solid red;  */
+  }
+  
+  .cardd:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Card Logo */
+  .cardd-logo {
+    width: full; 
+    height: 15vh; 
+    margin-bottom: 20px; 
+    /* border: 1px solid red;  */
+  }
+  
+  /* Card Title */
+  .cardd-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #603c86;
+    margin-bottom: 10px;
+    font-family: 'El Messiri', sans-serif;
+    /* border: 1px solid red; */
+  }
+  
+  /* Card Description */
+  .cardd-description {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #555;
+    color: black;
+    font-family: 'El Messiri', sans-serif;
+    /* border: 1px solid red; */
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .cardds-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .cardd {
+      width: 90%;
+    }
+  }
+  

@@ -1,0 +1,100 @@
+/* Main Container */
+.mri-desc-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+  background-color: #f7f7f7; /* Light background color */
+}
+
+/* Container for Text Content */
+.mri-desc-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  max-width: 1200px;
+  width: 100%;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+}
+
+/* Left Text Content */
+.mri-desc-text-content {
+  flex: 1;
+  min-width: 300px;
+  color: #000000; /* Dark gray text */
+}
+
+.mri-desc-text-content h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #eb7801; /* Highlight color */
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between icon and text */
+}
+
+.mri-desc-text-content p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  color: #000000; /* Slightly lighter text */
+}
+
+/* Right Additional Information */
+.mri-desc-additional-info {
+  flex: 1;
+  min-width: 300px;
+  margin-top: -20px;
+  color: #000000; /* Dark gray text */
+}
+
+.mri-desc-additional-info h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #eb7801; /* Highlight color */
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between icon and text */
+}
+
+.mri-desc-additional-info p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  color: #000000; /* Slightly lighter text */
+}
+
+/* Divider between Left and Right Containers */
+.mri-divider {
+  width: 100%;
+  height: 1px;
+  background-color: #ddd; /* Light gray line */
+  margin: 20px 0; /* Spacing above and below the line */
+}
+
+/* Icon Styling */
+.fas {
+  color: #603c86; /* Icon color */
+}
+
+.fa-check-circle {
+  color: #603c86;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .mri-desc-container {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .mri-desc-text-content,
+  .mri-desc-additional-info {
+    text-align: center;
+  }
+}

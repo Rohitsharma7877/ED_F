@@ -1,0 +1,87 @@
+/* Main Container */
+.mriwhy-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  background: url("./pexels-charlss-gonzhu-433318654-15277956.jpg") no-repeat
+    center center/cover; /* Gradient from #603c86 to #eb7801 */
+  margin: 30px auto;
+  border-radius: 12px;
+  height: 350px; /* Adjusted height for better layout */
+}
+
+/* Text Section */
+.mriwhy-text {
+  flex: 1;
+  max-width: 800px;
+  padding: 30px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 12px;
+}
+
+.mriwhy-text h1 {
+  font-size: 40px;
+  color: #eb7801; /* Highlighted orange color */
+  font-weight: 700;
+}
+
+/* Advantages List */
+.mriwhy-advantages-list {
+  display: flex;
+  gap: 20px;
+  justify-content: center; /* Center the items */
+  padding-top: 20px;
+}
+
+/* Individual Advantage Box */
+.mriwhy-box {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 16px;
+  color: #000000;
+  width: 150px; /* Fixed width for consistency */
+  transition: transform 0.3s ease-in-out;
+}
+
+.mriwhy-box svg {
+  font-size: 30px;
+  color: #603c86; /* Icon color */
+  margin-bottom: 10px;
+}
+
+.mriwhy-box p {
+  margin: 0;
+  font-size: 14px;
+  color: #000;
+}
+
+/* Hover Effect */
+.mriwhy-box:hover {
+  transform: translateY(-5px); /* Lift the box slightly */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.mriwhy-box svg:hover {
+  color: #eb7801; /* Change icon color on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .mriwhy-text h1 {
+    font-size: 28px;
+  }
+
+  .mriwhy-advantages-list {
+    flex-direction: column; /* Stack items vertically on smaller screens */
+  }
+
+  .mriwhy-box {
+    width: 100%; /* Make boxes full-width */
+    margin-bottom: 15px; /* Add spacing between boxes */
+  }
+}

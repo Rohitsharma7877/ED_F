@@ -1,0 +1,103 @@
+.about-main1 {
+    height: auto;
+    width: 100%;
+    padding-top: 17vh;
+}
+
+.about-main2 {
+    height: auto;
+    width: 95%;
+    box-sizing: border-box;
+    margin: 4% auto;
+}
+
+.about-box2 {
+    height: auto;
+    width: 40%;
+    margin-top: 1%;
+}
+
+.about-box2 h1 {
+    text-align: left;
+    width: 100%;
+    font-size: 8vh;
+    font-weight: bold;
+    color: #eb7801;
+    font-family: 'El Messiri', sans-serif;
+}
+
+.about-box3 {
+    position: relative;
+    height: 80vh;
+    width: 100%;
+    margin-top: 2%;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.about-box4 {
+    height: auto;
+    width: 85%;
+    margin-left: 5%;
+    margin-top: 2%;
+    color: black;
+}
+
+.about-box4 p {
+    font-size: 3vh;
+    font-weight: 500;
+    text-align: left;
+    color: black;
+    font-family: 'El Messiri', sans-serif;
+}
+
+/* Media Query for Mobile Screens */
+@media (max-width: 768px) {
+    .about-main1 {
+        padding-top: 17vh;
+    }
+
+    .about-box2 {
+        width: 100%;
+        text-align: center;
+    }
+
+    .about-box2 h1 {
+        font-size: 6vh;
+        text-align: center;
+    }
+
+    .about-box3 {
+        height: 50vh;
+        margin-top: 1%;
+        border-radius: 10px;
+    }
+
+    .background-video {
+        object-fit: cover;
+    }
+
+    .about-box4 {
+        width: 100%;
+        margin-left: 0;
+        padding: 0 5%;
+    }
+
+    .about-box4 p {
+        font-size: 2.5vh;
+        text-align: justify;
+    }
+}

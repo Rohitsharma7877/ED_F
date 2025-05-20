@@ -1,0 +1,109 @@
+/* Main container */
+.benefitsPFT-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .benefitsPFT-content {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .benefitsPFT-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Box containing details */
+  .benefitsPFT-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .benefitsPFT-header h1 {
+    color: #eb7801;
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+    font-weight: bold;
+    line-height: 1.4;
+  }
+  
+  .benefitsPFTlist ul {
+    list-style: none; /* Remove default bullets */
+    padding: 0;
+    margin: 0;
+  }
+  
+  .benefitsPFTlist li {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #000000;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f9f9f9;
+    padding: 10px 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, background 0.3s ease;
+  }
+  
+  .benefitsPFTlist li:hover {
+    transform: translateY(-3px);
+    background: #f3f3f3;
+  }
+  
+  .check-icon {
+    font-size: 1.2rem;
+    color: #603c86;
+    font-weight: bold;
+  }
+  
+  /* Box containing image */
+  .benefitsPFT-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  .benefitsPFT-image img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 12px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+  }
+  
+  .benefitsPFT-image img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .benefitsPFT-content {
+      flex-direction: column;
+    }
+  
+    .benefitsPFT-image img {
+      max-width: 100%;
+    }
+  }
+  

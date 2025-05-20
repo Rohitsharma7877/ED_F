@@ -1,0 +1,371 @@
+.ctscanHeader-main1 {
+  height: auto;
+  /* border: 1px solid black; */
+  width: 100%; /* Use 100% instead of 'full' */
+  padding-top: 17vh;
+}
+
+.ctscanHeader-main2 {
+  height: 70vh; /* Fills the parent container */
+  width: 100%;
+  background-image: url("./CTScanimg1.jpg");
+  /* background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)),
+  url("./assests/ctscanHeader.jpg") ; */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+}
+
+
+.ctscanHeader-box{
+  height: auto;
+  width: 50%;
+  /* border: 1px solid black; */
+  box-sizing: border-box;
+  /* margin: 13% 5% 10% 2%; */
+  /* justify-content: center; */
+  /* text-align: start; */
+  /* align-items: center; */
+}
+.ctscanHeader-title-box{
+  height: auto;
+  width: full;
+  /* border: 1px solid rgb(185, 14, 14); */
+  justify-content: center;
+  /* text-align: start; */
+  align-items: center;
+  padding: 22% 5% 10% 10%;
+}
+.ctscanHeader-title{
+  font-size: 10.5vh;
+  font-weight: 500;
+  /* width: auto; */
+  /* border: 1px solid rgb(20, 185, 14); */
+  color: #eb7801;
+  /* justify-content: center; */
+  /* text-align: start; */
+  /* align-items: center; */
+}
+
+.ctscanHeader-title2 {
+  color: #000000;
+  background-color: rgba(255, 255, 255, 0.3); /* Semi-transparent white */
+  backdrop-filter: blur(10px); /* Adjust blur intensity */
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Light box shadow */
+  display: flex;
+  padding: 1%;
+}
+.ctscanHeader-buttons {
+  display: flex;
+  justify-content: start;
+  margin-top: 3%;
+  /* gap: 5px; */
+}
+
+.ctscanHeader-btn {
+  background-color: #5e2d89;
+  color: #fff;
+  border: none;
+  /* margin: 2% 5% 10% 2%; */
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.ctscanHeader-btn:hover {
+  background-color: #7737a1;
+}
+
+/* Modal Styles */
+.ctscan-form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ctscan-form-wrapper {
+  display: flex;
+  flex-direction: row; /* Ensure sections are side by side in desktop */
+  width: 80%;
+  margin-top: 5%;
+  max-width: 800px; /* Increase max width for desktop */
+  max-height: 70%; /* Limit height for scrolling */
+  background: white;
+  border-radius: 8px;
+  overflow-y: auto; /* Enable scrolling for overflow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+
+
+
+/* Expanded Form for Larger Screens */
+.ctscan-form-wrapper.expanded {
+  max-width: 95%; /* Expanded width */
+}
+
+.ctscan-form-image-section {
+  flex: 1;
+  background: #f3f3f3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ctscan-form-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ctscan-form-container {
+  flex: 1;
+  padding: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left;
+  overflow-y: auto; /* Scroll within the form */
+  max-height: 100%;
+  /* border: 1px solid red; */
+}
+
+.ctscan-book-test-tittle{
+  font-size: larger;
+  font-weight: bold;
+  color: #603c86;
+}
+
+.ctscan-form-close-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.ctscan-book-test-form{
+  width: 85%;
+  
+  /* border: 1px solid red; */
+}
+.ctscan-book-test-form input,
+.ctscan-book-test-form textarea {
+  width: 100%;
+  margin: 1px 0;
+  padding: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+.ctscan-book-form-name {
+  width: 100%; /* Ensure fields take full container width */
+  margin-bottom: 10px;
+  /* text-align: start; */
+  /* width: 100%; */
+  /* display: flex; */
+  /* justify-content: center; */
+}
+
+/* Scrollbar Styling */
+.ctscan-form-wrapper::-webkit-scrollbar {
+  width: 5px; /* Scrollbar width */
+}
+
+.ctscan-form-wrapper::-webkit-scrollbar-thumb {
+  background: #5e2d89; /* Thumb color */
+  border-radius: 10px; /* Rounded corners */
+}
+
+.ctscan-form-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #7737a1; /* Hover color */
+}
+
+.ctscan-form-wrapper::-webkit-scrollbar-track {
+  background: #f3f3f3; /* Scrollbar track */
+}
+
+.ctscan-book-test-form .ctscan-form-submit-btn {
+  background-color: #5e2d89;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 10px; /* Add space between buttons */
+}
+
+.ctscan-book-test-form .ctscan-form-submit-reg-btn {
+  background-color: #5e2d89;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.ctscan-book-test-form button:hover {
+  background-color: #eb7801;
+}
+
+/* Responsive styles using Media Queries */
+
+/* Mobile-first approach */
+@media (max-width: 768px) {
+  .ctscanHeader-main2 {
+    height: auto;
+    padding: 5vh 0;
+  }
+
+  .ctscanHeader-box {
+    width: 100%;
+    padding: 0 10%;
+  }
+
+  .ctscanHeader-title-box {
+    padding: 10% 5%;
+    text-align: center;
+  }
+
+  .ctscanHeader-title {
+    font-size: 6vh;
+  }
+
+  .ctscanHeader-title2 {
+    width: 90%;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .ctscanHeader-buttons {
+    justify-content: center;
+    margin-top: 5%;
+  }
+
+  .ctscanHeader-btn {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .form-wrapper {
+    flex-direction: column;
+    width: 90%;
+  }
+
+  .form-image-section {
+    width: 100%;
+    height: 50%;
+  }
+
+  .form-container {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .book-test-form button {
+    font-size: 14px;
+  }
+
+  .terms-container {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .terms-container input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* Tablet and larger devices */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .ctscanHeader-main2 {
+    height: auto;
+    padding: 10vh 0;
+  }
+
+  .ctscanHeader-box {
+    width: 60%;
+    padding: 0 10%;
+  }
+
+  .ctscanHeader-title {
+    font-size: 8vh;
+  }
+
+  .ctscanHeader-title2 {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .ctscanHeader-btn {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+
+  .form-wrapper {
+    width: 85%;
+  }
+
+  .form-container {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .book-test-form button {
+    font-size: 16px;
+  }
+}
+
+/* Desktop and larger devices */
+@media (min-width: 1025px) {
+  .ctscanHeader-main2 {
+    height: 80vh;
+  }
+
+  .ctscanHeader-box {
+    width: 50%;
+  }
+
+  .ctscanHeader-title {
+    font-size: 10.5vh;
+  }
+
+  .ctscanHeader-title2 {
+    font-size: 18px;
+  }
+
+  .ctscanHeader-btn {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+
+  .form-wrapper {
+    width: 60%;
+  }
+
+  .form-container {
+    padding: 20px;
+  }
+
+  .book-test-form button {
+    font-size: 16px;
+  }
+}

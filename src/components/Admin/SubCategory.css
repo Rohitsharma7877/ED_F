@@ -1,0 +1,255 @@
+.SubCategory-main1 {
+  width: 100%;
+  padding: 20px;
+  border-radius: 20px;
+  box-sizing: border-box;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+  background-color: rgb(245, 245, 245);
+}
+
+.SubCategory-list-box1 {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  height: auto;
+  min-height: 100px;
+}
+
+.SubCategory-titles {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Input Rows */
+.SubCategory-input-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%; /* Make sure the row takes up full width */
+  max-width: 600px; /* Optional: Set a max width */
+  margin: 10px auto; /* Center the row horizontally */
+}
+
+.SubCategory-input-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.SubCategory-input-group label {
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.SubCategory-input-group select,
+.SubCategory-input-group input,
+.SubCategory-input-group textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.SubCategory-input-group textarea {
+  height: 60px;
+  min-height: 50px;
+  max-height: 80px;
+  resize: vertical;
+}
+
+/* Add Category Button */
+button.add-button {
+  background-color: #eb7801;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 20%;
+  min-width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button.add-button:hover {
+  opacity: 0.9;
+}
+
+/* Submit Button */
+.SubCategory-submit-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+button.SubCategory-submit-button {
+  background-color: #28a745;
+  color: #fff;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button.SubCategory-submit-button:hover {
+  opacity: 0.9;
+}
+
+/* Box 2 - SubCategories List */
+.SubCategory-box2 {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.SubCategory-fetch-container {
+  padding: 15px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  margin: 20px auto;
+  overflow-x: auto;
+}
+
+.SubCategory-fetch-title {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 1.8rem;
+  color: #eb7801;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+/* Filter and Search Container */
+.SubCategory-filter-container {
+  margin-bottom: 15px;
+}
+
+.date-filter {
+  padding: 6px 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  width: 150px;
+}
+
+.SubCategory-search-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.search-input {
+  padding: 6px;
+  font-size: 14px;
+  width: 200px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-right: 8px;
+}
+
+.excel-button {
+  background-color: #603c86;
+  color: white;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.excel-button:hover {
+  background-color: #eb7801;
+  transform: scale(1.05);
+}
+
+/* Table Styles */
+.SubCategory-fetch-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+}
+
+.SubCategory-fetch-table th,
+.SubCategory-fetch-table td {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #f0f0f0;
+}
+
+.SubCategory-fetch-table th {
+  background-color: #eb7801;
+  color: white;
+  font-weight: bold;
+}
+
+.SubCategory-fetch-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.SubCategory-fetch-table tr:hover {
+  background-color: #ececec;
+}
+
+.SubCategory-fetch-table td {
+  color: #333;
+  white-space: nowrap;
+}
+
+.category-image {
+  width: 50px; /* Adjust size as needed */
+  height: 50px; /* Ensure height equals width */
+  border-radius: 50%; /* Make it round */
+  object-fit: cover; /* Ensure it covers the area without distortion */
+  border: 2px solid #ccc; /* Optional: Add a border */
+}
+
+.actions-container {
+  display: flex;
+  gap: 8px; /* Space between buttons */
+}
+
+.edit-button,
+.delete-button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-button {
+  background-color: #28a745; /* Green color for Edit */
+  color: white;
+}
+
+.delete-button {
+  background-color: #dc3545; /* Red color for Delete */
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
+.delete-button:hover {
+  background-color: #c82333; /* Darker red on hover */
+}

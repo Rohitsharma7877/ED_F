@@ -1,0 +1,93 @@
+/* General container styles */
+.screening-main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  /* background-color: #e7f2f9; */
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+/* Container for content and image */
+.screening-content {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.screening-content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Box 1 - Text box */
+.screening-text-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+/* Title */
+.screening-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #eb7801;
+  margin-bottom: 20px;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+}
+
+/* Description text */
+.screening-description p {
+  font-size: 18px;
+  color: black;
+  line-height: 1.8;
+  text-align: justify;
+  /* font-family: "Arial", sans-serif; */
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+/* Box 2 - Image box */
+.screening-image-box {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.screening-image-box img {
+  width: 100%;
+  max-width: 480px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+}
+
+.screening-image-box img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .screening-content {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .screening-image-box img {
+    max-width: 100%;
+  }
+}

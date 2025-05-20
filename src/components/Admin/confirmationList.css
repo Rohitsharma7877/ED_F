@@ -1,0 +1,151 @@
+.confirmation-list-container {
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  max-width: 1500px; /* Reduced maximum width */
+  margin: 4px auto 20px auto; /* Increased top margin to move it slightly down */
+  position: relative;
+}
+
+.confirmation-h2 {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 3rem; /* Reduced font size */
+  color: #eb7801;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  /* margin-bottom: 20px; */
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+/* Styling for Action column (Dropdown) */
+.confirmation-table td select {
+  padding: 8px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.confirmation-table td select:hover,
+.confirmation-table td select:focus {
+  border-color: #603c86;
+  box-shadow: 0 0 5px rgba(96, 60, 134, 0.3);
+}
+
+/* Styling for Process Completed column */
+.confirmation-table td:nth-child(9) {
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Apply color for Process Completed statuses */
+.confirmation-table td.pending {
+  color: #f44336; /* Red for Pending */
+}
+
+.confirmation-table td.completed {
+  color: #4caf50; /* Green for Completed */
+}
+
+.confirmation-table td.under-process {
+  color: #ff9800; /* Orange for Under Process */
+}
+
+/* Hover effect for Process Completed statuses */
+.confirmation-table td.pending:hover {
+  transform: scale(1.05);
+}
+
+.confirmation-table td.completed:hover {
+  transform: scale(1.05);
+}
+
+.confirmation-table td.under-process:hover {
+  transform: scale(1.05);
+}
+
+/* Styling for the Action Button in Action column */
+.confirmation-table td select option {
+  padding: 10px;
+  font-size: 14px;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.confirmation-table td select option:hover {
+  background-color: #603c86;
+  color: white;
+}
+
+.export-btn,
+.back-btn {
+  padding: 10px 20px;
+  background-color: #603c86;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.export-btn:hover,
+.back-btn:hover {
+  background-color: #eb7801;
+}
+
+.confirmation-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  table-layout: auto; /* Allows column widths to adjust dynamically */
+}
+
+.confirmation-table th,
+.confirmation-table td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.confirmation-table th {
+  background-color: #eb7801;
+  color: white;
+}
+
+.confirmation-table td {
+  word-wrap: break-word; /* Ensures long text wraps within cells */
+}
+
+.confirmation-table tr:hover {
+  background-color: #ddd;
+}
+
+/* Set specific width for the Email column */
+.confirmation-table th:nth-child(4), /* Email header */
+.confirmation-table td:nth-child(4) /* Email cells */ {
+  width: 280px; /* Adjust this value for desired width */
+}
+
+.confirm-date-filter,
+.search-filter {
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 20%;
+}

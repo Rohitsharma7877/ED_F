@@ -1,0 +1,425 @@
+.navbar-container {
+  height: 40px;
+  width: 100%;
+  margin-top: 64px;
+  background-color: white;
+  position: fixed;
+  z-index: 9;
+  /* border: 1px solid red; */
+}
+
+.desktop-navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  position: fixed;
+  width: 100%;
+  height: 45px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-top: none;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+}
+
+.nav-links li {
+  /* margin-top: 1; */
+  margin: 0 15px;
+  position: relative;
+}
+
+.nav-links li a {
+  color: #603c86;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.nav-links li a:hover {
+  color: #f0a500;
+}
+
+.dropdown-menu,
+.dropdown2-menu2 {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #603c86;
+  list-style: none;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: 200px;
+}
+
+.dropdown-menu li {
+  margin: 0;
+}
+
+.dropdown-menu li a {
+  font-size: 14px;
+  font-weight: normal;
+  color: white;
+  padding: 5px 10px;
+  transition: background 0.3s;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #f0a500;
+  color: #603c86;
+  border-radius: 3px;
+}
+
+/* Show dropdown menu on hover */
+.dropdown:hover .dropdown-menu,
+.dropdown:hover .dropdown2-menu2 {
+  display: block;
+}
+
+/* Mobile Styles */
+.mobile-navbar {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 15px;
+  background-color: white;
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
+}
+
+.hamburger-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.sidebar {
+  position: fixed;
+  top: 10;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background-color: white;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-content {
+  padding: 20px;
+}
+
+
+.close-icon {
+  position: absolute;
+  top: 15px; /* Distance from the top */
+  right: 15px; /* Distance from the right */
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px; /* Adjust size as needed */
+  color: #ff0404; /* Match the theme color */
+  z-index: 1100; /* Ensure it stays above other elements */
+}
+
+.close-icon:hover {
+  color: #f0a500; /* Optional hover effect */
+}
+
+.sidebar-links {
+  list-style: none;
+  padding: 0;
+  /* margin-top: 20px; */
+}
+
+.sidebar-links li {
+  margin-bottom: 15px;
+}
+
+.sidebar-links a {
+  text-decoration: none;
+  color: #603c86;
+  font-size: 16px;
+  font-weight: bold;
+  display: block;
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+  transition: color 0.3s;
+}
+
+.sidebar-links a:hover {
+  color: #f0a500;
+}
+
+/* Submenu Styles */
+.submenu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 10px 0;
+  color: #603c86;
+  border-bottom: 1px solid #ddd;
+}
+
+.submenu-header:hover {
+  color: #f0a500;
+}
+
+.slider-dropdown-menu {
+  list-style: none;
+  padding-left: 20px;
+  margin-top: 10px;
+  max-height: 300px; /* Limit the height of the submenu */
+  overflow-y: auto;
+}
+
+.slider-dropdown-menu li {
+  margin-bottom: 10px;
+}
+
+.slider-dropdown-menu a {
+  text-decoration: none;
+  color: #603c86;
+}
+
+.slider-dropdown-menu a:hover {
+  color: #f0a500;
+}
+
+.sidebar::-webkit-scrollbar,
+.slider-dropdown-menu::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-thumb,
+.slider-dropdown-menu::-webkit-scrollbar-thumb {
+  background: #603c86;
+  border-radius: 4px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover,
+.slider-dropdown-menu::-webkit-scrollbar-thumb:hover {
+  background: #f0a500;
+}
+
+.sidebar::-webkit-scrollbar-track,
+.slider-dropdown-menu::-webkit-scrollbar-track {
+  background: #f3f3f3;
+  border-radius: 4px;
+}
+
+/* Icons */
+.submenu-icon {
+  font-size: 14px;
+  color: #603c86;
+}
+
+/* Down arrow icon */
+.down-icon {
+  margin-left: 5px;
+  font-size: 12px;
+  color: #f0a500;
+}
+
+/* Lab Test div*/
+
+.dropdown2-menu2 {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 3px solid #603c86;
+  padding: 10px;
+  list-style: none;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: 900px;
+}
+
+.dropdown2-menu2 li {
+  margin: 0;
+}
+
+.dropdown2-menu2 li a {
+  font-size: 2vh;
+  font-weight: 800;
+  /* font-weight: normal; */
+  color: #603c86;
+  padding: 5px 10px;
+  transition: background 0.3s;
+}
+
+.dropdown2-menu2 li a:hover {
+  background-color: #f0a500;
+  color: #603c86;
+  border-radius: 3px;
+}
+.dropdown2-menu2 li p {
+  font-size: 11px;
+}
+
+/* Show dropdown menu on hover */
+.dropdown:hover .dropdown2-menu2 {
+  display: block;
+}
+
+/* Down arrow icon */
+.down-icon {
+  margin-left: 5px;
+  font-size: 12px;
+  color: #f0a500;
+}
+
+.droupdown-grid-box {
+  /* width: ; */
+  background: white;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.droupdown-flex-box {
+  display: flex;
+}
+
+/* Modal styles */
+.form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  /* border: 1px solid red; */
+}
+.form-wrapper {
+  display: flex;
+  width: 80%;
+  max-width: 900px;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Image section */
+.form-image-section {
+  flex: 1;
+  background: #f3f3f3; 
+}
+
+.form-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.form-container {
+  flex: 1;
+  padding: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* Close icon positioning */
+.form-close-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.form-close-icon:hover {
+  transform: scale(1.1); /* Add a hover effect for the close icon */
+}
+
+.book-test-form input,
+.book-test-form textarea {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.book-test-form button {
+  background-color: #5e2d89;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.book-test-form button:hover {
+  background-color: #eb7801;
+}
+.form-submit-btn {
+  background-color: #eb7801;
+}
+
+.terms-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between the checkbox and label */
+  margin: 10px 0;
+  justify-content: center;
+  /* border: 1px solid red; */
+}
+
+.terms-container input[type="checkbox"] {
+  width: 18px; /* Adjust size of checkbox */
+  height: 18px;
+  accent-color: #5e2d89; /* Customize checkbox color */
+  cursor: pointer;
+}
+
+.terms-container label {
+  font-size: 14px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.terms-container label a {
+  color: #5e2d89;
+  text-decoration: none;
+}
+
+.terms-container label a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .desktop-navbar {
+    display: none;
+  }
+
+  .mobile-navbar {
+    display: flex;
+  }
+}

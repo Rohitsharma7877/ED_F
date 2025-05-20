@@ -1,0 +1,83 @@
+/* General page styling */
+body {
+  /* font-family: Arial, sans-serif; */
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  width: 250px;
+  text-align: center;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.card h2 {
+  font-size: 1.5em;
+  color: #603c86;
+  margin-top: 20px;
+}
+
+.card p {
+  font-size: 1em;
+
+  color: #000000;
+  padding: 10px;
+}
+
+.card button {
+  background-color: #003886;
+  color: white;
+  padding: 10px;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 0 0 8px 8px;
+  font-size: 1em;
+  transition: background-color 0.3s;
+}
+
+.card button:hover {
+  background-color: #003886;
+}
+
+/* Hover effect */
+.card:hover {
+  transform: translateY(-10px);
+}
+.card-container1 h1 {
+  /* font-size: large; */
+  text-align: center;
+  color: #eb7801;
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+
+.card-container1 p {
+  color: #000000;
+  text-align: center; /* Centers the text horizontally */
+  font-size: 1.2em;
+  line-height: 1.6;
+  margin-top: 20px;
+  width: fit-content; /* Adjusts the width of the paragraph to its content */
+  margin-left: 250px; /* Centers the paragraph horizontally */
+  margin-right: 250px; /* Centers the paragraph horizontally */
+}

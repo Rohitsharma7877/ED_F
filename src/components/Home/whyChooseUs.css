@@ -1,0 +1,215 @@
+.diagnosticwhy-main {
+  height: auto;
+  width: 100%;
+  /* border: 1px solid red; */
+}
+
+/* Main Container */
+/* Main Container */
+.diagnosticwhy-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  background-image: url("./handshake.jpg");
+  background-size: 100%; /* Adjust the size of the background image */
+  background-repeat: no-repeat; /* Prevent tiling of the image */
+  background-position: center;
+  margin: 30px;
+  border-radius: 12px;
+  height: 350px; /* Automatically adjusts height based on content */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+/* Text Section Styles */
+.diagnosticwhy-text {
+  flex: 1;
+  max-width: 1200px;
+  text-align: center;
+}
+
+.diagnosticwhy-text h1 {
+  font-size: 48px;
+  color: #1d1b1b;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+/* Advantages Container */
+.diagnosticwhy-advantages-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 10px;
+}
+
+/* Individual Card Styles */
+.diagnosticwhy-box {
+  position: relative;
+  background: linear-gradient(135deg, #ffffff, #f9f9f9);
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+  width: calc(25% - 20px); /* Four cards in one row */
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  overflow: hidden;
+}
+
+/* Unique Background Styles for Cards */
+.diagnosticwhy-box:nth-child(1) {
+  background: linear-gradient(135deg, #ede7f6, #eb7801);
+}
+
+.diagnosticwhy-box:nth-child(2) {
+  background: linear-gradient(135deg, #ede7f6, #603c86);
+}
+
+.diagnosticwhy-box:nth-child(3) {
+  background: linear-gradient(135deg, #ede7f6, #eb7801);
+}
+
+.diagnosticwhy-box:nth-child(4) {
+  background: linear-gradient(135deg, #ede7f6, #603c86);
+}
+
+/* Hover Effects */
+.diagnosticwhy-box:hover {
+  transform: scale(1.05); /* Slight zoom effect */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Decorative Effects */
+.diagnosticwhy-box::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 100px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  z-index: 0;
+  transition: transform 0.3s ease-in-out;
+}
+
+.diagnosticwhy-box:hover::before {
+  transform: translate(-10px, 10px) scale(1.2);
+}
+
+.diagnosticwhy-box img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 15px;
+  border-radius: 50%; /* Circular Image Style */
+  border: 4px solid rgba(255, 255, 255, 0.8); /* Subtle Border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add depth */
+}
+
+/* Card Content */
+.diagnosticwhy-box h3 {
+  font-size: 16px;
+  color: #000000;
+  margin-bottom: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.diagnosticwhy-box p {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.6;
+  margin: 0;
+  z-index: 1; /* Ensures text appears above decorative elements */
+}
+/* General Responsive Adjustments */
+@media (max-width: 1024px) {
+  .diagnosticwhy-container {
+    flex-direction: column; /* Stack elements vertically */
+    padding: 40px 15px; /* Reduce padding */
+    height: auto; /* Adjust height dynamically */
+  }
+
+  .diagnosticwhy-text h1 {
+    font-size: 36px; /* Reduce heading size */
+    margin-bottom: 20px; /* Adjust margin */
+  }
+
+  .diagnosticwhy-advantages-list {
+    gap: 15px; /* Adjust gap between cards */
+  }
+
+  .diagnosticwhy-box {
+    width: calc(50% - 15px); /* Display two cards per row */
+    padding: 15px; /* Adjust padding for smaller screens */
+  }
+}
+
+/* Tablet Devices */
+@media (max-width: 768px) {
+  .diagnosticwhy-container {
+    padding: 30px 10px; /* Compact padding */
+  }
+
+  .diagnosticwhy-text h1 {
+    font-size: 28px; /* Reduce heading size further */
+  }
+
+  .diagnosticwhy-advantages-list {
+    gap: 10px; /* Reduce gap between cards */
+  }
+
+  .diagnosticwhy-box {
+    width: 100%; /* Single card per row */
+    padding: 10px; /* Compact padding */
+  }
+
+  .diagnosticwhy-box img {
+    width: 50px; /* Reduce image size */
+    height: 50px;
+  }
+
+  .diagnosticwhy-box h3 {
+    font-size: 16px; /* Adjust font size for headings */
+  }
+
+  .diagnosticwhy-box p {
+    font-size: 12px; /* Adjust paragraph font size */
+  }
+}
+
+/* Mobile Devices */
+@media (max-width: 480px) {
+  .diagnosticwhy-container {
+    padding: 20px 10px; /* Minimal padding */
+    margin: 15px; /* Adjust margin */
+  }
+
+  .diagnosticwhy-text h1 {
+    font-size: 24px; /* Smaller heading size for mobiles */
+    margin-bottom: 15px; /* Adjust margin */
+  }
+
+  .diagnosticwhy-box {
+    width: 100%; /* Full width for cards */
+    padding: 8px; /* Compact padding */
+  }
+
+  .diagnosticwhy-box img {
+    width: 40px; /* Further reduce image size */
+    height: 40px;
+  }
+
+  .diagnosticwhy-box h3 {
+    font-size: 14px; /* Adjust heading font size */
+  }
+
+  .diagnosticwhy-box p {
+    font-size: 11px; /* Adjust paragraph font size */
+  }
+}

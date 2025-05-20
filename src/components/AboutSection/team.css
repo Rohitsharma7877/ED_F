@@ -1,0 +1,192 @@
+/* Main container */
+.main-container{
+    height: auto;
+    background-color: #603c86;
+    
+    /* border: 1px solid rgb(250, 1, 1);  */
+    /* margin-left: 10%; */
+    margin-top: 1%; 
+    width: full;
+
+}
+
+.main-container h1{
+    text-align: left;
+    /* height: 100%; */
+    width: 100%;
+    font-size: 8vh;
+    font-weight: bold;
+    /* display: flex; */
+    /* border: 1px solid rgb(250, 1, 1); */
+    align-items: center;
+    color: #eb7801;
+    font-family: 'El Messiri', sans-serif;
+}
+
+.team-container1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    /* border: 1px solid rgb(250, 1, 1); */
+}
+
+.team-grid {
+    display: grid;
+    /* background: #fff; */
+    grid-template-columns: repeat(5, 1fr); /* 5 columns in a row */
+    gap: 20px; /* Spacing between cards */
+    width: 100%;
+    max-width: 1200px; /* Adjust for responsiveness */
+}
+
+/* Flip Card Container */
+.flip-card {
+    background-color: transparent;
+    perspective: 1000px; /* Create 3D effect */
+  }
+  
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    font-family: "El Messiri", sans-serif;
+  }
+  
+  .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+  
+  /* Front Side */
+  .flip-card-front,
+  .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    font-family: "El Messiri", sans-serif;
+  }
+  
+  .flip-card-front {
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .team-image {
+    width: 80%;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  .team-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .team-designation {
+    font-size: 1rem;
+    color: #eb7801;
+  }
+  
+  /* Back Side */
+  .flip-card-back {
+    background-color: #603c86;
+    color: white;
+    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .team-description {
+    height: 100%;
+    width: 100%;
+    /* padding: 1%; */
+    padding-top: 8%;
+    font-size: 11px;
+    font-weight: 300;
+    border-radius: 10px;
+    /* border: 1px solid red; */
+    line-height: 1.5;
+    background-color: white;
+    color: #000;
+    font-family: "El Messiri", sans-serif;
+  }
+  
+  /* Mobile View Styles */
+@media (max-width: 768px) {
+  .main-container {
+    padding: 80px;
+  }
+
+  .main-container h1 {
+    font-size: 6vh; /* Smaller font size for headings */
+    text-align: center; /* Center-align the heading for mobile */
+  }
+
+  .team-container1 {
+    padding: 10px;
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for better fit on small screens */
+    gap: 10px; /* Reduce gap for smaller devices */
+  }
+
+  .flip-card-inner {
+    height: 250px; /* Adjust height for smaller screens */
+  }
+
+  .team-image {
+    width: 70%; /* Reduce image size */
+  }
+
+  .team-title {
+    font-size: 1rem; /* Adjust font size */
+  }
+
+  .team-designation {
+    font-size: 0.9rem;
+  }
+
+  .team-description {
+    font-size: 10px; /* Adjust description font size */
+    padding-top: 5%; /* Adjust padding for better fit */
+  }
+}
+
+/* Extra Small Devices */
+@media (max-width: 480px) {
+  .team-grid {
+    grid-template-columns: repeat(1, 1fr); /* Single column for very small screens */
+  }
+
+  .flip-card-inner {
+    height: 200px; /* Further adjust card height */
+  }
+
+  .team-title {
+    font-size: 0.9rem;
+  }
+
+  .team-designation {
+    font-size: 0.8rem;
+  }
+
+  .team-description {
+    font-size: 9px;
+  }
+}

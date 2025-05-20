@@ -1,0 +1,121 @@
+/* Main container */
+.xray-test-container {
+    padding: 40px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  /* Title */
+  .xray-test-container h1 {
+    font-size: 28px;
+    color: #eb7801;
+    margin-bottom: 30px;
+  }
+  
+  /* Section Navigation */
+  .xray-section-nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .xray-section-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #eb7801;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-weight: 600;
+  }
+  
+  .xray-section-button:hover {
+    background-color: #603c86;
+    transform: scale(1.05);
+  }
+  
+  .xray-section-button.active {
+    background-color: #603c86;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .tick-icon {
+    color: #603c86;
+  }
+  
+  /* Content Sections */
+  .xray-test-sections {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .xray-test-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.3s ease;
+  }
+  
+  /* Header */
+  .xray-test-section h2 {
+    font-size: 22px;
+    color: #eb7801;
+    border-bottom: 2px solid #eb7801;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+  
+  /* List styles */
+  .xray-test-section ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+  }
+  
+  .xray-test-section li {
+    font-size: 16px;
+    color: #000000;
+    margin-bottom: 10px;
+    position: relative;
+    display: flex;
+    align-items: left; /* Aligns the text with the checkmark */
+  }
+  
+  /* Checkmark styling */
+  .xray-test-section li::before {
+    content: "✔";
+    font-size: 18px;
+    color: #603c86;
+    margin-right: 10px; /* Space between the checkmark and the text */
+    display: inline-block; /* Ensures the tick and text are inline */
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .xray-test-container {
+      padding: 20px;
+    }
+  
+    .xray-section-button {
+      font-size: 13px;
+      padding: 8px 16px;
+    }
+  
+    .xray-test-section {
+      padding: 15px;
+    }
+  }
+  

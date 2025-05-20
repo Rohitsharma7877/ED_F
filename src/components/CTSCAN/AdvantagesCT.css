@@ -1,0 +1,42 @@
+/* Container that holds both columns */
+.ct-scan-container {
+  display: flex;
+  justify-content: space-between; /* Distribute the space between the columns */
+  align-items: center; /* Align items vertically in the center */
+  gap: 20px; /* Space between the two columns */
+  margin: 50px;
+}
+
+/* Text column styles */
+.ct-scan-text {
+  flex: 1; /* Takes up available space */
+  padding: 20px;
+}
+
+.ct-scan-text h1 {
+  font-size: 24px;
+  color: #eb7801;
+  text-align: left; /* Align text to the left */
+  margin-bottom: 15px;
+}
+
+.ct-scan-text p {
+  font-size: 16px;
+  color: #000000;
+  line-height: 1.6;
+  text-align: left;
+}
+
+/* Image column styles */
+.ct-scan-image {
+  flex: 1; /* Takes up available space */
+  display: flex;
+  justify-content: center; /* Center the image horizontally */
+}
+
+.ct-scan-image img {
+  width: 100%; /* Make image responsive */
+  max-width: 500px; /* Set a max width for the image */
+  border-radius: 10px; /* Add rounded corners to the image */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}

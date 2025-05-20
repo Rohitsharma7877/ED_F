@@ -1,0 +1,92 @@
+/* Main Container */
+.treadmillAdv-container {
+  display: flex;
+  justify-content: center; /* Center the content horizontally */
+  align-items: center; /* Center the content vertically */
+  padding: 60px 20px;
+  /* background-image: url("./Treadmill-Header.jpg"); */
+  background-size: cover; /* Keeps the image covering the container */
+  background-position: center;
+  margin: 30px;
+  margin-bottom: 50px;
+  border-radius: 12px;
+  height: 300px; /* Set a fixed height for the container */
+}
+
+/* Text section styles */
+.treadmillAdv-text {
+  flex: 1;
+  max-width: 800px;
+  padding: 30px;
+  text-align: center;
+  border-radius: 12px;
+}
+
+.treadmillAdv-text h1 {
+  font-size: 40px;
+  color: #eb7801; /* Orange color for the heading */
+  /* margin-bottom: 0px; */
+  font-weight: 700;
+  /* text-decoration: black; */
+}
+
+/* New Advantages Box Layout */
+.treadmillAdv-advantages-list {
+  display: flex;
+  gap: 20px;
+  justify-content: center; /* Center the list items */
+  padding-top: 20px;
+}
+
+.advantage-box {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 16px;
+  color: #333;
+  width: 150px; /* Set a fixed width for each box */
+  transition: transform 0.3s ease-in-out; /* Add hover effect */
+}
+
+.advantage-box svg {
+  font-size: 30px;
+  color: #603c86; /* Icon color */
+  margin-bottom: 10px; /* Space between icon and text */
+}
+
+.advantage-box p {
+  margin: 0;
+  font-size: 14px;
+  color: #000;
+}
+
+/* Hover Effect */
+.advantage-box:hover {
+  transform: translateY(-5px); /* Lift the box on hover */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Enhance shadow */
+}
+
+.advantage-box svg :hover {
+  font-size: 30px;
+  color: #eb7801; /* Icon color */
+  margin-bottom: 10px; /* Space between icon and text */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .treadmillAdv-text h1 {
+    font-size: 28px;
+  }
+
+  .treadmillAdv-advantages-list {
+    flex-direction: column; /* Stack items vertically on smaller screens */
+  }
+
+  .advantage-box {
+    font-size: 16px;
+    padding: 15px;
+    width: 100%; /* Make boxes fill the width */
+  }
+}

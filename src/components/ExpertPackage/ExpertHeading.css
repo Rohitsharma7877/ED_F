@@ -1,0 +1,205 @@
+.expertHeading-main1 {
+    height: auto;
+    width: 100%;
+    padding-top: 17vh;
+    /* border: 1px solid red; */
+  }
+  
+  .expertHeading-main2 {
+    width: 80%;
+    height: auto;
+    margin: 2rem auto;
+    /* border: 1px solid red; */
+    color: #333;
+    gap: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .expertHeading-box1 {
+    width: 40%;
+    height: auto;
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+
+  
+  /* Centering the image inside the box */
+  .expertHeading-images-box {
+    width: 90%; /* Adjust width as needed */
+    height: 90%; /* Adjust height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+    /* border: 1px solid red; */
+    border-radius: 20px;
+  }
+  
+  .expertHeading-images-box img {
+    height: 100%;
+    width: 100%;
+    /* margin: 5%; */
+    object-fit: contain;
+    /* border: 1px solid red;  */
+  }
+  
+
+  .expertHeading-box2 {
+    width: 60%;
+    height: auto;
+    /* border: 1px solid red; */
+  }
+
+  .expertHeading-box2-tittle {
+    width: 100%;
+    height: 22vh;
+    /* border: 1px solid red; */
+    padding-top: 5vh;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    text-align: center; /* Ensure text alignment is centered */
+  }
+  
+  .expertHeading-box2-tittle h1{
+    font-size: 6vh;
+    font-weight: bold;
+    color: black;
+  }
+  .expertHeading-box2-tittle p{
+    font-size: 2vh;
+    color: rgb(169, 169, 173);
+  }
+
+  .expertHeading-box2-package {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+  }
+  
+  .expertHeading-box2-package-title {
+    width: 100%;
+    /* height: auto; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.7vh;
+    font-weight: bold;
+    text-decoration: underline;
+    color: #000;
+    /* margin-bottom: 20px; */
+  }
+  
+  .expertHeading-box2-package-service{
+    /* border: 1px solid rgb(0, 0, 0); */
+    width: 100%;
+    height: 15vh;
+    /* gap: 1%; */
+  }
+
+  .expert-one{
+    /* border: 1px solid rgb(0, 0, 0); */
+    width: 100%;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+  }
+
+  .expert-one h1 {
+    font-size: 2vh;
+    color: #706c6c;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out; /* Smooth animation */
+  }
+  
+  .expert-one h1:hover {
+    color: blue;
+    transform: scale(1.1); /* Zoom in effect */
+  }
+  
+
+  .expert-two{
+    /* border: 1px solid rgb(0, 0, 0); */
+    width: 100%;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+  }
+
+  .expert-two h1 {
+    font-size: 2vh;
+    color: #706c6c;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out; /* Smooth animation */
+  }
+  
+  .expert-two h1:hover {
+    color: blue;
+    transform: scale(1.1); /* Zoom in effect */
+  }
+
+  .expert-three{
+    /* border: 1px solid rgb(0, 0, 0); */
+    width: 100%;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+  }
+
+  .expert-three h1 {
+    font-size: 2vh;
+    color: #706c6c;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out; /* Smooth animation */
+  }
+  
+  .expert-three h1:hover {
+    color: blue;
+    transform: scale(1.1); /* Zoom in effect */
+  }
+  
+  
+
+  .expertHeading-box2-help{
+    width: 100%;
+    height: auto;
+    /* border: 1px solid red; */
+  }
+
+  .expertHeading-box2-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid rgb(68, 0, 255); */
+  }
+
+  .expertHeading-submit-btn {
+    padding: 0.8rem;
+    background: linear-gradient(90deg, #603c86, #d06601);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    width: 50%;
+    transition: background-color 0.3s ease;
+  }
+  
+  .expertHeading-submit-btn:hover {
+    background-color: #6e2c94;
+  }

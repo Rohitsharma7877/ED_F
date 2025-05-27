@@ -114,12 +114,12 @@ const Navbar2 = () => {
           </li>
 
           {/* Download reports */}
-          {/* <li>
-            <Link to="/download-report" className="flex items-start gap-2">
-              <IoMdCloudDownload className="text-[18px] " />
-              <div className="text-left text-[#f0a500]">Download Report</div>
+          <li>
+            <Link to="/expert-gallery" className="flex items-start gap-2">
+              {/* <IoMdCloudDownload className="text-[18px] " /> */}
+              <div className="text-left text-[#f0a500]">Expert Gallery</div>
             </Link>
-          </li> */}
+          </li>
 
 
           <li>
@@ -285,11 +285,11 @@ const Navbar2 = () => {
             </li>
 
             {/* Download Report */}
-            {/* <li>
-              <Link to="/download-report" onClick={closeSidebar}>
-                Download Report
+            <li>
+              <Link to="/expert-gallery" onClick={closeSidebar}>
+                Expert Gallery
               </Link>
-            </li> */}
+            </li>
             <li>
               <Link to="/mobile" onClick={closeSidebar}>
                 +91 0123456789

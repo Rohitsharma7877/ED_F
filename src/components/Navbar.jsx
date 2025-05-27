@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GrSearch } from "react-icons/gr";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IoClose } from "react-icons/io5";
@@ -32,42 +32,77 @@ const Navbar = () => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
-
+  const [allTestNames, setAllTestNames] = useState([]);
   const { token, user, logout } = useAuth();
   const navigate = useNavigate();
   const searchInput = useLocation();
   const URLSearch = new URLSearchParams(searchInput?.search);
-  const searchQuery = URLSearch.getAll("q");
 
-  if (searchQuery.length > 0) {
-    setSearch(searchQuery[0]);
-  }
+  useEffect(() => {
+    const URLSearch = new URLSearchParams(searchInput.search);
+    const searchQuery = URLSearch.get("q");
+    if (searchQuery) {
+      setSearch(searchQuery);
+    }
+  }, [searchInput]);
 
+  // Fetch all test names when component mounts
+  useEffect(() => {
+    const fetchTestNames = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:4000/api/subcategories/test-names"
+        );
+        const data = await response.json();
+        if (response.ok) {
+          console.log("✅ allTestNames loaded from backend:", data.data);
+          setAllTestNames(data.data); // ✅ this should be an array of objects
+        } else {
+          console.error("❌ Error fetching test names:", data);
+        }
+      } catch (error) {
+        console.error("❌ Network error:", error);
+      }
+    };
+
+    fetchTestNames();
+  }, []);
+
+  // Modify your handleSearch function
   const handleSearch = (e) => {
     const value = e.target.value;
     setSearch(value);
+    console.log("🔍 User typed:", value);
+    console.log("📦 Searching within:", allTestNames);
 
     if (value.trim()) {
-      setIsLoading(true);
-      setTimeout(() => {
-        const filteredData = dummyData.filter((item) =>
-          item.name.toLowerCase().includes(value.toLowerCase())
-        );
-        setSearchResults(filteredData);
-        setIsLoading(false);
-        setIsDropdownVisible(true);
-      }, 500);
+      const filteredData = allTestNames.filter(
+        (item) =>
+          item.title.toLowerCase().includes(value.toLowerCase()) ||
+          (item.testNo &&
+            item.testNo.toLowerCase().includes(value.toLowerCase())) ||
+          (item.expertSerialTestNo &&
+            item.expertSerialTestNo.toLowerCase().includes(value.toLowerCase()))
+      );
+
+      console.log("✅ Filtered Results:", filteredData);
+      setSearchResults(filteredData);
+      setIsDropdownVisible(true);
     } else {
       setSearchResults([]);
       setIsDropdownVisible(false);
     }
   };
 
-  const handleResultClick = (result) => {
+  // Modify your search results display
+const handleResultClick = (result) => {
+  navigate(`/test-details/${result._id}`);
+  setTimeout(() => {
     setSearch("");
     setIsDropdownVisible(false);
-    navigate(`/product/${result.id}`);
-  };
+  }, 100); // delay to let navigation finish first
+};
+
 
   const handleLogout = () => {
     logout();
@@ -137,20 +172,24 @@ const Navbar = () => {
           {isDropdownVisible && (
             <div
               className={`absolute top-12 bg-white shadow-lg border rounded-lg z-50 
-                w-[65%] left-[65%] mt-[0.6%] transform -translate-x-1/2 
-                sm:w-[35%] sm:left-[20%] sm:mt-[0.6%] sm:transform-none`}
+          w-[65%] left-[65%] mt-[0.6%] transform -translate-x-1/2 
+          sm:w-[35%] sm:left-[20%] sm:mt-[0.6%] sm:transform-none search-scrollable`}
+          style={{ maxHeight: "250px", overflowY: "auto" }}
             >
               {isLoading ? (
                 <p className="p-2 text-gray-500 text-center">Loading...</p>
               ) : searchResults.length > 0 ? (
                 searchResults.map((result) => (
                   <div
-                    key={result.id}
+                    key={result._id}
                     className="p-2 hover:bg-gray-100 cursor-pointer"
                     onClick={() => handleResultClick(result)}
                   >
-                    <p className="font-medium">{result.name}</p>
-                    <p className="text-sm text-gray-500">{result.category}</p>
+                    <p className="text-sm text-gray-500">{result.title}</p>
+                    <p className="font-medium ">
+                      Test No: {result.testNo} | Serial:{" "}
+                      {result.expertSerialTestNo}
+                    </p>
                   </div>
                 ))
               ) : (
@@ -179,9 +218,7 @@ const Navbar = () => {
             </Link>
             <Link to="/offline-booking" className="relative text-white text-lg">
               <FaShoppingCart />
-              <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full px-1">
-                
-              </span>
+              <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full px-1"></span>
             </Link>
 
             {/* Profile Dropdown */}

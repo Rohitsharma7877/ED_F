@@ -110,6 +110,26 @@
   color: #603c86;
 }
 
+.coordinates-display {
+  margin: 20px 0;
+  padding: 15px;
+  background: #f5f5f5;
+  border-radius: 5px;
+}
+
+.view-on-maps-link {
+  display: inline-block;
+  margin-top: 10px;
+  color: #603c86;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.view-on-maps-link:hover {
+  text-decoration: underline;
+}
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .viewAmbulanceService-container {

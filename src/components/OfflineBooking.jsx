@@ -39,8 +39,14 @@ const OfflineBooking = () => {
 
           <div className="working-hours">
             <h3>Working Hours:</h3>
-            <p>Monday - Saturday: 8:00 AM - 8:00 PM</p>
-            <p>Sunday: 9:00 AM - 2:00 PM</p>
+            <p>Monday - Sunday: 9:00 AM - 8:00 PM</p>
+            {/* <p>Sunday: 9:00 AM - 2:00 PM</p> */}
+          </div>
+
+          <div className="working-hours">
+            <h3>Emergency Time:</h3>
+            <p>24 × 7</p>
+            {/* <p>Sunday: 9:00 AM - 2:00 PM</p> */}
           </div>
         </div>
       </div>

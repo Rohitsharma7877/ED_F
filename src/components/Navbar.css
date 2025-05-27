@@ -90,6 +90,17 @@
     font-weight: bold;
   }
   
+/* Add to your Navbar.css or global CSS */
+.search-scrollable::-webkit-scrollbar {
+  width: 6px;
+}
+
+.search-scrollable::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+}
+
+
   @media (max-width: 640px) {
     .search-bar {
       width: 90%; 

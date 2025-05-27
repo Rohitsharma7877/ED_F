@@ -61,7 +61,9 @@ function AdminDashboard() {
             className={`sidebar-link ${
               activeDropdown === "admin-offline-registration" ? "active" : ""
             }`}
-            onClick={() => navigate("admin-offline-registration/view-offline-registrations")}
+            onClick={() =>
+              navigate("admin-offline-registration/view-offline-registrations")
+            }
           >
             <span className="icon">
               <i className="fas fa-calendar-check"></i>
@@ -79,6 +81,30 @@ function AdminDashboard() {
               <i className="fas fa-calendar-check"></i>
             </span>{" "}
             Contact Us
+          </div>
+
+          <div
+            className={`sidebar-link ${
+              activeDropdown === "admin-career" ? "active" : ""
+            }`}
+            onClick={() => navigate("admin-career")}
+          >
+            <span className="icon">
+              <i className="fas fa-calendar-check"></i>
+            </span>{" "}
+            Career
+          </div>
+
+          <div
+            className={`sidebar-link ${
+              activeDropdown === "resume-submissions" ? "active" : ""
+            }`}
+            onClick={() => navigate("resume-submissions")}
+          >
+            <span className="icon">
+              <i className="fas fa-file-alt"></i>
+            </span>{" "}
+            Resume Submissions
           </div>
 
           <div
@@ -143,7 +169,7 @@ function AdminDashboard() {
               Book Appointment
             </Link>
             <Link to="ambulance-services" className="dropdown-item">
-            Ambulance Service
+              Ambulance Service
             </Link>
           </div>
 

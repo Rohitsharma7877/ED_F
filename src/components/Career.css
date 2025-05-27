@@ -1,0 +1,201 @@
+/* Overall wrapper */
+.career-wrapper {
+    padding-top: 17vh;
+  /* font-family: 'Segoe UI', sans-serif; */
+}
+
+/* Full-width banner */
+/* Career Banner (with background image) */
+.career-banner {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background-image: url('../components/assests/background2.jpg'); /* ✅ your actual path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.career-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4); /* ✅ Dark overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.career-banner-title {
+  color: #ff3c00;
+  font-size: 2.8rem;
+  font-weight: bold;
+  font-family: 'Georgia', serif;
+}
+
+
+/* Job Section */
+.career-jobs {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.career-heading {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2d2d2d;
+}
+
+.career-subheading {
+  font-size: 1rem;
+  color: #6b6b6b;
+  margin-bottom: 2rem;
+}
+
+/* Filter buttons */
+.career-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.career-filter-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #7928ca;
+  background-color: transparent;
+  color: #7928ca;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.career-filter-btn.active,
+.career-filter-btn:hover {
+  background-color: #7928ca;
+  color: #fff;
+}
+
+/* Dynamic content */
+.category-content {
+  text-align: left;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.category-content ul {
+  padding-left: 1.5rem;
+  list-style-type: disc;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* No data */
+.no-data {
+  color: #888;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+
+.resume-paragraph{
+    font-size: 0.9rem;
+}
+/* Resume Section */
+/* Resume Section Layout */
+.resume-section {
+  background-color: #f4ecff;
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.resume-section h2 {
+  font-size: 1.5rem;
+  color: #2d2d2d;
+  margin-bottom: 1rem;
+}
+
+.resume-section p {
+  color: #555;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+/* Flex Layout for Select + Button */
+.resume-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.resume-select {
+  appearance: none;
+  -webkit-appearance: none; /* for Safari */
+  -moz-appearance: none;    /* for Firefox */
+  
+  padding: 0.8rem 2.5rem 0.8rem 1rem; /* right padding for arrow space */
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  min-width: 250px;
+  height: 44px;
+  line-height: 1.4;
+  background-color: #fff;
+  color: #333;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 140 140' width='16' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='20,50 70,100 120,50' stroke='%23666' stroke-width='15' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1rem;
+}
+
+
+
+
+.resume-btn {
+  background-color: #f89c1c;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  height: 44px; /* Match select height */
+  transition: background 0.3s ease;
+}
+
+.resume-btn:hover {
+  background-color: #e08500;
+}
+
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .career-heading {
+    font-size: 1.5rem;
+  }
+
+  .resume-section h2 {
+    font-size: 1.2rem;
+  }
+
+  .resume-form {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .resume-select,
+  .resume-btn {
+    width: 100%;
+  }
+}

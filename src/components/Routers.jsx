@@ -47,6 +47,13 @@ import ViewAmbulanceService from "./Admin/viewAmbulanceService";
 import OfflineBooking from "./OfflineBooking";
 import BookForServices from "./Admin/BookForServices";
 import ViewContact from "./Admin/ViewContact";
+import TestDetails from "./TestDetails";
+import GalleryHome from "./ExpertGallery/GalleryHome";
+import TermCondition from "./TermCondition";
+import Career from "./Career";
+import AdminCareer from "./Admin/AdminCareer";
+import AdminResumes from "./Admin/AdminResumes"; // Add this import
+import ResumeModal from "./ResumeModal";
 
 const Routers = () => {
   // const { isLoggedIn } = useAuth();
@@ -64,6 +71,11 @@ const Routers = () => {
       <Route path="/ambulance-service" element={<AmbulanceServices />} />
       <Route path="/home-collection" element={<HomeCollection />} />
       <Route path="/book-appointment" element={<BookAppointment />} />
+      <Route path="/test-details/:id" element={<TestDetails />} />
+      <Route path="/expert-gallery" element={<GalleryHome />} />
+      <Route path="/term-condition" element={<TermCondition />} />
+      <Route path="/career" element={<Career />} />
+      <Route path="/submit-resume" element={<ResumeModal />} />
 
       {/* Admin section*/}
       <Route path="/admin-login" element={<AdminLogin />} />
@@ -73,8 +85,13 @@ const Routers = () => {
         <Route path="book-appointment" element={<ViewAppointments />} />
         <Route path="home-collection" element={<ViewHomeCollection />} />
         <Route path="ambulance-services" element={<ViewAmbulanceService />} />
-        <Route path="admin-offline-registration" element={<RegistrationForm />} />
+        <Route
+          path="admin-offline-registration"
+          element={<RegistrationForm />}
+        />
         <Route path="test-booking" element={<BookForServices />} />
+        <Route path="admin-career" element={<AdminCareer />} />
+        <Route path="resume-submissions" element={<AdminResumes />} />
         <Route
           path="upload-prescription"
           element={<UploadPrescriptionDashboard />}
@@ -83,7 +100,6 @@ const Routers = () => {
         <Route path="view-contact-us" element={<ViewContact />} />
         <Route path="sub-category" element={<SubCategory />} />
         <Route path="expert-service-list" element={<ExpertServiceList />} />
-        
         <Route
           path="admin-offline-registration/view-offline-registrations"
           element={<FetchRegistrations />}
@@ -122,7 +138,7 @@ const Routers = () => {
       </Route>
 
       <Route path="/offline-booking" element={<OfflineBooking />} />
-      
+
       <Route path="/contact-us" element={<ContactUs />} />
       <Route path="*" element={<PageDoesNot />} />
     </Routes>

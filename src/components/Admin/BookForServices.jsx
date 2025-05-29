@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import * as XLSX from "xlsx";
-import { Link } from "react-router-dom";
 import "./BookForServices.css";
 
 const BookForServices = () => {
@@ -11,14 +10,19 @@ const BookForServices = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedService, setSelectedService] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [bookingsPerPage] = useState(10);
 
-  // Fetch all service bookings from the backend
+  useEffect(() => {
+    fetchServiceBookings();
+  }, []);
+
   const fetchServiceBookings = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/service-bookings");
-      if (!response.ok) {
-        throw new Error("Failed to fetch service bookings");
-      }
+      const response = await fetch(
+        "http://localhost:4000/api/service-bookings"
+      );
+      if (!response.ok) throw new Error("Failed to fetch service bookings");
       const data = await response.json();
       setBookings(data);
       setFilteredBookings(data);
@@ -29,11 +33,6 @@ const BookForServices = () => {
     }
   };
 
-  useEffect(() => {
-    fetchServiceBookings();
-  }, []);
-
-  // Format date for display
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", {
@@ -43,7 +42,51 @@ const BookForServices = () => {
     });
   };
 
-  // Handle search functionality
+  const handleStatusChange = async (bookingId, newStatus) => {
+    try {
+      const response = await fetch(
+        `http://localhost:4000/api/service-bookings/${bookingId}/status`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({ status: newStatus }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to update status");
+      }
+
+      // Update the local state to reflect the change immediately
+      setBookings((prevBookings) =>
+        prevBookings.map((booking) =>
+          booking._id === bookingId
+            ? { ...booking, status: newStatus }
+            : booking
+        )
+      );
+
+      setFilteredBookings((prevFilteredBookings) =>
+        prevFilteredBookings.map((booking) =>
+          booking._id === bookingId
+            ? { ...booking, status: newStatus }
+            : booking
+        )
+      );
+
+      // Optional: Show success message
+      // alert("Status updated successfully!");
+    } catch (error) {
+      console.error("Error updating status:", error);
+      alert(error.message || "Failed to update status");
+    }
+  };
+
   const handleSearch = (e) => {
     const value = e.target.value.toLowerCase();
     setSearchTerm(value);
@@ -52,41 +95,42 @@ const BookForServices = () => {
       const matchesSearch =
         booking.name.toLowerCase().includes(value) ||
         booking.email.toLowerCase().includes(value) ||
-        booking.mobile.includes(value);
-      
-      const matchesService = 
-        selectedService === "all" || 
+        booking.mobile.includes(value) ||
+        (booking.testName && booking.testName.toLowerCase().includes(value));
+
+      const matchesService =
+        selectedService === "all" ||
         booking.serviceType.toLowerCase() === selectedService.toLowerCase();
-      
-      const matchesDate = 
-        !selectedDate || 
+
+      const matchesDate =
+        !selectedDate ||
         formatDate(booking.appointmentDate) === formatDate(selectedDate);
 
       return matchesSearch && matchesService && matchesDate;
     });
 
     setFilteredBookings(filtered);
+    setCurrentPage(1);
   };
 
-  // Handle date filter
   const handleDateFilter = (e) => {
     const value = e.target.value;
     setSelectedDate(value);
 
     const filtered = bookings.filter((booking) => {
-      const matchesService = 
-        selectedService === "all" || 
+      const matchesService =
+        selectedService === "all" ||
         booking.serviceType.toLowerCase() === selectedService.toLowerCase();
-      
-      const matchesSearch = 
+
+      const matchesSearch =
         !searchTerm ||
         booking.name.toLowerCase().includes(searchTerm) ||
         booking.email.toLowerCase().includes(searchTerm) ||
-        booking.mobile.includes(searchTerm);
+        booking.mobile.includes(searchTerm) ||
+        (booking.testName &&
+          booking.testName.toLowerCase().includes(searchTerm));
 
-      if (!value) {
-        return matchesService && matchesSearch;
-      }
+      if (!value) return matchesService && matchesSearch;
       return (
         formatDate(booking.appointmentDate) === formatDate(value) &&
         matchesService &&
@@ -95,27 +139,27 @@ const BookForServices = () => {
     });
 
     setFilteredBookings(filtered);
+    setCurrentPage(1);
   };
 
-  // Handle service type filter
   const handleServiceFilter = (e) => {
     const value = e.target.value;
     setSelectedService(value);
 
     const filtered = bookings.filter((booking) => {
-      const matchesDate = 
-        !selectedDate || 
+      const matchesDate =
+        !selectedDate ||
         formatDate(booking.appointmentDate) === formatDate(selectedDate);
-      
-      const matchesSearch = 
+
+      const matchesSearch =
         !searchTerm ||
         booking.name.toLowerCase().includes(searchTerm) ||
         booking.email.toLowerCase().includes(searchTerm) ||
-        booking.mobile.includes(searchTerm);
+        booking.mobile.includes(searchTerm) ||
+        (booking.testName &&
+          booking.testName.toLowerCase().includes(searchTerm));
 
-      if (value === "all") {
-        return matchesDate && matchesSearch;
-      }
+      if (value === "all") return matchesDate && matchesSearch;
       return (
         booking.serviceType.toLowerCase() === value.toLowerCase() &&
         matchesDate &&
@@ -124,18 +168,20 @@ const BookForServices = () => {
     });
 
     setFilteredBookings(filtered);
+    setCurrentPage(1);
   };
 
-  // Handle export to Excel
   const handleExportToExcel = () => {
     const transformedData = filteredBookings.map((booking, index) => ({
       "S.No": index + 1,
       "Service Type": booking.serviceType,
+      "Test Name": booking.testName || "-",
       Name: booking.name,
       Email: booking.email,
       Mobile: booking.mobile,
       Age: booking.age,
       Gender: booking.gender,
+      Status: booking.status || "Pending",
       "Appointment Date": formatDate(booking.appointmentDate),
       "Booking Date": formatDate(booking.createdAt),
     }));
@@ -146,7 +192,15 @@ const BookForServices = () => {
     XLSX.writeFile(wb, "service_bookings.xlsx");
   };
 
-  // Service type options for filter dropdown
+  // Pagination logic
+  const indexOfLastBooking = currentPage * bookingsPerPage;
+  const indexOfFirstBooking = indexOfLastBooking - bookingsPerPage;
+  const currentBookings = filteredBookings.slice(
+    indexOfFirstBooking,
+    indexOfLastBooking
+  );
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   const serviceTypes = [
     { value: "all", label: "All Services" },
     { value: "mri", label: "MRI" },
@@ -167,11 +221,9 @@ const BookForServices = () => {
     <div className="book-for-services-container">
       <h2 className="book-for-services-heading">Service Bookings</h2>
 
-      {/* Loading and error states */}
       {loading && <p className="loading-text">Loading data...</p>}
       {error && <p className="error-text">{error}</p>}
 
-      {/* Filter controls */}
       <div className="filter-controls">
         <div className="filter-group">
           <label htmlFor="service-filter">Service Type:</label>
@@ -203,7 +255,7 @@ const BookForServices = () => {
           <input
             id="search"
             type="text"
-            placeholder="Search by name, email, or mobile"
+            placeholder="Search by name, email, test or mobile"
             value={searchTerm}
             onChange={handleSearch}
           />
@@ -214,7 +266,6 @@ const BookForServices = () => {
         </button>
       </div>
 
-      {/* Bookings table */}
       {!loading && !error && (
         <div className="bookings-table-container">
           <table className="bookings-table">
@@ -222,39 +273,97 @@ const BookForServices = () => {
               <tr>
                 <th>S.No</th>
                 <th>Service Type</th>
+                <th>Test Name</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Mobile</th>
                 <th>Age</th>
                 <th>Gender</th>
+                <th>Status</th>
                 <th>Appointment Date</th>
                 <th>Booking Date</th>
               </tr>
             </thead>
             <tbody>
-              {filteredBookings.length > 0 ? (
-                filteredBookings.map((booking, index) => (
+              {currentBookings.length > 0 ? (
+                currentBookings.map((booking, index) => (
                   <tr key={booking._id}>
-                    <td>{index + 1}</td>
+                    <td>{indexOfFirstBooking + index + 1}</td>
                     <td>{booking.serviceType}</td>
+                    <td>{booking.testName || "-"}</td>
                     <td>{booking.name}</td>
                     <td>{booking.email}</td>
                     <td>{booking.mobile}</td>
                     <td>{booking.age}</td>
                     <td>{booking.gender}</td>
+                    <td>
+                      <select
+                        value={booking.status || "Pending"}
+                        onChange={(e) =>
+                          handleStatusChange(booking._id, e.target.value)
+                        }
+                        className={`status-select ${
+                          booking.status?.toLowerCase() || "pending"
+                        }`}
+                      >
+                        <option value="Pending">Pending</option>
+                        <option value="Confirmed">Confirmed</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Cancelled">Cancelled</option>
+                      </select>
+                    </td>
+
                     <td>{formatDate(booking.appointmentDate)}</td>
                     <td>{formatDate(booking.createdAt)}</td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="9" className="no-data">
+                  <td colSpan="11" className="no-data">
                     No bookings found matching your criteria
                   </td>
                 </tr>
               )}
             </tbody>
           </table>
+        </div>
+      )}
+
+      {/* Pagination */}
+      {filteredBookings.length > bookingsPerPage && (
+        <div className="pagination">
+          <button
+            onClick={() => paginate(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="pagination-nav"
+          >
+            &laquo; Prev
+          </button>
+
+          {Array.from({
+            length: Math.ceil(filteredBookings.length / bookingsPerPage),
+          }).map((_, index) => (
+            <button
+              key={index}
+              className={`pagination-btn ${
+                currentPage === index + 1 ? "active" : ""
+              }`}
+              onClick={() => paginate(index + 1)}
+            >
+              {index + 1}
+            </button>
+          ))}
+
+          <button
+            onClick={() => paginate(currentPage + 1)}
+            disabled={
+              currentPage ===
+              Math.ceil(filteredBookings.length / bookingsPerPage)
+            }
+            className="pagination-nav"
+          >
+            Next &raquo;
+          </button>
         </div>
       )}
     </div>

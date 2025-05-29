@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IoClose } from "react-icons/io5"; // Import the close icon
 import doctor from './indianGroupDoctors.jpg'
 import './PFTHeader.css'
@@ -13,8 +13,33 @@ import { useNavigate } from "react-router-dom";
 const PFTHeader = () => {
 const [showForm, setShowForm] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
-  const navigate = useNavigate();
+  const [pftTests, setPftTests] = useState([]);
+  const [loadingTests, setLoadingTests] = useState(true);
+
+  useEffect(() => {
+  const fetchTestNames = async () => {
+    try {
+      const response = await fetch("http://localhost:4000/api/subcategories");
+      const data = await response.json();
+
+      if (response.ok) {
+        // More flexible filtering
+        const pftTests = data.data.filter(test => 
+          test.subCategory.toLowerCase().includes("pulmonary") || 
+          test.title.toLowerCase().includes("pulmonary")
+        );
+        console.log("Filtered PFT Tests:", pftTests); // Debug log
+        setPftTests(pftTests);
+      }
+    } catch (error) {
+      console.error("Error Fetching Test Names:", error);
+    } finally {
+      setLoadingTests(false);
+    }
+  };
+
+  fetchTestNames();
+}, []);
 
   const handleBookNowClick = () => {
     setShowForm(true);
@@ -29,16 +54,16 @@ const [showForm, setShowForm] = useState(false);
   const handleBookNow = async (e) => {
     e.preventDefault();
 
-    // Get form data using FormData API
     const formData = new FormData(e.target);
     const data = {
-      serviceType: "Pulmonary Function Test", // Set this according to your service
+      serviceType: "Pulmonary Function Test",
       name: formData.get("name"),
       email: formData.get("email"),
       mobile: formData.get("mobile"),
       age: formData.get("age"),
       gender: formData.get("gender"),
       appointmentDate: formData.get("appointmentDate"),
+      testName: formData.get("testName"),
     };
 
     try {
@@ -139,6 +164,43 @@ const [showForm, setShowForm] = useState(false);
                     maxLength="50"
                   />
                 </div>
+
+                <div className="pftest-book-form-name">
+                  <label>Select Test Name:</label>
+                  <select name="testName" required>
+                    <option value="">-- Select a Test --</option>
+                    {loadingTests ? (
+                      <option value="" disabled>
+                        Loading tests...
+                      </option>
+                    ) : (
+                      <>
+                        {pftTests.length === 0 ? (
+                          <option value="" disabled>
+                            No Data available
+                          </option>
+                        ) : (
+                          pftTests.map((test) => (
+                            <option key={test._id} value={test.title}>
+                              {test.title}
+                            </option>
+                          ))
+                        )}
+                      </>
+                    )}
+                  </select>
+                </div>
+                 <div className="pftest-book-form-name">
+                  <label>Appointment Date:</label>
+                  <input
+                    type="date"
+                    name="appointmentDate" // Add name attribute
+                    required
+                    min={new Date().toISOString().split("T")[0]}
+                  />
+                </div>
+
+
                 <div className="pftest-book-form-name">
                   <FormControl>
                     <FormLabel id="demo-row-radio-buttons-group-label">

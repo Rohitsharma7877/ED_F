@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IoClose } from "react-icons/io5"; // Import the close icon
 import doctor from "./indianGroupDoctors.jpg";
 import "./ctScanHeader.css";
@@ -14,6 +14,31 @@ const CTScanHeader = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
   const navigate = useNavigate();
+  const [ctScanTests, setCtScanTests] = useState([]);
+  const [loadingTests, setLoadingTests] = useState(true);
+
+  useEffect(() => {
+    const fetchCtScanTests = async () => {
+      try {
+        const response = await fetch("http://localhost:4000/api/subcategories");
+        const data = await response.json();
+
+        if (response.ok) {
+          // Filter for CT Scan tests using the subCategory field
+          const ctTests = data.data.filter(
+            (test) => test.subCategory === "CT-Scan" || test.title.includes("CT-Scan")
+          );
+          setCtScanTests(ctTests);
+        }
+      } catch (error) {
+        console.error("Error fetching CT Scan tests:", error);
+      } finally {
+        setLoadingTests(false);
+      }
+    };
+
+    fetchCtScanTests();
+  }, []);
 
   const handleBookNowClick = () => {
     setShowForm(true);
@@ -28,18 +53,19 @@ const CTScanHeader = () => {
   const handleBookNow = async (e) => {
     e.preventDefault();
 
-    // Get form data using FormData API
     const formData = new FormData(e.target);
     const data = {
-      serviceType: "CT Scan", // Set this according to your service
+      serviceType: "CT Scan",
       name: formData.get("name"),
       email: formData.get("email"),
       mobile: formData.get("mobile"),
       age: formData.get("age"),
       gender: formData.get("gender"),
       appointmentDate: formData.get("appointmentDate"),
+      testName: formData.get("testName"), // Add this line
     };
 
+    // Rest of your function remains the same
     try {
       const response = await fetch(
         "http://localhost:4000/api/service-bookings",
@@ -88,7 +114,7 @@ const CTScanHeader = () => {
           </div>
         </div>
       </div>
-      
+
       {showForm && (
         <div className="ctscan-form-overlay">
           <div
@@ -151,6 +177,43 @@ const CTScanHeader = () => {
                     maxLength="50"
                   />
                 </div>
+
+                <div className="ctscan-book-form-name">
+                  <label>Select Test Name:</label>
+                  <select name="testName" required>
+                    <option value="">-- Select a Test --</option>
+                    {loadingTests ? (
+                      <option value="" disabled>
+                        Loading tests...
+                      </option>
+                    ) : (
+                      <>
+                        {ctScanTests.length === 0 ? (
+                          <option value="" disabled>
+                            No CT Scan tests available
+                          </option>
+                        ) : (
+                          ctScanTests.map((test) => (
+                            <option key={test._id} value={test.title}>
+                              {test.title}
+                            </option>
+                          ))
+                        )}
+                      </>
+                    )}
+                  </select>
+                </div>
+
+                <div className="ctscan-book-form-name">
+                  <label>Appointment Date:</label>
+                  <input
+                    type="date"
+                    name="appointmentDate" // Add name attribute
+                    required
+                    min={new Date().toISOString().split("T")[0]}
+                  />
+                </div>
+
                 <div className="ctscan-book-form-name">
                   <FormControl>
                     <FormLabel id="demo-row-radio-buttons-group-label">
@@ -179,15 +242,7 @@ const CTScanHeader = () => {
                     </RadioGroup>
                   </FormControl>
                 </div>
-                <div className="ctscan-book-form-name">
-                  <label>Appointment Date:</label>
-                  <input
-                    type="date"
-                    name="appointmentDate" // Add name attribute
-                    required
-                    min={new Date().toISOString().split("T")[0]}
-                  />
-                </div>
+
                 <button type="submit" className="ctscan-form-submit-btn">
                   Submit
                 </button>

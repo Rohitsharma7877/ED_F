@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IoClose } from "react-icons/io5"; // Import the close icon
 import doctor from "./indianGroupDoctors.jpg";
 import "./Mammography2Header.css";
@@ -9,63 +9,96 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { useNavigate } from "react-router-dom";
 
-
 const Mammography2Header = () => {
   const [showForm, setShowForm] = useState(false);
-    const [isExpanded, setIsExpanded] = useState(false);
-    // const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
-    const navigate = useNavigate();
-  
-    const handleBookNowClick = () => {
-      setShowForm(true);
-      setIsExpanded(true);
-    };
-  
-    const handleCloseForm = () => {
-      setShowForm(false);
-      setIsExpanded(false);
-    };
-  
-    const handleBookNow = async (e) => {
-      e.preventDefault();
-  
-      // Get form data using FormData API
-      const formData = new FormData(e.target);
-      const data = {
-        serviceType: "Mammography", // Set this according to your service
-        name: formData.get("name"),
-        email: formData.get("email"),
-        mobile: formData.get("mobile"),
-        age: formData.get("age"),
-        gender: formData.get("gender"),
-        appointmentDate: formData.get("appointmentDate"),
-      };
-  
-      try {
-        const response = await fetch(
-          "http://localhost:4000/api/service-bookings",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-          }
-        );
-  
-        if (!response.ok) {
-          throw new Error("Failed to submit booking");
-        }
-  
-        const result = await response.json();
-        alert("Appointment submitted successfully!");
-        handleCloseForm();
-      } catch (error) {
-        console.error("Error submitting booking:", error);
-        alert("Failed to submit appointment. Please try again.");
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [memogTests, setMemogTests] = useState([]);
+  const [loadingTests, setLoadingTests] = useState(true);
+
+useEffect(() => {
+  const fetchTestNames = async () => {
+    try {
+      // First try fetching from the full subcategories endpoint
+      const response = await fetch("http://localhost:4000/api/subcategories");
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log("All tests:", data.data); // Debug log
+        
+        // More flexible filtering for Mammography tests
+        const memogTests = data.data.filter(test => {
+          // Check if subCategory exists and matches Mammography (case-insensitive)
+          const isMammography = 
+            test.subCategory && 
+            test.subCategory.toLowerCase().includes("mammography") &&
+            !test.subCategory.toLowerCase().includes("mri"); // Exclude MRI Mammography
+              
+          return isMammography;
+        });
+
+        console.log("Filtered Mammography tests:", memogTests); // Debug log
+        setMemogTests(memogTests);
       }
+    } catch (error) {
+      console.error("Error fetching test names:", error);
+    } finally {
+      setLoadingTests(false);
+    }
+  };
+
+  fetchTestNames();
+}, []);
+
+
+  const handleBookNowClick = () => {
+    setShowForm(true);
+    setIsExpanded(true);
+  };
+
+  const handleCloseForm = () => {
+    setShowForm(false);
+    setIsExpanded(false);
+  };
+
+  const handleBookNow = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const data = {
+      serviceType: "Mammography",
+      name: formData.get("name"),
+      email: formData.get("email"),
+      mobile: formData.get("mobile"),
+      age: formData.get("age"),
+      gender: formData.get("gender"),
+      appointmentDate: formData.get("appointmentDate"),
+      testName: formData.get("testName"),
     };
 
+    try {
+      const response = await fetch(
+        "http://localhost:4000/api/service-bookings",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to submit booking");
+      }
+
+      const result = await response.json();
+      alert("Appointment submitted successfully!");
+      handleCloseForm();
+    } catch (error) {
+      console.error("Error submitting booking:", error);
+      alert("Failed to submit appointment. Please try again.");
+    }
+  };
 
   return (
     <div className="mammography2Header-main1">
@@ -91,7 +124,9 @@ const Mammography2Header = () => {
       </div>
       {showForm && (
         <div className="mammgph-form-overlay">
-          <div className={`mammgph-form-wrapper ${isExpanded ? "expanded" : ""}`}>
+          <div
+            className={`mammgph-form-wrapper ${isExpanded ? "expanded" : ""}`}
+          >
             {/* Left Section: Image */}
             <div className="mammgph-form-image-section">
               <img src={doctor} alt="Doctors" className="patient-form-image" />
@@ -100,10 +135,15 @@ const Mammography2Header = () => {
             {/* Right Section: Form */}
             <div className="mammgph-form-container">
               {/* Close Icon */}
-              <button className="mammgph-form-close-icon" onClick={handleCloseForm}>
+              <button
+                className="mammgph-form-close-icon"
+                onClick={handleCloseForm}
+              >
                 <IoClose size={24} color="#f44336" />
               </button>
-              <h2 className="mammgph-book-test-tittle">Book Your Appointment</h2>
+              <h2 className="mammgph-book-test-tittle">
+                Book Your Appointment
+              </h2>
               <form className="mammgph-book-test-form" onSubmit={handleBookNow}>
                 <div className="mammgph-book-form-name">
                   <label>Name:</label>
@@ -146,6 +186,42 @@ const Mammography2Header = () => {
                     maxLength="50"
                   />
                 </div>
+
+                <div className="mammgph-book-form-name">
+                  <label>Select Test Name:</label>
+                  <select name="testName" required>
+                    <option value="">-- Select a Test --</option>
+                    {loadingTests ? (
+                      <option value="" disabled>
+                        Loading tests...
+                      </option>
+                    ) : (
+                      <>
+                        {memogTests.length === 0 ? (
+                          <option value="" disabled>
+                            No Mammography tests available
+                          </option>
+                        ) : (
+                          memogTests.map((test) => (
+                            <option key={test._id} value={test.title}>
+                              {test.title}
+                            </option>
+                          ))
+                        )}
+                      </>
+                    )}
+                  </select>
+                </div>
+                <div className="mammgph-book-form-name">
+                  <label>Appointment Date:</label>
+                  <input
+                    type="date"
+                    name="appointmentDate" // Add name attribute
+                    required
+                    min={new Date().toISOString().split("T")[0]}
+                  />
+                </div>
+
                 <div className="mammgph-book-form-name">
                   <FormControl>
                     <FormLabel id="demo-row-radio-buttons-group-label">

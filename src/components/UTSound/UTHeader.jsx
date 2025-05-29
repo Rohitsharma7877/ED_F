@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IoClose } from "react-icons/io5"; // Import the close icon
-import doctor from './indianGroupDoctors.jpg'
-import './UTHeader.css'
+import doctor from "./indianGroupDoctors.jpg";
+import "./UTHeader.css";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -9,36 +9,60 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { useNavigate } from "react-router-dom";
 
-
 const UTHeader = () => {
-   const [showForm, setShowForm] = useState(false);
-   const [isExpanded, setIsExpanded] = useState(false);
-   // const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
-   const navigate = useNavigate();
- 
-   const handleBookNowClick = () => {
-     setShowForm(true);
-     setIsExpanded(true);
-   };
- 
-   const handleCloseForm = () => {
-     setShowForm(false);
-     setIsExpanded(false);
-   };
+  const [showForm, setShowForm] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
+  const navigate = useNavigate();
+  const [uthTests, setUTHTests] = useState([]);
+  const [loadingTests, setLoadingTests] = useState(true);
+
+  useEffect(() => {
+    const fetchUtsTests = async () => {
+      try {
+        const response = await fetch("http://localhost:4000/api/subcategories");
+        const data = await response.json();
+
+        if (response.ok) {
+          // Filter for X-Ray tests using the subCategory field
+          const uthTests = data.data.filter(
+            (test) => test.subCategory === "Ultrasonography"
+          );
+          setUTHTests(uthTests);
+        }
+      } catch (error) {
+        console.error("Error fetching Ultrasonography tests:", error);
+      } finally {
+        setLoadingTests(false);
+      }
+    };
+
+    fetchUtsTests();
+  }, []);
+
+  const handleBookNowClick = () => {
+    setShowForm(true);
+    setIsExpanded(true);
+  };
+
+  const handleCloseForm = () => {
+    setShowForm(false);
+    setIsExpanded(false);
+  };
 
   const handleBookNow = async (e) => {
     e.preventDefault();
 
-    // Get form data using FormData API
     const formData = new FormData(e.target);
     const data = {
-      serviceType: "Ultrasonography", // Set this according to your service
+      serviceType: "Ultrasonography",
       name: formData.get("name"),
       email: formData.get("email"),
       mobile: formData.get("mobile"),
       age: formData.get("age"),
       gender: formData.get("gender"),
       appointmentDate: formData.get("appointmentDate"),
+      testName: formData.get("testName"), // Add test name to the booking data
     };
 
     try {
@@ -73,11 +97,15 @@ const UTHeader = () => {
           <div className="uTHeade-title-box">
             <h1 className="uTHeade-title">Ultrasonography</h1>
             <p className="uTHeade-title2">
-            Ultrasonography is a non-invasive imaging technique that uses high-frequency sound waves to visualize internal body structures and diagnose medical conditions.
+              Ultrasonography is a non-invasive imaging technique that uses
+              high-frequency sound waves to visualize internal body structures
+              and diagnose medical conditions.
             </p>
             <div className="uTHeade-buttons">
-            <button className="uTHeade-btn" onClick={() => setShowForm(true)}>Book Now</button>
-          </div>
+              <button className="uTHeade-btn" onClick={() => setShowForm(true)}>
+                Book Now
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -138,6 +166,44 @@ const UTHeader = () => {
                     maxLength="50"
                   />
                 </div>
+
+                {/* Add the test selection dropdown here */}
+                <div className="uT-book-form-name">
+                  <label>Select Test Name:</label>
+                  <select name="testName" required>
+                    <option value="">-- Select a Test --</option>
+                    {loadingTests ? (
+                      <option value="" disabled>
+                        Loading tests...
+                      </option>
+                    ) : (
+                      <>
+                        {uthTests.length === 0 ? (
+                          <option value="" disabled>
+                            No X-Ray tests available
+                          </option>
+                        ) : (
+                          uthTests.map((test) => (
+                            <option key={test._id} value={test.title}>
+                              {test.title}
+                            </option>
+                          ))
+                        )}
+                      </>
+                    )}
+                  </select>
+                </div>
+
+                <div className="uT-book-form-name">
+                  <label>Appointment Date:</label>
+                  <input
+                    type="date"
+                    name="appointmentDate" // Add name attribute
+                    required
+                    min={new Date().toISOString().split("T")[0]}
+                  />
+                </div>
+
                 <div className="uT-book-form-name">
                   <FormControl>
                     <FormLabel id="demo-row-radio-buttons-group-label">
@@ -184,7 +250,7 @@ const UTHeader = () => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default UTHeader
+export default UTHeader;

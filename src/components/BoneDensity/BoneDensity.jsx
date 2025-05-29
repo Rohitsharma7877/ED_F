@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IoClose } from "react-icons/io5"; // Import the close icon
-import doctor from './indianGroupDoctors.jpg'
+import doctor from "./indianGroupDoctors.jpg";
 import "./boneDensity.css";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -9,12 +9,37 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { useNavigate } from "react-router-dom";
 
-
 const BoneDensity = () => {
   const [showForm, setShowForm] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
-  const navigate = useNavigate();
+  const [bdtTests, setBdtTests] = useState([]);
+  const [loadingTests, setLoadingTests] = useState(true);
+
+  useEffect(() => {
+    const fetchTestNames = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:4000/api/subcategories/test-names"
+        );
+        const data = await response.json();
+
+        if (response.ok) {
+          const bdtTests = data.data.filter(
+            (test) =>
+              test.subCategory === "Bone Density Test" ||
+              test.title.includes("Bone Density Test") // optional: also include tests with "MRI" in title
+          );
+          setBdtTests(bdtTests);
+        }
+      } catch (error) {
+        console.error("Error fetching test names:", error);
+      } finally {
+        setLoadingTests(false);
+      }
+    };
+
+    fetchTestNames();
+  }, []);
 
   const handleBookNowClick = () => {
     setShowForm(true);
@@ -29,16 +54,16 @@ const BoneDensity = () => {
   const handleBookNow = async (e) => {
     e.preventDefault();
 
-    // Get form data using FormData API
     const formData = new FormData(e.target);
     const data = {
-      serviceType: "Bone Density", // Set this according to your service
+      serviceType: "Bone Density Test",
       name: formData.get("name"),
       email: formData.get("email"),
       mobile: formData.get("mobile"),
       age: formData.get("age"),
       gender: formData.get("gender"),
       appointmentDate: formData.get("appointmentDate"),
+      testName: formData.get("testName"),
     };
 
     try {
@@ -78,7 +103,10 @@ const BoneDensity = () => {
               osteoporosis.
             </p>
             <div className="boneDensity-buttons">
-              <button className="boneDensity-btn" onClick={() => setShowForm(true)}>
+              <button
+                className="boneDensity-btn"
+                onClick={() => setShowForm(true)}
+              >
                 Book Now
               </button>
             </div>
@@ -88,7 +116,9 @@ const BoneDensity = () => {
 
       {showForm && (
         <div className="boneDen-form-overlay">
-          <div className={`boneDen-form-wrapper ${isExpanded ? "expanded" : ""}`}>
+          <div
+            className={`boneDen-form-wrapper ${isExpanded ? "expanded" : ""}`}
+          >
             {/* Left Section: Image */}
             <div className="boneDen-form-image-section">
               <img src={doctor} alt="Doctors" className="patient-form-image" />
@@ -97,10 +127,15 @@ const BoneDensity = () => {
             {/* Right Section: Form */}
             <div className="boneDen-form-container">
               {/* Close Icon */}
-              <button className="boneDen-form-close-icon" onClick={handleCloseForm}>
+              <button
+                className="boneDen-form-close-icon"
+                onClick={handleCloseForm}
+              >
                 <IoClose size={24} color="#f44336" />
               </button>
-              <h2 className="boneDen-book-test-tittle">Book Your Appointment</h2>
+              <h2 className="boneDen-book-test-tittle">
+                Book Your Appointment
+              </h2>
               <form className="boneDen-book-test-form" onSubmit={handleBookNow}>
                 <div className="boneDen-book-form-name">
                   <label>Name:</label>
@@ -143,6 +178,42 @@ const BoneDensity = () => {
                     maxLength="50"
                   />
                 </div>
+
+                <div className="boneDen-book-form-name">
+                  <label>Select Test Name:</label>
+                  <select name="testName" required>
+                    <option value="">-- Select a Test --</option>
+                    {loadingTests ? (
+                      <option value="" disabled>
+                        Loading tests...
+                      </option>
+                    ) : (
+                      <>
+                        {bdtTests.length === 0 ? (
+                          <option value="" disabled>
+                            No MRI tests available
+                          </option>
+                        ) : (
+                          bdtTests.map((test) => (
+                            <option key={test._id} value={test.title}>
+                              {test.title}
+                            </option>
+                          ))
+                        )}
+                      </>
+                    )}
+                  </select>
+                </div>
+
+                <div className="boneDen-book-form-name">
+                  <label>Appointment Date:</label>
+                  <input
+                    type="date"
+                    name="appointmentDate" // Add name attribute
+                    required
+                    min={new Date().toISOString().split("T")[0]}
+                  />
+                </div>
                 <div className="boneDen-book-form-name">
                   <FormControl>
                     <FormLabel id="demo-row-radio-buttons-group-label">
@@ -171,15 +242,7 @@ const BoneDensity = () => {
                     </RadioGroup>
                   </FormControl>
                 </div>
-                <div className="boneDen-book-form-name">
-                  <label>Appointment Date:</label>
-                  <input
-                    type="date"
-                    name="appointmentDate" // Add name attribute
-                    required
-                    min={new Date().toISOString().split("T")[0]}
-                  />
-                </div>
+
                 <button type="submit" className="boneDen-form-submit-btn">
                   Submit
                 </button>

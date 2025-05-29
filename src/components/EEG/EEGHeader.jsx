@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { IoClose } from "react-icons/io5"; // Import the close icon
 import doctor from "./indianGroupDoctors.jpg";
 import "./EEGHeader.css";
@@ -14,9 +14,34 @@ import { useNavigate } from "react-router-dom";
 const EEGHeader = () => {
   const [showForm, setShowForm] = useState(false);
     const [isExpanded, setIsExpanded] = useState(false);
-    // const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
-    const navigate = useNavigate();
+  const [eegTests, setEegTests] = useState([]);
+    const [loadingTests, setLoadingTests] = useState(true);
   
+
+    useEffect(() => {
+        const fetchTestNames = async () => {
+          try {
+            const response = await fetch(
+              "http://localhost:4000/api/subcategories/test-names"
+            );
+            const data = await response.json();
+    
+            if (response.ok) {
+              const eegTests = data.data.filter(
+                (test) => test.subCategory === "MRI" || test.title.includes("MRI") // optional: also include tests with "MRI" in title
+              );
+              setEegTests(eegTests);
+            }
+          } catch (error) {
+            console.error("Error Fetching Test Names:", error);
+          } finally {
+            setLoadingTests(false);
+          }
+        };
+    
+        fetchTestNames();
+      }, []);
+
     const handleBookNowClick = () => {
       setShowForm(true);
       setIsExpanded(true);
@@ -26,47 +51,43 @@ const EEGHeader = () => {
       setShowForm(false);
       setIsExpanded(false);
     };
+
   
     const handleBookNow = async (e) => {
-      e.preventDefault();
-  
-      // Get form data using FormData API
-      const formData = new FormData(e.target);
-      const data = {
-        serviceType: "EEG", // Set this according to your service
-        name: formData.get("name"),
-        email: formData.get("email"),
-        mobile: formData.get("mobile"),
-        age: formData.get("age"),
-        gender: formData.get("gender"),
-        appointmentDate: formData.get("appointmentDate"),
-      };
-  
-      try {
-        const response = await fetch(
-          "http://localhost:4000/api/service-bookings",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-          }
-        );
-  
-        if (!response.ok) {
-          throw new Error("Failed to submit booking");
-        }
-  
-        const result = await response.json();
-        alert("Appointment submitted successfully!");
-        handleCloseForm();
-      } catch (error) {
-        console.error("Error submitting booking:", error);
-        alert("Failed to submit appointment. Please try again.");
-      }
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = {
+      serviceType: "EEG",
+      name: formData.get("name"),
+      email: formData.get("email"),
+      mobile: formData.get("mobile"),
+      age: formData.get("age"),
+      gender: formData.get("gender"),
+      appointmentDate: formData.get("appointmentDate"),
+      testName: formData.get("testName"),
     };
-
+    try {
+      const response = await fetch(
+        "http://localhost:4000/api/service-bookings",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to submit booking");
+      }
+      const result = await response.json();
+      alert("Appointment submitted successfully!");
+      handleCloseForm();
+    } catch (error) {
+      console.error("Error submitting booking:", error);
+      alert("Failed to submit appointment. Please try again.");
+    }
+  };
 
   return (
     <div className="EEGHeader-main1">
@@ -145,6 +166,43 @@ const EEGHeader = () => {
                     maxLength="50"
                   />
                 </div>
+
+                <div className="mri-book-form-name">
+                  <label>Select Test Name:</label>
+                  <select name="testName" required>
+                    <option value="">-- Select a Test --</option>
+                    {loadingTests ? (
+                      <option value="" disabled>
+                        Loading tests...
+                      </option>
+                    ) : (
+                      <>
+                        {eegTests.length === 0 ? (
+                          <option value="" disabled>
+                            No MRI tests available
+                          </option>
+                        ) : (
+                          eegTests.map((test) => (
+                            <option key={test._id} value={test.title}>
+                              {test.title}
+                            </option>
+                          ))
+                        )}
+                      </>
+                    )}
+                  </select>
+                </div>
+
+<div className="eeg-book-form-name">
+                  <label>Appointment Date:</label>
+                  <input
+                    type="date"
+                    name="appointmentDate" // Add name attribute
+                    required
+                    min={new Date().toISOString().split("T")[0]}
+                  />
+                </div>
+
                 <div className="eeg-book-form-name">
                   <FormControl>
                     <FormLabel id="demo-row-radio-buttons-group-label">
@@ -173,15 +231,7 @@ const EEGHeader = () => {
                     </RadioGroup>
                   </FormControl>
                 </div>
-                <div className="eeg-book-form-name">
-                  <label>Appointment Date:</label>
-                  <input
-                    type="date"
-                    name="appointmentDate" // Add name attribute
-                    required
-                    min={new Date().toISOString().split("T")[0]}
-                  />
-                </div>
+                
                 <button type="submit" className="eeg-form-submit-btn">
                   Submit
                 </button>

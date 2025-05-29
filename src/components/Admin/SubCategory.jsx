@@ -31,8 +31,10 @@ const SubCategory = () => {
     "TMT",
     "EEG",
     "ENMG",
-    "Digital Mammography",
-    "MRI Mammography",
+    "MRI-Mammography",
+    "Mammography",
+    "Bone Density Test",
+    "Pulmonary Function Test",
   ]);
   const [subCategoriesList, setSubCategoriesList] = useState([]);
   const [loading, setLoading] = useState(false);

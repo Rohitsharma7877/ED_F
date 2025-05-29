@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IoClose } from "react-icons/io5"; // Import the close icon
 import doctor from "./indianGroupDoctors.jpg";
 import "./electrocardiogram.css";
@@ -12,8 +12,32 @@ import { useNavigate } from "react-router-dom";
 const Electrocardiogram = () => {
   const [showForm, setShowForm] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
-  const navigate = useNavigate();
+  const [ecgTests, setEcgTests] = useState([]);
+  const [loadingTests, setLoadingTests] = useState(true);
+
+  useEffect(() => {
+    const fetchTestNames = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:4000/api/subcategories/test-names"
+        );
+        const data = await response.json();
+
+        if (response.ok) {
+          const ecgTests = data.data.filter(
+            (test) => test.subCategory === "ECG" || test.title.includes("ECG") // optional: also include tests with "MRI" in title
+          );
+          setEcgTests(ecgTests);
+        }
+      } catch (error) {
+        console.error("Error Fetching Test Names:", error);
+      } finally {
+        setLoadingTests(false);
+      }
+    };
+
+    fetchTestNames();
+  }, []);
 
   const handleBookNowClick = () => {
     setShowForm(true);
@@ -28,16 +52,16 @@ const Electrocardiogram = () => {
   const handleBookNow = async (e) => {
     e.preventDefault();
 
-    // Get form data using FormData API
     const formData = new FormData(e.target);
     const data = {
-      serviceType: "ECG", // Set this according to your service
+      serviceType: "ECG",
       name: formData.get("name"),
       email: formData.get("email"),
       mobile: formData.get("mobile"),
       age: formData.get("age"),
       gender: formData.get("gender"),
       appointmentDate: formData.get("appointmentDate"),
+      testName: formData.get("testName"),
     };
 
     try {
@@ -154,6 +178,41 @@ const Electrocardiogram = () => {
                   />
                 </div>
                 <div className="electro-book-form-name">
+                  <label>Select Test Name:</label>
+                  <select name="testName" required>
+                    <option value="">-- Select a Test --</option>
+                    {loadingTests ? (
+                      <option value="" disabled>
+                        Loading tests...
+                      </option>
+                    ) : (
+                      <>
+                        {ecgTests.length === 0 ? (
+                          <option value="" disabled>
+                            No MRI tests available
+                          </option>
+                        ) : (
+                          ecgTests.map((test) => (
+                            <option key={test._id} value={test.title}>
+                              {test.title}
+                            </option>
+                          ))
+                        )}
+                      </>
+                    )}
+                  </select>
+                </div>
+
+                <div className="electro-book-form-name">
+                  <label>Appointment Date:</label>
+                  <input
+                    type="date"
+                    name="appointmentDate" // Add name attribute
+                    required
+                    min={new Date().toISOString().split("T")[0]}
+                  />
+                </div>
+                <div className="electro-book-form-name">
                   <FormControl>
                     <FormLabel id="demo-row-radio-buttons-group-label">
                       Gender
@@ -181,15 +240,7 @@ const Electrocardiogram = () => {
                     </RadioGroup>
                   </FormControl>
                 </div>
-                <div className="electro-book-form-name">
-                  <label>Appointment Date:</label>
-                  <input
-                    type="date"
-                    name="appointmentDate" // Add name attribute
-                    required
-                    min={new Date().toISOString().split("T")[0]}
-                  />
-                </div>
+
                 <button type="submit" className="electro-form-submit-btn">
                   Submit
                 </button>

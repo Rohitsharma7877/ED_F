@@ -14,7 +14,9 @@ const AllTest = () => {
   const [selectedCard, setSelectedCard] = useState(null); // Selected card
   const [subCategoryData, setSubCategoryData] = useState([]); // Subcategory data
   const itemsPerPage = 8; // Number of cards per page
+  const maxVisiblePages=5;
 
+  
   // Fetch categories from API on page load
   useEffect(() => {
     const fetchData = async () => {
@@ -215,11 +217,11 @@ const AllTest = () => {
                         <div className="card-price">
                           {/* <span className="original-price">
                             <MdOutlineCurrencyRupee className="price-icon" />
-                            {card.oldPrice}/-
+                            {card.oldPrice}/- Price
                           </span> */}
                           <span className="discounted-price">
                             <MdOutlineCurrencyRupee className="price-icon discount-icon" />
-                            {card.discountedPrice}/- Price
+                            {card.oldPrice}/- Price
                           </span>
                         </div>
                         <div className="book-for">
@@ -255,35 +257,72 @@ const AllTest = () => {
           </div>
 
           {/* Pagination */}
-          <div className="pagination">
-            <button
-              className="arrow-button"
-              disabled={currentPage === 1}
-              onClick={() => paginate(currentPage - 1)}
-            >
-              &lt;
-            </button>
+<div className="pagination">
+  <button
+    className="arrow-button"
+    disabled={currentPage === 1}
+    onClick={() => paginate(currentPage - 1)}
+  >
+    &lt;
+  </button>
 
-            {Array.from({ length: totalPages }, (_, index) => (
-              <button
-                key={index}
-                className={`page-button ${
-                  currentPage === index + 1 ? "active" : ""
-                }`}
-                onClick={() => paginate(index + 1)}
-              >
-                {index + 1}
-              </button>
-            ))}
+  {/* Always show first page */}
+  <button
+    className={`page-button ${currentPage === 1 ? "active" : ""}`}
+    onClick={() => paginate(1)}
+  >
+    1
+  </button>
 
-            <button
-              className="arrow-button"
-              disabled={currentPage === totalPages}
-              onClick={() => paginate(currentPage + 1)}
-            >
-              &gt;
-            </button>
-          </div>
+  {/* Show ellipsis if needed before middle pages */}
+  {currentPage > maxVisiblePages - 1 && <span className="ellipsis">...</span>}
+
+  {/* Calculate middle pages to show */}
+  {(() => {
+    let startPage = Math.max(2, currentPage - Math.floor(maxVisiblePages / 2));
+    let endPage = Math.min(totalPages - 1, startPage + maxVisiblePages - 1);
+    
+    // Adjust if we're near the end
+    if (endPage === totalPages - 1) {
+      startPage = Math.max(2, endPage - maxVisiblePages + 1);
+    }
+
+    const pages = [];
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(
+        <button
+          key={i}
+          className={`page-button ${currentPage === i ? "active" : ""}`}
+          onClick={() => paginate(i)}
+        >
+          {i}
+        </button>
+      );
+    }
+    return pages;
+  })()}
+
+  {/* Show ellipsis if needed after middle pages */}
+  {currentPage < totalPages - (maxVisiblePages - 1) && <span className="ellipsis">...</span>}
+
+  {/* Always show last page if there's more than 1 page */}
+  {totalPages > 1 && (
+    <button
+      className={`page-button ${currentPage === totalPages ? "active" : ""}`}
+      onClick={() => paginate(totalPages)}
+    >
+      {totalPages}
+    </button>
+  )}
+
+  <button
+    className="arrow-button"
+    disabled={currentPage === totalPages}
+    onClick={() => paginate(currentPage + 1)}
+  >
+    &gt;
+  </button>
+</div>
         </div>
       </div>
     </div>

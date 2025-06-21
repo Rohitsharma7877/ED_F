@@ -3,12 +3,18 @@ import * as XLSX from "xlsx";
 import "./ExpertServiceList.css";
 
 const initialTestParameters = [
-  "Random blood sugar",
-  "Serum creatinine",
-  "TSH",
+  "Random Blood Sugar",
+  "Serum Creatinine",
   "Complete Blood Count",
   "Complete Urine Routine",
-  "S. Bilirubin",
+  "Complete urine analysis",
+  "Complete lipid Profile",
+  "S.Bilirubin",
+  "Diabetic  Profiling",
+  "Liver Function Test",
+  "Kidney Function Tests",
+  "Thyroid  Function Tests",
+  "TSH",
   "EEG",
 ];
 
@@ -22,6 +28,7 @@ const ExpertServiceList = () => {
     discountPercent: "",
     howManyTest: "",
     reportTime: "",
+    consultation: "", // Added this
     tagLine: "",
     description: "",
     selectedTests: [],
@@ -132,6 +139,7 @@ const ExpertServiceList = () => {
         discountPercent: "",
         howManyTest: "",
         reportTime: "",
+        consultation: "", // Added this
         tagLine: "",
         description: "",
         selectedTests: [],
@@ -154,6 +162,7 @@ const ExpertServiceList = () => {
       discountPercent: selectedRow.discountPercent,
       howManyTest: selectedRow.howManyTest,
       reportTime: selectedRow.reportTime,
+      consultation: selectedRow.consultation, // Added this
       tagLine: selectedRow.tagLine,
       description: selectedRow.description,
       selectedTests: selectedRow.selectedTests,
@@ -309,6 +318,18 @@ const ExpertServiceList = () => {
                 placeholder="Enter Report Time"
               />
             </div>
+
+            <div className="expertservice-input-group">
+              <label>Consultation:</label>
+              <input
+                name="consultation"
+                className="expertservice-input-section"
+                type="text"
+                value={formData.consultation}
+                onChange={handleInputChange}
+                placeholder="Free Consultation "
+              />
+            </div>
           </div>
 
           <div className="expertservice-input-row">
@@ -422,6 +443,7 @@ const ExpertServiceList = () => {
                   <th>Discount Percent</th>
                   <th>How Many Test</th>
                   <th>Report Time</th>
+                  <th>Consultation</th> {/* Added this */}
                   <th>Tag Line</th>
                   <th>Description</th>
                   <th>Tests parameter</th>
@@ -439,6 +461,8 @@ const ExpertServiceList = () => {
                     <td>{expertPackageInput.discountPercent}</td>
                     <td>{expertPackageInput.howManyTest}</td>
                     <td>{expertPackageInput.reportTime}</td>
+                    <td>{expertPackageInput.consultation}</td>{" "}
+                    {/* Added this */}
                     <td>{expertPackageInput.tagLine}</td>
                     <td>{expertPackageInput.description}</td>
                     <td>{expertPackageInput.selectedTests.join(", ")}</td>

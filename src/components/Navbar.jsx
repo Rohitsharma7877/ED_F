@@ -13,16 +13,9 @@ import navbarImage from "./assests/navbckimg.png";
 import homecollect from "./assests/homecollection1.png";
 import hospitalimage from "./assests/hospitalimage.png";
 import ambulance from "./assests/ambulance3.png";
+import { useCart } from '../components/context/CartContext';
 import "./Navbar.css";
 
-// Dummy Data for Testing
-const dummyData = [
-  { id: 1, name: "Paracetamol", category: "Medicine" },
-  { id: 2, name: "Aspirin", category: "Medicine" },
-  { id: 3, name: "Gloves", category: "Surgical" },
-  { id: 4, name: "Thermometer", category: "Device" },
-  { id: 5, name: "Stethoscope", category: "Device" },
-];
 
 const Navbar = () => {
   const [showForm, setShowForm] = useState(false);
@@ -36,6 +29,7 @@ const Navbar = () => {
   const { token, user, logout } = useAuth();
   const navigate = useNavigate();
   const searchInput = useLocation();
+   const { cart } = useCart();
   const URLSearch = new URLSearchParams(searchInput?.search);
 
   useEffect(() => {
@@ -317,7 +311,7 @@ const handleResultClick = (result) => {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <FaShoppingCart className="mr-1 relative -top-0 text-lg" />
-                Cart
+                Cart ({cart.length})
               </Link>
 
               {token ? (

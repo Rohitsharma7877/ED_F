@@ -6,6 +6,9 @@ import Footer from "./components/Footer/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthProvider } from './components/context/AuthContext';
+import { CartProvider } from './components/context/CartContext';
+
+
 function App() {
   const location = useLocation();
 
@@ -24,6 +27,7 @@ function App() {
   return (
     <div className="App">
      <AuthProvider>
+     <CartProvider>
       {/* ToastContainer should be at the root level */}
       <ToastContainer 
         position="top-right"
@@ -40,6 +44,7 @@ function App() {
       {!hideHeaderFooter && <NavBarPage />}
       <Routers />
       {!hideHeaderFooter && <Footer />}
+      </CartProvider>
       </AuthProvider>
     </div>
   );

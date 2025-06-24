@@ -87,43 +87,30 @@ const Login = () => {
 
   // Handle OTP Verification
   const handleVerifyOtp = async () => {
-    if (isVerifying) return;
+  if (!otp || otp.length !== 4) {
+    toast.error("Please enter a valid 4-digit OTP");
+    return;
+  }
 
-    if (!otp || otp.length !== 4) {
-      toast.error("Please enter a valid 4-digit OTP");
-      return;
-    }
+  setIsVerifying(true);
 
-    setIsVerifying(true);
+  try {
+    const { mobile, name, email } = formData;
+    const response = await axios.post(
+      "http://localhost:4000/person/verify-otp",
+      { mobile, otp, name, email }
+    );
 
-    try {
-      const { mobile, name, email } = formData;
-      const response = await axios.post(
-        "http://localhost:4000/person/verify-otp",
-        { mobile, otp, name, email }
-      );
-
-      toast.success("Login successful!", {
-        position: "top-right",
-        autoClose: 2000,
-        onClose: () => {
-          localStorage.setItem("authToken", response.data.token);
-          localStorage.setItem("userId", response.data.user.id); // Store user ID
-          setToken(response.data.token);
-          setUser(response.data.user);
-          navigate("/");
-        },
-      });
-    } catch (err) {
-      console.error("Error verifying OTP:", err);
-      const errorMsg =
-        err.response?.data?.error || "Invalid OTP. Please try again.";
-      setErrorMessage(errorMsg);
-      toast.error(errorMsg);
-    } finally {
-      setIsVerifying(false);
-    }
-  };
+    toast.success("Login successful!");
+    setToken(response.data.token);        // ✅ Save token in context + localStorage
+    setUser(response.data.user);          // ✅ Save user in context + localStorage
+    navigate("/");                        // ✅ Go to homepage
+  } catch (err) {
+    toast.error(err.response?.data?.error || "Invalid OTP");
+  } finally {
+    setIsVerifying(false);
+  }
+};
 
   // Resend OTP
   const handleResendOtp = async () => {

@@ -2,22 +2,31 @@ import React, { useState, useEffect } from "react";
 import "./AllTest.css";
 import { MdOutlineCurrencyRupee } from "react-icons/md";
 import { TiTick } from "react-icons/ti";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AllTest = () => {
-  const [data, setData] = useState([]); // All test data from backend
-  const [categories, setCategories] = useState([]); // Categories list
-  const [currentPage, setCurrentPage] = useState(1); // Pagination
-  const [loading, setLoading] = useState(true); // Loading state
-  const [selectedCategory, setSelectedCategory] = useState("All Test"); // Selected category
-  const [searchQuery, setSearchQuery] = useState(""); // Search bar input
-  const [suggestions, setSuggestions] = useState([]); // Search suggestions
-  const [selectedCard, setSelectedCard] = useState(null); // Selected card
-  const [subCategoryData, setSubCategoryData] = useState([]); // Subcategory data
-  const itemsPerPage = 8; // Number of cards per page
-  const maxVisiblePages=5;
+  const [data, setData] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState("All Test");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [selectedSubTestId, setSelectedSubTestId] = useState(null);
+  const [expandedCardId, setExpandedCardId] = useState(null);
+  const [subCategoryData, setSubCategoryData] = useState([]);
+  const itemsPerPage = 8;
+  const maxVisiblePages = 5;
+  const navigate = useNavigate();
+  const isShowingSubCategory = subCategoryData.length > 0;
 
-  
-  // Fetch categories from API on page load
+  // Check if user is logged in (you'll need to implement your actual auth check)
+  const isLoggedIn = () => {
+    return localStorage.getItem("authToken") !== null;
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -32,7 +41,7 @@ const AllTest = () => {
           "All Test",
           ...new Set(categoryResult.data.map((item) => item.category)),
         ]);
-        setData(categoryResult.data); // Store test data
+        setData(categoryResult.data);
       } catch (error) {
         console.error("Error fetching categories:", error);
       } finally {
@@ -43,98 +52,88 @@ const AllTest = () => {
     fetchData();
   }, []);
 
-  // Fetch subcategory data when a category is clicked
   const handleCategoryClick = async (category) => {
     setSelectedCategory(category);
-    setSelectedCard(null); // Reset selected card when switching category
-    setSubCategoryData([]); // ✅ Clear subcategory data on category switch
+    setExpandedCardId(null);
+    setSelectedSubTestId(null); // ✅
+    setSubCategoryData([]);
     setCurrentPage(1);
-
     try {
-      if (category === "All Test") {
-        const response = await fetch("http://localhost:4000/api/categories");
-        const result = await response.json();
-        setData(result.data);
-      } else {
-        const response = await fetch(
-          `http://localhost:4000/api/categories?category=${category}`
-        );
-        const result = await response.json();
-        setData(result.data); // ✅ Store only category data
-      }
-    } catch (error) {
-      console.error("Error fetching categories:", error);
+      const url =
+        category === "All Test"
+          ? "http://localhost:4000/api/categories"
+          : `http://localhost:4000/api/categories?category=${category}`;
+      const res = await fetch(url);
+      const json = await res.json();
+      setData(json.data);
+    } catch (err) {
+      console.error("Category fetch error:", err);
     }
   };
 
-  // Fetch detailed test data when clicking on a test card
   const handleCardClick = async (card) => {
-    setSelectedCard(card);
-
+    setExpandedCardId(card._id);
     try {
-      const response = await fetch(
+      const res = await fetch(
         `http://localhost:4000/api/subcategories?category=${selectedCategory}&subCategory=${card.title}`
       );
-      const result = await response.json();
-
-      console.log("Detailed Test Data:", result);
-
-      // ✅ Filter only the subcategory data related to the clicked card
-      const filteredSubcategoryData = result.data.filter(
+      const json = await res.json();
+      const filtered = json.data.filter(
         (item) => item.subCategory === card.title
       );
-
-      setSubCategoryData(filteredSubcategoryData); // Store only relevant data
-    } catch (error) {
-      console.error("Error fetching test details:", error);
+      setSubCategoryData(filtered);
+    } catch (err) {
+      console.error("Subcategory fetch error:", err);
     }
   };
 
-  // Update this section to fix search functionality
-  const filteredData = (data || []).filter((item) => {
-    const matchesCategory =
-      selectedCategory === "All Test" || item.category === selectedCategory;
-    const matchesSearch = item.title
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase()); // Case-insensitive search on title
-    return matchesCategory && matchesSearch; // Filtering by category & title
-  });
-
-  // Update this section to fix search suggestions
-  useEffect(() => {
-    if (searchQuery) {
-      const newSuggestions = (data || [])
-        .filter(
-          (item) => item.title.toLowerCase().includes(searchQuery.toLowerCase()) // Case-insensitive title search
-        )
-        .map((item) => item.title);
-      setSuggestions(newSuggestions);
-    } else {
-      setSuggestions([]);
+  const handleAddToCart = (card) => {
+    if (!isLoggedIn()) {
+      toast.error("Please login to add tests to your cart");
+      setTimeout(() => {
+        navigate("/log-in");
+      }, 1000);
+      return;
     }
-  }, [searchQuery, data]);
+    toast.success(`${card.title} added to cart successfully!`);
+    setTimeout(() => navigate("/cart"), 1000);
+  };
 
   const handleSuggestionClick = (title) => {
     setSearchQuery(title);
     setSuggestions([]);
   };
 
-  // Pagination Logic
-  const lastIndex = currentPage * itemsPerPage;
-  const firstIndex = lastIndex - itemsPerPage;
-  const currentCards = selectedCard
-    ? subCategoryData.slice(firstIndex, lastIndex)
-    : filteredData.slice(firstIndex, lastIndex);
+  useEffect(() => {
+    if (searchQuery) {
+      const sugg = data
+        .filter((item) =>
+          item.title.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+        .map((item) => item.title);
+      setSuggestions(sugg);
+    } else {
+      setSuggestions([]);
+    }
+  }, [searchQuery, data]);
 
-  const totalPages = Math.ceil(
-    (selectedCard ? subCategoryData.length : filteredData.length) / itemsPerPage
+  const filteredData = (data || []).filter((item) => {
+    const matchesCategory =
+      selectedCategory === "All Test" || item.category === selectedCategory;
+    const matchesSearch = item.title
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+  // Pagination Logic
+  const paginatedCards = expandedCardId ? subCategoryData : filteredData;
+
+  const totalPages = Math.ceil(paginatedCards.length / itemsPerPage);
+  const currentCards = paginatedCards.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
   );
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  // Handle Add to Cart
-  const handleAddToCart = (card) => {
-    console.log("Added to cart:", card);
-  };
 
   if (loading) {
     return <div className="loading">Loading...</div>;
@@ -143,7 +142,6 @@ const AllTest = () => {
   return (
     <div className="alltest-wrapper">
       <div className="alltest-main1">
-        {/* Left Side: Categories List */}
         <div className="alltest-box1">
           <ul className="categories-list">
             {categories.map((category, index) => (
@@ -158,9 +156,7 @@ const AllTest = () => {
           </ul>
         </div>
 
-        {/* Right Side: Search Bar, Heading, and Cards */}
         <div className="alltest-box2">
-          {/* Search Bar */}
           <div className="alltest-search-bar">
             <input
               type="text"
@@ -183,19 +179,23 @@ const AllTest = () => {
             )}
           </div>
 
-          {/* Heading */}
           <h2 className="dashboard-heading">
-            {selectedCard ? selectedCard.title : selectedCategory}
+            {expandedCardId
+              ? data.find((d) => d._id === expandedCardId)?.title || "Sub Tests"
+              : selectedCategory}
           </h2>
 
-          {/* Cards Grid */}
           <div className="card-grid">
             {currentCards.length > 0 ? (
               currentCards.map((card) => (
                 <div
-                  className="card"
                   key={card._id}
-                  onClick={() => !selectedCard && handleCardClick(card)}
+                  className={`card ${
+                    expandedCardId === card._id ? "expanded" : ""
+                  }`}
+                  onClick={() =>
+                    expandedCardId === card._id ? null : handleCardClick(card)
+                  }
                 >
                   <img
                     src={
@@ -208,17 +208,13 @@ const AllTest = () => {
                   />
                   <div className="card-content">
                     <h3>{card.title}</h3>
-
-                    {/* Show description in both views */}
                     <p className="card-description">{card.description}</p>
 
-                    {selectedCard && (
+                    {(isShowingSubCategory ||
+                      expandedCardId === card._id ||
+                      selectedSubTestId === card._id) && (
                       <>
                         <div className="card-price">
-                          {/* <span className="original-price">
-                            <MdOutlineCurrencyRupee className="price-icon" />
-                            {card.oldPrice}/- Price
-                          </span> */}
                           <span className="discounted-price">
                             <MdOutlineCurrencyRupee className="price-icon discount-icon" />
                             {card.oldPrice}/- Price
@@ -231,21 +227,31 @@ const AllTest = () => {
                           </span>
                         </div>
                         <div className="book-for-contras">
-                          {/* <TiTick className="book-for-icon-contras" /> */}
                           <span className="book-for-text-contras">
-                          Contrast: 
-                          <MdOutlineCurrencyRupee className="price-icon-contras" />
-                          {card.contrastPrice}
+                            Contrast:
+                            <MdOutlineCurrencyRupee className="price-icon-contras" />
+                            {card.contrastPrice}
                           </span>
                         </div>
                       </>
                     )}
+
                     <div className="alltest-card">
                       <button
                         className="alltest-add-to-cart"
-                        onClick={() => handleAddToCart(card)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (subCategoryData.length > 0) {
+                            setSelectedSubTestId(card._id); // ✅ for sub-tests
+                            handleAddToCart(card);
+                          } else {
+                            handleCardClick(card); // for main category card
+                          }
+                        }}
                       >
-                        {selectedCard ? "Add to Cart" : "Book Test"}
+                        {isShowingSubCategory || expandedCardId === card._id
+                          ? "Add to Cart"
+                          : "Book Test"}
                       </button>
                     </div>
                   </div>
@@ -256,73 +262,80 @@ const AllTest = () => {
             )}
           </div>
 
-          {/* Pagination */}
-<div className="pagination">
-  <button
-    className="arrow-button"
-    disabled={currentPage === 1}
-    onClick={() => paginate(currentPage - 1)}
-  >
-    &lt;
-  </button>
+          <div className="pagination">
+            <button
+              className="arrow-button"
+              disabled={currentPage === 1}
+              onClick={() => paginate(currentPage - 1)}
+            >
+              &lt;
+            </button>
 
-  {/* Always show first page */}
-  <button
-    className={`page-button ${currentPage === 1 ? "active" : ""}`}
-    onClick={() => paginate(1)}
-  >
-    1
-  </button>
+            <button
+              className={`page-button ${currentPage === 1 ? "active" : ""}`}
+              onClick={() => paginate(1)}
+            >
+              1
+            </button>
 
-  {/* Show ellipsis if needed before middle pages */}
-  {currentPage > maxVisiblePages - 1 && <span className="ellipsis">...</span>}
+            {currentPage > maxVisiblePages - 1 && (
+              <span className="ellipsis">...</span>
+            )}
 
-  {/* Calculate middle pages to show */}
-  {(() => {
-    let startPage = Math.max(2, currentPage - Math.floor(maxVisiblePages / 2));
-    let endPage = Math.min(totalPages - 1, startPage + maxVisiblePages - 1);
-    
-    // Adjust if we're near the end
-    if (endPage === totalPages - 1) {
-      startPage = Math.max(2, endPage - maxVisiblePages + 1);
-    }
+            {(() => {
+              let startPage = Math.max(
+                2,
+                currentPage - Math.floor(maxVisiblePages / 2)
+              );
+              let endPage = Math.min(
+                totalPages - 1,
+                startPage + maxVisiblePages - 1
+              );
 
-    const pages = [];
-    for (let i = startPage; i <= endPage; i++) {
-      pages.push(
-        <button
-          key={i}
-          className={`page-button ${currentPage === i ? "active" : ""}`}
-          onClick={() => paginate(i)}
-        >
-          {i}
-        </button>
-      );
-    }
-    return pages;
-  })()}
+              if (endPage === totalPages - 1) {
+                startPage = Math.max(2, endPage - maxVisiblePages + 1);
+              }
 
-  {/* Show ellipsis if needed after middle pages */}
-  {currentPage < totalPages - (maxVisiblePages - 1) && <span className="ellipsis">...</span>}
+              const pages = [];
+              for (let i = startPage; i <= endPage; i++) {
+                pages.push(
+                  <button
+                    key={i}
+                    className={`page-button ${
+                      currentPage === i ? "active" : ""
+                    }`}
+                    onClick={() => paginate(i)}
+                  >
+                    {i}
+                  </button>
+                );
+              }
+              return pages;
+            })()}
 
-  {/* Always show last page if there's more than 1 page */}
-  {totalPages > 1 && (
-    <button
-      className={`page-button ${currentPage === totalPages ? "active" : ""}`}
-      onClick={() => paginate(totalPages)}
-    >
-      {totalPages}
-    </button>
-  )}
+            {currentPage < totalPages - (maxVisiblePages - 1) && (
+              <span className="ellipsis">...</span>
+            )}
 
-  <button
-    className="arrow-button"
-    disabled={currentPage === totalPages}
-    onClick={() => paginate(currentPage + 1)}
-  >
-    &gt;
-  </button>
-</div>
+            {totalPages > 1 && (
+              <button
+                className={`page-button ${
+                  currentPage === totalPages ? "active" : ""
+                }`}
+                onClick={() => paginate(totalPages)}
+              >
+                {totalPages}
+              </button>
+            )}
+
+            <button
+              className="arrow-button"
+              disabled={currentPage === totalPages}
+              onClick={() => paginate(currentPage + 1)}
+            >
+              &gt;
+            </button>
+          </div>
         </div>
       </div>
     </div>

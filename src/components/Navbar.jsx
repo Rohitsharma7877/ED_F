@@ -15,7 +15,7 @@ import hospitalimage from "./assests/hospitalimage.png";
 import ambulance from "./assests/ambulance3.png";
 import { useCart } from '../components/context/CartContext';
 import "./Navbar.css";
-
+// import { useAuth } from '../context/AuthContext';
 
 const Navbar = () => {
   const [showForm, setShowForm] = useState(false);
@@ -210,7 +210,7 @@ const handleResultClick = (result) => {
               <IoMdCloudUpload className="mr-1 relative -top-0 text-lg " />
               Upload Prescription
             </Link>
-            <Link to="/offline-booking" className="relative text-white text-lg">
+            <Link to="/cart" className="relative text-white text-lg">
               <FaShoppingCart />
               <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full px-1"></span>
             </Link>
@@ -311,7 +311,7 @@ const handleResultClick = (result) => {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <FaShoppingCart className="mr-1 relative -top-0 text-lg" />
-                Cart ({cart.length})
+                Cartt ({cart.length})
               </Link>
 
               {token ? (

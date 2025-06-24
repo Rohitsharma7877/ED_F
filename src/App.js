@@ -26,8 +26,9 @@ function App() {
 
   return (
     <div className="App">
-     <AuthProvider>
+     
      <CartProvider>
+     <AuthProvider>
       {/* ToastContainer should be at the root level */}
       <ToastContainer 
         position="top-right"
@@ -44,8 +45,9 @@ function App() {
       {!hideHeaderFooter && <NavBarPage />}
       <Routers />
       {!hideHeaderFooter && <Footer />}
-      </CartProvider>
       </AuthProvider>
+      </CartProvider>
+     
     </div>
   );
 }

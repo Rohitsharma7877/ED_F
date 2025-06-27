@@ -49,44 +49,56 @@ export const CartProvider = ({ children }) => {
   }, [fetchCart]);
 
 const addToCart = async (testId, testName) => {
+  // console.log('[CART] Attempting to add:', testId);
   setIsLoading(true);
   setError(null);
 
-  // STEP 1: Log inputs
-  console.log("📦 Sending addToCart request with testId:", testId);
-  console.log("🛡️ Token being sent:", token);
-
-  if (!testId) {
-    toast.error("Invalid test ID. Cannot add to cart.");
-    setIsLoading(false);
-    return;
-  }
-
   try {
-  const response = await axios.post("http://localhost:4000/person/cart/add", { testId }, {
-  headers: { Authorization: `Bearer ${token}` }
-});
+    console.log('[CART] Adding test:', testId);
 
-    // STEP 2: Log the response
-    console.log("📩 Server responded:", response.data);
-
-    if (response.data.success) {
-      await fetchCart(); // cart will update
-      toast.success(`${testName} added to cart successfully!`);
-      return { success: true };
-    } else {
-      toast.error(response.data.error || "Failed to add to cart");
-      return { success: false };
+    if (!token) {
+      throw new Error("Authentication required - please login");
     }
-  } catch (err) {
-    console.log("❌ Error during addToCart:", err);
-    toast.error("Something went wrong while adding to cart.");
-    return { success: false };
+
+    const response = await axios.post(
+      "http://localhost:4000/person/cart/add",
+      { testId },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        timeout: 8000
+      }
+    );
+
+    if (!response.data?.success) {
+      throw new Error(response.data?.error || "Failed to add to cart");
+    }
+
+    // Refresh cart data
+    await fetchCart();
+    
+    return { 
+      success: true,
+      data: response.data
+    };
+
+  } catch (error) {
+    const errorDetails = {
+      message: error.message,
+      response: error.response?.data,
+      config: error.config
+    };
+    
+    console.error('[CART] Full error:', errorDetails);
+    setError(errorDetails.response?.error || error.message);
+    throw errorDetails;
+    
   } finally {
     setIsLoading(false);
   }
 };
-
 
 
   const removeFromCart = async (testId) => {

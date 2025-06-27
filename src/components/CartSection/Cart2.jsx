@@ -4,25 +4,42 @@ import { useAuth } from "../context/AuthContext";
 import "./Cart2.css";
 
 const Cart2 = () => {
-  const { cart, fetchCart } = useCart(); // ✅ First, declare cart
+  const { cart, fetchCart } = useCart();
   const { token } = useAuth();
 
-  // ✅ Then use it
-  console.log("🛒 Rendered Cart in Cart2:", cart);
+  // Debugging logs
+  console.log("🛒 Current Cart Data:", cart);
 
   useEffect(() => {
     if (token) {
       fetchCart();
-      console.log("🛒 Cart in Cart2:", cart);
     }
   }, [token, fetchCart]);
 
   const getTotalPrice = () => {
     return cart.reduce((total, item) => {
-      if (!item.testId) return total;
-      return total + item.testId.oldPrice * item.quantity;
+      if (!item.subCategoryId) return total;
+      return total + (item.subCategoryId.oldPrice || 0) * (item.quantity || 1);
     }, 0);
   };
+
+  // Handle empty cart state
+  if (cart.length === 0) {
+    return (
+      <div className="cart-container">
+        <h2>Your Basket</h2>
+        <div className="empty-cart-message">
+          <p>Your cart is empty</p>
+          <button 
+            className="continue-shopping-btn"
+            onClick={() => window.location.href = '/'}
+          >
+            Continue Shopping
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="cart-container">
@@ -30,36 +47,38 @@ const Cart2 = () => {
       <div className="cart-wrapper">
         {/* Cart Items */}
         <div className="cart-items">
-          {cart.length === 0 ? (
-            <p>Your cart is empty</p>
-          ) : (
-            cart
-              .filter((item) => item.testId)
-              .map((item) => (
-                <div className="cart-card" key={item._id}>
-                  <img
-                    src={
-                      item.testId.image
-                        ? `http://localhost:4000/uploads/${item.testId.image}`
-                        : "/default-test-image.jpg"
-                    }
-                    alt={item.testId.title}
-                    className="cart-image"
-                  />
-                  <div className="cart-info">
-                    <h3>{item.testId.title}</h3>
-                    <p>
-                      Delivery:{" "}
-                      {item.testId.homeCollection
-                        ? "Home Collection"
-                        : "Lab Visit"}
-                    </p>
-                    <p>Quantity: {item.quantity}</p>
-                    <p>Price: ₹{item.testId.oldPrice * item.quantity}</p>
-                  </div>
+          {cart
+            .filter((item) => item.subCategoryId) // Only show items with valid subCategoryId
+            .map((item) => (
+              <div className="cart-card" key={item._id}>
+                <img
+                  src={
+                    item.subCategoryId.image
+                      ? `http://localhost:4000/uploads/${item.subCategoryId.image}`
+                      : "/default-test-image.jpg"
+                  }
+                  alt={item.subCategoryId.title}
+                  className="cart-image"
+                  onError={(e) => {
+                    e.target.src = "/default-test-image.jpg"; // Fallback image
+                  }}
+                />
+                <div className="cart-info">
+                  <h3>{item.subCategoryId.title || "Test"}</h3>
+                  <p>
+                    Delivery:{" "}
+                    {item.subCategoryId.homeCollection
+                      ? "Home Collection"
+                      : "Lab Visit"}
+                  </p>
+                  <p>Quantity: {item.quantity || 1}</p>
+                  <p>
+                    Price: ₹
+                    {(item.subCategoryId.oldPrice || 0) * (item.quantity || 1)}
+                  </p>
                 </div>
-              ))
-          )}
+              </div>
+            ))}
         </div>
 
         {/* Summary Section */}
@@ -69,7 +88,15 @@ const Cart2 = () => {
           <p>Delivery: Free</p>
           <hr />
           <p className="total-price">Total: ₹{getTotalPrice()}</p>
-          <button className="checkout-btn">Proceed to Checkout</button>
+          <button 
+            className="checkout-btn"
+            onClick={() => {
+              // Add your checkout logic here
+              console.log("Proceeding to checkout");
+            }}
+          >
+            Proceed to Checkout
+          </button>
         </div>
       </div>
     </div>

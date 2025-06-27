@@ -5,6 +5,7 @@ import { TiTick } from "react-icons/ti";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useCart } from "../context/CartContext";
 
 const AllTest = () => {
   const [data, setData] = useState([]);
@@ -21,7 +22,7 @@ const AllTest = () => {
   const maxVisiblePages = 5;
   const navigate = useNavigate();
   const isShowingSubCategory = subCategoryData.length > 0;
-
+  const { addToCart } = useCart();
   // Check if user is logged in (you'll need to implement your actual auth check)
   const isLoggedIn = () => {
     return localStorage.getItem("authToken") !== null;
@@ -72,32 +73,62 @@ const AllTest = () => {
   };
 
   const handleCardClick = async (card) => {
-    setExpandedCardId(card._id);
-    try {
-      const res = await fetch(
-        `http://localhost:4000/api/subcategories?category=${selectedCategory}&subCategory=${card.title}`
-      );
-      const json = await res.json();
-      const filtered = json.data.filter(
-        (item) => item.subCategory === card.title
-      );
-      setSubCategoryData(filtered);
-    } catch (err) {
-      console.error("Subcategory fetch error:", err);
-    }
-  };
+  setExpandedCardId(card._id);
+  try {
+    const res = await fetch(
+      `http://localhost:4000/api/subcategories?category=${selectedCategory}&subCategory=${card.title}`
+    );
+    const json = await res.json();
+    const filtered = json.data.filter(
+      (item) => item.subCategory === card.title
+    );
+    
+    // DEBUG: Log the returned test data
+    console.log("Subcategory tests:", filtered);
+    console.log("First test ID:", filtered[0]?._id);
+    
+    setSubCategoryData(filtered);
+  } catch (err) {
+    console.error("Subcategory fetch error:", err);
+  }
+};
 
-  const handleAddToCart = (card) => {
+const handleAddToCart = async (card) => {
+  console.group('Add to Cart Debug');
+  try {
+    console.log('Selected Test:', card.title, 'ID:', card._id);
+
     if (!isLoggedIn()) {
-      toast.error("Please login to add tests to your cart");
-      setTimeout(() => {
-        navigate("/log-in");
-      }, 1000);
+      toast.error("Please login to add tests");
+      navigate("/login");
       return;
     }
-    toast.success(`${card.title} added to cart successfully!`);
-    setTimeout(() => navigate("/cart"), 1000);
-  };
+
+    const { success, error } = await addToCart(card._id, card.title);
+    
+    if (success) {
+      toast.success(`${card.title} added to cart!`);
+    } else {
+      toast.error(error || "Failed to add to cart");
+      console.error('Error details:', error);
+    }
+
+  } catch (error) {
+    console.error('Full error:', error);
+    
+    let userMessage = "Failed to add to cart";
+    if (error.response?.error) {
+      userMessage = error.response.error;
+    } else if (error.message.includes('Network Error')) {
+      userMessage = "Network connection failed";
+    }
+
+    toast.error(userMessage);
+
+  } finally {
+    console.groupEnd();
+  }
+};
 
   const handleSuggestionClick = (title) => {
     setSearchQuery(title);
@@ -241,15 +272,14 @@ const AllTest = () => {
                         className="alltest-add-to-cart"
                         onClick={(e) => {
                           e.stopPropagation();
-                          if (subCategoryData.length > 0) {
-                            setSelectedSubTestId(card._id); // ✅ for sub-tests
+                          if (isShowingSubCategory || expandedCardId) {
                             handleAddToCart(card);
                           } else {
-                            handleCardClick(card); // for main category card
+                            handleCardClick(card);
                           }
                         }}
                       >
-                        {isShowingSubCategory || expandedCardId === card._id
+                        {isShowingSubCategory || expandedCardId
                           ? "Add to Cart"
                           : "Book Test"}
                       </button>

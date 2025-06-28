@@ -19,28 +19,35 @@ export const CartProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   const fetchCart = useCallback(async () => {
-    if (!token) {
-      setCart([]);
-      return;
-    }
+  if (!token) {
+    setCart([]);
+    return;
+  }
 
-    setIsLoading(true);
-    setError(null);
-    try {
-      const res = await axios.get("http://localhost:4000/person/cart", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (res.data?.success) {
-        setCart(res.data.cart);
-      }
-    } catch (err) {
-      console.error("Failed to fetch cart", err);
-      setError(err.response?.data?.error || "Failed to load cart");
-      toast.error(err.response?.data?.error || "Failed to load cart");
-    } finally {
-      setIsLoading(false);
+  setIsLoading(true);
+  setError(null);
+  try {
+    const res = await axios.get("http://localhost:4000/person/cart", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    
+    if (res.data?.success) {
+      // Transform data to match frontend expectations
+      const formattedCart = res.data.cart.map(item => ({
+        ...item,
+        subCategoryId: item.testId // Map testId to subCategoryId
+      }));
+      
+      setCart(formattedCart);
     }
-  }, [token]);
+  } catch (err) {
+    console.error("Failed to fetch cart", err);
+    setError(err.response?.data?.error || "Failed to load cart");
+    toast.error(err.response?.data?.error || "Failed to load cart");
+  } finally {
+    setIsLoading(false);
+  }
+}, [token]);
 
   const debouncedFetchCart = useDebounce(fetchCart, 300);
 

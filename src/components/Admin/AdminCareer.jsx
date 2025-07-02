@@ -22,7 +22,7 @@ const AdminCareer = () => {
   const fetchCareers = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:4000/api/careers");
+      const response = await fetch("https://ed-b-1.onrender.com/api/careers");
       const data = await response.json();
       if (response.ok) {
         setCareers(data.data);
@@ -46,8 +46,8 @@ const AdminCareer = () => {
     e.preventDefault();
     
     const url = editId 
-      ? `http://localhost:4000/api/careers/${editId}`
-      : "http://localhost:4000/api/careers";
+      ? `https://ed-b-1.onrender.com/api/careers/${editId}`
+      : "https://ed-b-1.onrender.com/api/careers";
     
     const method = editId ? "PUT" : "POST";
 
@@ -86,7 +86,7 @@ const AdminCareer = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this career?")) {
       try {
-        const response = await fetch(`http://localhost:4000/api/careers/${id}`, {
+        const response = await fetch(`https://ed-b-1.onrender.com/api/careers/${id}`, {
           method: "DELETE"
         });
 

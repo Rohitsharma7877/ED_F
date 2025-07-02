@@ -62,7 +62,7 @@ const Cart2 = () => {
                   <img
                     src={
                       testData.image
-                        ? `http://localhost:4000/uploads/${testData.image}`
+                        ? `https://ed-b-1.onrender.com/uploads/${testData.image}`
                         : "/default-test-image.jpg"
                     }
                     alt={testData.title}

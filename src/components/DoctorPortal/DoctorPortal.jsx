@@ -73,7 +73,7 @@ const handleBookNow = async (e) => {
   };
 
   try {
-    const response = await fetch("http://localhost:4000/api/service-bookings", {
+    const response = await fetch("https://ed-b-1.onrender.com/api/service-bookings", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

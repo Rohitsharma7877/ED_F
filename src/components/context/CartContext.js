@@ -27,7 +27,7 @@ export const CartProvider = ({ children }) => {
   setIsLoading(true);
   setError(null);
   try {
-    const res = await axios.get("http://localhost:4000/person/cart", {
+    const res = await axios.get("https://ed-b-1.onrender.com/person/cart", {
       headers: { Authorization: `Bearer ${token}` },
     });
     
@@ -68,7 +68,7 @@ const addToCart = async (testId, testName) => {
     }
 
     const response = await axios.post(
-      "http://localhost:4000/person/cart/add",
+      "https://ed-b-1.onrender.com/person/cart/add",
       { testId },
       {
         headers: {
@@ -112,7 +112,7 @@ const addToCart = async (testId, testName) => {
     setIsLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:4000/person/cart/remove",
+        "https://ed-b-1.onrender.com/person/cart/remove",
         { testId }, // ✅ Correct body
         {
           headers: {

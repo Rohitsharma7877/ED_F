@@ -26,7 +26,7 @@ const XRayHeader = () => {
   useEffect(() => {
     const fetchXRayTests = async () => {
       try {
-        const response = await fetch("http://localhost:4000/api/subcategories");
+        const response = await fetch("https://ed-b-1.onrender.com/api/subcategories");
         const data = await response.json();
 
         if (response.ok) {
@@ -91,7 +91,7 @@ const XRayHeader = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:4000/api/service-bookings",
+        "https://ed-b-1.onrender.com/api/service-bookings",
         {
           method: "POST",
           headers: {

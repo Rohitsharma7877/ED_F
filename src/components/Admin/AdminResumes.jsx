@@ -14,7 +14,7 @@ const AdminResumes = () => {
 
   const fetchResumes = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/resumes");
+      const response = await axios.get("https://ed-b-1.onrender.com/api/resumes");
       setResumes(response.data.data);
     } catch (error) {
       console.error("Error fetching resumes:", error);
@@ -25,7 +25,7 @@ const AdminResumes = () => {
 
   const handleStatusChange = async (id, newStatus) => {
     try {
-      await axios.put(`http://localhost:4000/api/resumes/${id}`, {
+      await axios.put(`https://ed-b-1.onrender.com/api/resumes/${id}`, {
         status: newStatus,
       });
       fetchResumes(); // Refresh the list
@@ -37,7 +37,7 @@ const AdminResumes = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this resume?")) {
       try {
-        await axios.delete(`http://localhost:4000/api/resumes/${id}`);
+        await axios.delete(`https://ed-b-1.onrender.com/api/resumes/${id}`);
         fetchResumes(); // Refresh the list
       } catch (error) {
         console.error("Error deleting resume:", error);
@@ -46,7 +46,7 @@ const AdminResumes = () => {
   };
 
   const downloadResume = async (id) => {
-    window.open(`http://localhost:4000/api/resumes/${id}/download`, "_blank");
+    window.open(`https://ed-b-1.onrender.com/api/resumes/${id}/download`, "_blank");
   };
 
   const filteredResumes = resumes.filter((resume) => {

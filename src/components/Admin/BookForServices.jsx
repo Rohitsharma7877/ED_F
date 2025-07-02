@@ -20,7 +20,7 @@ const BookForServices = () => {
   const fetchServiceBookings = async () => {
     try {
       const response = await fetch(
-        "http://localhost:4000/api/service-bookings"
+        "https://ed-b-1.onrender.com/api/service-bookings"
       );
       if (!response.ok) throw new Error("Failed to fetch service bookings");
       const data = await response.json();
@@ -45,7 +45,7 @@ const BookForServices = () => {
   const handleStatusChange = async (bookingId, newStatus) => {
     try {
       const response = await fetch(
-        `http://localhost:4000/api/service-bookings/${bookingId}/status`,
+        `https://ed-b-1.onrender.com/api/service-bookings/${bookingId}/status`,
         {
           method: "PATCH",
           headers: {

@@ -24,7 +24,7 @@ const EEGHeader = () => {
     const fetchTestNames = async () => {
       try {
         const response = await fetch(
-          "http://localhost:4000/api/subcategories/test-names"
+          "https://ed-b-1.onrender.com/api/subcategories/test-names"
         );
         const data = await response.json();
 
@@ -86,7 +86,7 @@ const EEGHeader = () => {
     };
     try {
       const response = await fetch(
-        "http://localhost:4000/api/service-bookings",
+        "https://ed-b-1.onrender.com/api/service-bookings",
         {
           method: "POST",
           headers: {

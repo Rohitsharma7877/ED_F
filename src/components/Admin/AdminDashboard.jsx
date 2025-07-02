@@ -73,6 +73,18 @@ function AdminDashboard() {
 
           <div
             className={`sidebar-link ${
+              activeDropdown === "admincart" ? "active" : ""
+            }`}
+            onClick={() => navigate("admincart")}
+          >
+            <span className="icon">
+              <i className="fas fa-calendar-check"></i>
+            </span>{" "}
+            Admin Cart
+          </div>
+
+          <div
+            className={`sidebar-link ${
               activeDropdown === "view-contact-us" ? "active" : ""
             }`}
             onClick={() => navigate("view-contact-us")}

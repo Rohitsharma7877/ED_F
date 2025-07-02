@@ -53,7 +53,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/person/send-otp",
+        "https://ed-b-1.onrender.com/person/send-otp",
         {
           mobile,
           name,
@@ -97,7 +97,7 @@ const Login = () => {
   try {
     const { mobile, name, email } = formData;
     const response = await axios.post(
-      "http://localhost:4000/person/verify-otp",
+      "https://ed-b-1.onrender.com/person/verify-otp",
       { mobile, otp, name, email }
     );
 
@@ -122,7 +122,7 @@ const Login = () => {
     setIsVerifying(true);
     
     const response = await axios.post(
-      "http://localhost:4000/person/send-otp",
+      "https://ed-b-1.onrender.com/person/send-otp",
       { mobile, name, email },
       {
         headers: {

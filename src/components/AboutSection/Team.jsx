@@ -55,10 +55,10 @@ const Team = () => {
             <img src={member.image} alt={member.name} className="team-img" />
             <h3 className="team-name">{member.name}</h3>
             <p className="team-role">{member.designation}</p>
-            <p className="team-desc">
+            {/* <p className="team-desc">
               Sample text. Click to select the text box. Click again or double
               click to start editing the text.
-            </p>
+            </p> */}
           </div>
         ))}
       </div>

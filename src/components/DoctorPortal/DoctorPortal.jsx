@@ -15,58 +15,90 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext"; // Make sure path is correct
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // Make sure this path is correct
+
 
 const DoctorPortal = () => {
-  const [showForm, setShowForm] = useState(false);
+   const [showForm, setShowForm] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
+const [loadingTests, setLoadingTests] = useState(true);
   const navigate = useNavigate();
+  const { token, user } = useAuth();// Get the auth token from context
+
+  // Check if user is logged in
+  const isLoggedIn = () => {
+    return token !== null;
+  };
 
   const handleBookNowClick = () => {
-    setShowForm(true);
-    setIsExpanded(true);
+  if (!isLoggedIn()) {
+    toast.error("Please login to book an appointment");
+
+    // Delay navigation to give time for the toast to show
+    setTimeout(() => {
+      navigate("/log-in");
+    }, 3000);
+
+    return;
+  }
+
+  setShowForm(true);
+  setIsExpanded(true);
+};
+
+const handleBookNow = async (e) => {
+  e.preventDefault();
+  
+  if (!isLoggedIn()) {
+    toast.error("Please login to book an appointment");
+    navigate("/log-in");
+    return;
+  }
+
+  // Get form data
+  const formData = new FormData(e.target);
+  const data = {
+    serviceType: "Doctor Portal",
+    testName: "Doctor Consultation", // Add default test name
+    name: formData.get("name"),
+    email: formData.get("email"),
+    mobile: formData.get("mobile"),
+    age: formData.get("age"),
+    gender: formData.get("gender"),
+    appointmentDate: formData.get("appointmentDate"),
+    userId: user?._id,
+    status: "pending" // Add default status
   };
 
-  const handleCloseForm = () => {
+  try {
+    const response = await fetch("http://localhost:4000/api/service-bookings", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to submit booking");
+    }
+
+    const result = await response.json();
+    toast.success("Appointment submitted successfully!");
+    handleCloseForm();
+  } catch (error) {
+    console.error("Error submitting booking:", error);
+    toast.error(error.message || "Failed to submit appointment. Please try again.");
+  }
+};
+
+const handleCloseForm = () => {
     setShowForm(false);
     setIsExpanded(false);
-  };
-
-  const handleBookNow = async (e) => {
-    e.preventDefault();
-    
-    // Get form data using FormData API
-    const formData = new FormData(e.target);
-    const data = {
-      serviceType: "Doctor Portal", // Set this according to your service
-      name: formData.get("name"),
-      email: formData.get("email"),
-      mobile: formData.get("mobile"),
-      age: formData.get("age"),
-      gender: formData.get("gender"),
-      appointmentDate: formData.get("appointmentDate"),
-    };
-  
-    try {
-      const response = await fetch("http://localhost:4000/api/service-bookings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-  
-      if (!response.ok) {
-        throw new Error("Failed to submit booking");
-      }
-  
-      const result = await response.json();
-      alert("Appointment submitted successfully!");
-      handleCloseForm();
-    } catch (error) {
-      console.error("Error submitting booking:", error);
-      alert("Failed to submit appointment. Please try again.");
-    }
   };
 
   return (
@@ -82,12 +114,9 @@ const DoctorPortal = () => {
               delivery and efficient management.
             </p>
             <div className="doctorPortals-buttons">
-              <button
-                className="doctorPortals-btn"
-                onClick={handleBookNowClick}
-              >
-                Book Now
-              </button>
+              <button className="doctorPortals-btn" onClick={handleBookNowClick}>
+        Book Now
+      </button>
             </div>
           </div>
         </div>
@@ -246,7 +275,9 @@ const DoctorPortal = () => {
             </div>
           </div>
         </div>
+        
       )}
+      <ToastContainer position="top-right" />
     </div>
   );
 };

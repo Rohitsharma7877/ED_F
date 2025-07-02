@@ -8,6 +8,10 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext"; // Make sure path is correct
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const UTHeader = () => {
   const [showForm, setShowForm] = useState(false);
@@ -16,6 +20,8 @@ const UTHeader = () => {
   const navigate = useNavigate();
   const [uthTests, setUTHTests] = useState([]);
   const [loadingTests, setLoadingTests] = useState(true);
+ const { token, user } = useAuth();
+
 
   useEffect(() => {
     const fetchUtsTests = async () => {
@@ -41,9 +47,18 @@ const UTHeader = () => {
   }, []);
 
   const handleBookNowClick = () => {
-    setShowForm(true);
-    setIsExpanded(true);
-  };
+     if (!token) {
+       toast.error("Please login to book an appointment");
+ 
+       // Delay navigation to allow toast to render
+       setTimeout(() => {
+         navigate("/log-in", { state: { from: "/ultrasonography" } });
+       }, 3000); // Delay for 1.5 seconds
+       return;
+     }
+ 
+     setShowForm(true);
+   };
 
   const handleCloseForm = () => {
     setShowForm(false);
@@ -52,6 +67,11 @@ const UTHeader = () => {
 
   const handleBookNow = async (e) => {
     e.preventDefault();
+    if (!token) {
+          toast.error("Please login to book an appointment");
+          navigate("/log-in");
+          return;
+        }
 
     const formData = new FormData(e.target);
     const data = {
@@ -62,7 +82,9 @@ const UTHeader = () => {
       age: formData.get("age"),
       gender: formData.get("gender"),
       appointmentDate: formData.get("appointmentDate"),
-      testName: formData.get("testName"), // Add test name to the booking data
+      testName: formData.get("testName"),
+      userId: user?._id, // Associate with user if logged in
+      status: "pending", // Add test name to the booking data
     };
 
     try {
@@ -77,18 +99,22 @@ const UTHeader = () => {
         }
       );
 
-      if (!response.ok) {
-        throw new Error("Failed to submit booking");
-      }
-
-      const result = await response.json();
-      alert("Appointment submitted successfully!");
-      handleCloseForm();
-    } catch (error) {
-      console.error("Error submitting booking:", error);
-      alert("Failed to submit appointment. Please try again.");
-    }
-  };
+       if (!response.ok) {
+              throw new Error(await response.text());
+            }
+      
+            toast.success("Appointment booked successfully!");
+            setShowForm(false);
+      
+            // Optional: Refresh admin panel data
+            if (user?.role === "admin") {
+              // Logic to refresh admin data
+            }
+          } catch (error) {
+            console.error("Booking error:", error);
+            toast.error(error.message || "Failed to book appointment");
+          }
+        };
 
   return (
     <div className="uTHeade-main1">
@@ -102,7 +128,7 @@ const UTHeader = () => {
               and diagnose medical conditions.
             </p>
             <div className="uTHeade-buttons">
-              <button className="uTHeade-btn" onClick={() => setShowForm(true)}>
+              <button className="uTHeade-btn" onClick={handleBookNowClick}>
                 Book Now
               </button>
             </div>
@@ -249,6 +275,7 @@ const UTHeader = () => {
           </div>
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 };

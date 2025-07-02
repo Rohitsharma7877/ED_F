@@ -113,23 +113,46 @@ const Login = () => {
 };
 
   // Resend OTP
-  const handleResendOtp = async () => {
-    try {
-      const { mobile, name, email } = formData;
-      await axios.post("http://localhost:4000/person/send-otp", {
-        mobile,
-        name,
-        email,
-      });
+ const handleResendOtp = async () => {
+  try {
+    const { mobile, name, email } = formData;
+    setErrorMessage(""); // Clear any previous errors
+    
+    // Show loading state
+    setIsVerifying(true);
+    
+    const response = await axios.post(
+      "http://localhost:4000/person/send-otp",
+      { mobile, name, email },
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    );
 
-      setOtp("");
-      setErrorMessage("");
-      toast.info("OTP has been resent to your mobile.");
-    } catch (err) {
-      console.error("Error resending OTP:", err);
-      setErrorMessage("Failed to resend OTP. Please try again.");
+    if (response.data.success) {
+      setOtp(""); // Clear the OTP input field
+      toast.success("OTP has been resent successfully!", {
+        position: "top-right",
+      });
+    } else {
+      throw new Error(response.data.error || "Failed to resend OTP");
     }
-  };
+  } catch (err) {
+    console.error("Error resending OTP:", err);
+    const errorMsg = err.response?.data?.error || 
+                    err.message || 
+                    "Failed to resend OTP. Please try again.";
+    
+    setErrorMessage(errorMsg);
+    toast.error(errorMsg, {
+      position: "top-right",
+    });
+  } finally {
+    setIsVerifying(false);
+  }
+};
 
   return (
     <div className="Login-main">

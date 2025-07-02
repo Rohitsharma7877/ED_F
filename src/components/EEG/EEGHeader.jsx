@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { IoClose } from "react-icons/io5"; // Import the close icon
 import doctor from "./indianGroupDoctors.jpg";
 import "./EEGHeader.css";
@@ -8,53 +8,69 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { useNavigate } from "react-router-dom";
-
-
+import { useAuth } from "../context/AuthContext"; // Make sure path is correct
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const EEGHeader = () => {
   const [showForm, setShowForm] = useState(false);
-    const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [eegTests, setEegTests] = useState([]);
-    const [loadingTests, setLoadingTests] = useState(true);
-  
+  const [loadingTests, setLoadingTests] = useState(true);
+  const navigate = useNavigate();
+  const { token, user } = useAuth();
 
-    useEffect(() => {
-        const fetchTestNames = async () => {
-          try {
-            const response = await fetch(
-              "http://localhost:4000/api/subcategories/test-names"
-            );
-            const data = await response.json();
-    
-            if (response.ok) {
-              const eegTests = data.data.filter(
-                (test) => test.subCategory === "MRI" || test.title.includes("MRI") // optional: also include tests with "MRI" in title
-              );
-              setEegTests(eegTests);
-            }
-          } catch (error) {
-            console.error("Error Fetching Test Names:", error);
-          } finally {
-            setLoadingTests(false);
-          }
-        };
-    
-        fetchTestNames();
-      }, []);
+  useEffect(() => {
+    const fetchTestNames = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:4000/api/subcategories/test-names"
+        );
+        const data = await response.json();
 
-    const handleBookNowClick = () => {
-      setShowForm(true);
-      setIsExpanded(true);
-    };
-  
-    const handleCloseForm = () => {
-      setShowForm(false);
-      setIsExpanded(false);
+        if (response.ok) {
+          const eegTests = data.data.filter(
+            (test) => test.subCategory === "MRI" || test.title.includes("MRI") // optional: also include tests with "MRI" in title
+          );
+          setEegTests(eegTests);
+        }
+      } catch (error) {
+        console.error("Error Fetching Test Names:", error);
+      } finally {
+        setLoadingTests(false);
+      }
     };
 
-  
-    const handleBookNow = async (e) => {
+    fetchTestNames();
+  }, []);
+
+   const handleBookNowClick = () => {
+     if (!token) {
+       toast.error("Please login to book an appointment");
+ 
+       // Delay navigation to allow toast to render
+       setTimeout(() => {
+         navigate("/log-in", { state: { from: "/eeg" } });
+       }, 3000); // Delay for 1.5 seconds
+       return;
+     }
+ 
+     setShowForm(true);
+   };
+
+  const handleCloseForm = () => {
+    setShowForm(false);
+    setIsExpanded(false);
+  };
+
+  const handleBookNow = async (e) => {
     e.preventDefault();
+    if (!token) {
+          toast.error("Please login to book an appointment");
+          navigate("/log-in");
+          return;
+        }
+    
     const formData = new FormData(e.target);
     const data = {
       serviceType: "EEG",
@@ -65,6 +81,8 @@ const EEGHeader = () => {
       gender: formData.get("gender"),
       appointmentDate: formData.get("appointmentDate"),
       testName: formData.get("testName"),
+      userId: user?._id, // Associate with user if logged in
+      status: "pending",
     };
     try {
       const response = await fetch(
@@ -78,16 +96,23 @@ const EEGHeader = () => {
         }
       );
       if (!response.ok) {
-        throw new Error("Failed to submit booking");
-      }
-      const result = await response.json();
-      alert("Appointment submitted successfully!");
-      handleCloseForm();
-    } catch (error) {
-      console.error("Error submitting booking:", error);
-      alert("Failed to submit appointment. Please try again.");
-    }
-  };
+             throw new Error(await response.text());
+           }
+     
+           toast.success("Appointment booked successfully!");
+           setShowForm(false);
+     
+           // Optional: Refresh admin panel data
+           if (user?.role === "admin") {
+             // Logic to refresh admin data
+           }
+         } catch (error) {
+           console.error("Booking error:", error);
+           toast.error(error.message || "Failed to book appointment");
+         }
+       };
+     
+
 
   return (
     <div className="EEGHeader-main1">
@@ -102,7 +127,10 @@ const EEGHeader = () => {
               epilepsy, sleep disorders, and brain injuries.{" "}
             </p>
             <div className="EEGHeader-buttons">
-              <button className="EEGHeader-btn" onClick={() => setShowForm(true)}>
+              <button
+                className="EEGHeader-btn"
+                onClick={handleBookNowClick}
+              >
                 Book Now
               </button>
             </div>
@@ -193,7 +221,7 @@ const EEGHeader = () => {
                   </select>
                 </div>
 
-<div className="eeg-book-form-name">
+                <div className="eeg-book-form-name">
                   <label>Appointment Date:</label>
                   <input
                     type="date"
@@ -231,7 +259,7 @@ const EEGHeader = () => {
                     </RadioGroup>
                   </FormControl>
                 </div>
-                
+
                 <button type="submit" className="eeg-form-submit-btn">
                   Submit
                 </button>
@@ -240,6 +268,7 @@ const EEGHeader = () => {
           </div>
         </div>
       )}
+        <ToastContainer />
     </div>
   );
 };

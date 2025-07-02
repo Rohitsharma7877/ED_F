@@ -8,14 +8,18 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
+import { useAuth } from "../context/AuthContext"; // adjust path if needed
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CTScanHeader = () => {
   const [showForm, setShowForm] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
+
   const navigate = useNavigate();
   const [ctScanTests, setCtScanTests] = useState([]);
   const [loadingTests, setLoadingTests] = useState(true);
+  const { token, user } = useAuth();
 
   useEffect(() => {
     const fetchCtScanTests = async () => {
@@ -26,7 +30,8 @@ const CTScanHeader = () => {
         if (response.ok) {
           // Filter for CT Scan tests using the subCategory field
           const ctTests = data.data.filter(
-            (test) => test.subCategory === "CT-Scan" || test.title.includes("CT-Scan")
+            (test) =>
+              test.subCategory === "CT-Scan" || test.title.includes("CT-Scan")
           );
           setCtScanTests(ctTests);
         }
@@ -41,17 +46,26 @@ const CTScanHeader = () => {
   }, []);
 
   const handleBookNowClick = () => {
-    setShowForm(true);
-    setIsExpanded(true);
-  };
+    if (!token) {
+      toast.error("Please login to book an appointment");
 
-  const handleCloseForm = () => {
-    setShowForm(false);
-    setIsExpanded(false);
+      setTimeout(() => {
+        navigate("/log-in", { state: { from: "/ct-scan" } });
+      }, 3000); // delay to let toast show
+      return;
+    }
+
+    setShowForm(true);
+    // setIsExpanded(true);
   };
 
   const handleBookNow = async (e) => {
     e.preventDefault();
+    if (!token) {
+      toast.error("Please login to book an appointment");
+      navigate("/log-in");
+      return;
+    }
 
     const formData = new FormData(e.target);
     const data = {
@@ -62,7 +76,9 @@ const CTScanHeader = () => {
       age: formData.get("age"),
       gender: formData.get("gender"),
       appointmentDate: formData.get("appointmentDate"),
-      testName: formData.get("testName"), // Add this line
+      testName: formData.get("testName"),
+      userId: user?._id, // Associate with user if logged in
+      status: "pending", // Add this line
     };
 
     // Rest of your function remains the same
@@ -79,16 +95,25 @@ const CTScanHeader = () => {
       );
 
       if (!response.ok) {
-        throw new Error("Failed to submit booking");
+        throw new Error(await response.text());
       }
 
-      const result = await response.json();
-      alert("Appointment submitted successfully!");
-      handleCloseForm();
+      toast.success("Appointment booked successfully!");
+      setShowForm(false);
+
+      // Optional: Refresh admin panel data
+      if (user?.role === "admin") {
+        // Logic to refresh admin data
+      }
     } catch (error) {
-      console.error("Error submitting booking:", error);
-      alert("Failed to submit appointment. Please try again.");
+      console.error("Booking error:", error);
+      toast.error(error.message || "Failed to book appointment");
     }
+  };
+
+  const handleCloseForm = () => {
+    setShowForm(false);
+    setIsExpanded(false);
   };
 
   return (
@@ -104,10 +129,7 @@ const CTScanHeader = () => {
               scanning and enhanced clarity.
             </p>
             <div className="ctscanHeader-buttons">
-              <button
-                className="ctscanHeader-btn"
-                onClick={() => setShowForm(true)}
-              >
+              <button className="ctscanHeader-btn" onClick={handleBookNowClick}>
                 Book Now
               </button>
             </div>

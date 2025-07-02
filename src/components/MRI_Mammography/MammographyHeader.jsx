@@ -8,12 +8,19 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext"; // Make sure path is correct
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const MammographyHeader = () => {
   const [showForm, setShowForm] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [mriMomTests, setMriMomTests] = useState([]);
   const [loadingTests, setLoadingTests] = useState(true);
+  const navigate = useNavigate();
+  const { token, user } = useAuth();
+
 
   useEffect(() => {
   const fetchTestNames = async () => {
@@ -52,11 +59,19 @@ const MammographyHeader = () => {
   fetchTestNames();
 }, []);
 
-  const handleBookNowClick = () => {
-    setShowForm(true);
-    setIsExpanded(true);
-  };
-
+ const handleBookNowClick = () => {
+     if (!token) {
+       toast.error("Please login to book an appointment");
+ 
+       // Delay navigation to allow toast to render
+       setTimeout(() => {
+         navigate("/log-in", { state: { from: "/mri-mammography" } });
+       }, 3000); // Delay for 1.5 seconds
+       return;
+     }
+ 
+     setShowForm(true);
+   };
   const handleCloseForm = () => {
     setShowForm(false);
     setIsExpanded(false);
@@ -64,7 +79,11 @@ const MammographyHeader = () => {
 
   const handleBookNow = async (e) => {
     e.preventDefault();
-
+ if (!token) {
+      toast.error("Please login to book an appointment");
+      navigate("/log-in");
+      return;
+    }
     const formData = new FormData(e.target);
     const data = {
       serviceType: "MRI-Mammography",
@@ -75,6 +94,8 @@ const MammographyHeader = () => {
       gender: formData.get("gender"),
       appointmentDate: formData.get("appointmentDate"),
       testName: formData.get("testName"),
+       userId: user?._id, // Associate with user if logged in
+      status: "pending", 
     };
 
     try {
@@ -90,17 +111,23 @@ const MammographyHeader = () => {
       );
 
       if (!response.ok) {
-        throw new Error("Failed to submit booking");
-      }
+             throw new Error(await response.text());
+           }
+     
+           toast.success("Appointment booked successfully!");
+           setShowForm(false);
+     
+           // Optional: Refresh admin panel data
+           if (user?.role === "admin") {
+             // Logic to refresh admin data
+           }
+         } catch (error) {
+           console.error("Booking error:", error);
+           toast.error(error.message || "Failed to book appointment");
+         }
+       };
 
-      const result = await response.json();
-      alert("Appointment submitted successfully!");
-      handleCloseForm();
-    } catch (error) {
-      console.error("Error submitting booking:", error);
-      alert("Failed to submit appointment. Please try again.");
-    }
-  };
+
   return (
     <div className="mammographyHeader-main1">
       <div className="mammographyHeader-main2">
@@ -116,7 +143,7 @@ const MammographyHeader = () => {
             <div className="mammographyHeader-buttons">
               <button
                 className="mammographyHeader-btn"
-                onClick={() => setShowForm(true)}
+                onClick={handleBookNowClick}
               >
                 Book Now
               </button>
@@ -264,6 +291,7 @@ const MammographyHeader = () => {
           </div>
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 };

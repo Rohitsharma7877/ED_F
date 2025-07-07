@@ -47,7 +47,7 @@ const ResumeModal = ({ categories, onClose, onSubmitSuccess }) => {
       formDataToSend.append("jobCategory", formData.jobCategory);
       formDataToSend.append("resumeFile", resumeFile);
 
-      const response = await axios.post("https://ed-b-1.onrender.com/api/resumes", formDataToSend, {
+      const response = await axios.post("http://localhost:4000/api/resumes", formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

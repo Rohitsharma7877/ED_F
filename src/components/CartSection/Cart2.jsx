@@ -8,6 +8,7 @@ const Cart2 = () => {
   const { cart, fetchCart, removeFromCart } = useCart();
   const { token } = useAuth();
   const [showPayment, setShowPayment] = useState(false); // State for payment modal
+  // const testData = item.subCategoryId || item.testId;
 
   useEffect(() => {
     if (token) {
@@ -37,9 +38,9 @@ const Cart2 = () => {
         <h2>Your Basket</h2>
         <div className="empty-cart-message">
           <p>Your cart is empty</p>
-          <button 
+          <button
             className="continue-shopping-btn"
-            onClick={() => window.location.href = '/'}
+            onClick={() => (window.location.href = "/")}
           >
             Continue Shopping
           </button>
@@ -54,31 +55,47 @@ const Cart2 = () => {
       <div className="cart-wrapper">
         <div className="cart-items">
           {cart
-            .filter(item => item.subCategoryId || item.testId)
+            .filter((item) => item.subCategoryId || item.testId)
             .map((item) => {
               const testData = item.subCategoryId || item.testId;
+              const isExpertPackage = item.isExpertPackage;
+
               return (
                 <div className="cart-card" key={item._id || testData._id}>
                   <img
-                    src={
-                      testData.image
-                        ? `https://ed-b-1.onrender.com/uploads/${testData.image}`
-                        : "/default-test-image.jpg"
-                    }
-                    alt={testData.title}
-                    className="cart-image"
-                    onError={(e) => {
-                      e.target.src = "/default-test-image.jpg";
-                    }}
-                  />
+  src={
+    testData?.image && typeof testData.image === "string"
+      ? `http://localhost:4000/uploads/${testData.image}`
+      : "/default-test-image.jpg"
+  }
+  alt={testData.title || testData.testName || "Test Image"}
+  className="cart-image"
+  onError={(e) => {
+    if (e.target.src !== window.location.origin + "/default-test-image.jpg") {
+      e.target.src = "/default-test-image.jpg";
+    }
+  }}
+/>
+
                   <div className="cart-info">
-                    <h3>{testData.title || "Test"}</h3>
+                    <h3>
+                      {testData.title || testData.testName || "Unnamed Test"}
+                    </h3>
+
                     <p>
                       Price: ₹
-                      {(testData.oldPrice || 0) * (item.quantity || 1)}
+                      {(testData.oldPrice || testData.discountPrice || 0) *
+                        (item.quantity || 1)}
                     </p>
+                    {isExpertPackage && (
+                      <div className="expert-details">
+                        <p>Tests Included: {testData.howManyTest}</p>
+                        <p>Report Time: {testData.reportTime} hrs</p>
+                        <p>Tagline: {testData.tagLine}</p>
+                      </div>
+                    )}
                   </div>
-                  <button 
+                  <button
                     className="remove-item-btn"
                     onClick={() => removeFromCart(testData._id)}
                   >
@@ -95,10 +112,7 @@ const Cart2 = () => {
           <p>Delivery: Free</p>
           <hr />
           <p className="total-price">Total: ₹{getTotalPrice()}</p>
-          <button 
-            className="checkout-btn"
-            onClick={handleCheckout}
-          >
+          <button className="checkout-btn" onClick={handleCheckout}>
             Proceed to Checkout
           </button>
         </div>
@@ -106,25 +120,27 @@ const Cart2 = () => {
 
       {/* Payment Overlay */}
       {showPayment && (
-  <div className="payment-overlay">
-    <div className="payment-modal">
-      <button className="close-payment" onClick={closePayment}>
-        <FaTimes />
-      </button>
-      <h3>Payment Information</h3>
-      <div className="payment-message">
-        <p className="main-message">When you visit the centre that time you pay</p>
-        <p className="sub-message">Sorry for the inconvenience, our team is working on the payment section</p>
-      </div>
-      <button 
-        className="continue-btn"
-        onClick={closePayment}
-      >
-        Continue
-      </button>
-    </div>
-  </div>
-)}
+        <div className="payment-overlay">
+          <div className="payment-modal">
+            <button className="close-payment" onClick={closePayment}>
+              <FaTimes />
+            </button>
+            <h3>Payment Information</h3>
+            <div className="payment-message">
+              <p className="main-message">
+                When you visit the centre that time you pay
+              </p>
+              <p className="sub-message">
+                Sorry for the inconvenience, our team is working on the payment
+                section
+              </p>
+            </div>
+            <button className="continue-btn" onClick={closePayment}>
+              Continue
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

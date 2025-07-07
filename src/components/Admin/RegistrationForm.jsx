@@ -30,7 +30,7 @@ const RegistrationForm = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `https://ed-b-1.onrender.com/api/${formType}`,
+        `http://localhost:4000/api/${formType}`,
         formData
       );
 

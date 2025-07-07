@@ -23,7 +23,7 @@ const team = [
     image:
       "https://res.cloudinary.com/duw27lpbe/image/upload/v1733395110/Prathiksha_llzepb.jpg",
     name: "Dr. Prateeksha",
-    designation: "Radiology Department",
+    designation: "Obstetrics & Gynecologist Department",
     description:"Dr. Pratheeksha H.K., a GOLD medalist and best outgoing postgraduate from SDM Medical College, is a skilled obstetrician and gynecologist. ",
   },
   {
@@ -31,15 +31,15 @@ const team = [
     image:
       "https://res.cloudinary.com/dngcmfwpg/image/upload/v1733459755/Dr.Priyanka-removebg-preview_twwplv.png",
     name: "Dr. Priyanka",
-    designation: "Radiology Department",
+    designation: "Dermatology Department",
     description:"Dr. Priyanka Gowda C.D., a consultant dermatologist and dermato-surgeon with an MD from JSS Medical College, specializes in medical and surgical dermatology. ",
   },
   {
     id: 5,
     image:
       "https://res.cloudinary.com/duw27lpbe/image/upload/v1733395568/Preethy_h1orsk.jpg",
-    name: "Dr. Preety",
-    designation: "Radiology Department",
+    name: "Mrs. Preety",
+    designation: " Managing Department",
     description:"Mrs. Preety, founder and Managing Director, brings 17 years of expertise in software technology, automation, and agile development. ",
   },
 ];
@@ -55,10 +55,7 @@ const Team = () => {
             <img src={member.image} alt={member.name} className="team-img" />
             <h3 className="team-name">{member.name}</h3>
             <p className="team-role">{member.designation}</p>
-            {/* <p className="team-desc">
-              Sample text. Click to select the text box. Click again or double
-              click to start editing the text.
-            </p> */}
+            <p className="team-desc">{member.description}</p>
           </div>
         ))}
       </div>

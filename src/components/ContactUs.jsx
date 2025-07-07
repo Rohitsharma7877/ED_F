@@ -8,7 +8,7 @@ const ContactUs = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone:"",
+    phone: "",
     message: "",
   });
 
@@ -20,31 +20,31 @@ const ContactUs = () => {
     });
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  
-  try {
-    const response = await fetch("https://ed-b-1.onrender.com/api/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    const data = await response.json();
+    try {
+      const response = await fetch("http://localhost:4000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-    if (!response.ok) {
-      throw new Error(data.message || "Failed to send message");
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to send message");
+      }
+
+      alert(data.message || "Message Sent Successfully!");
+      setFormData({ name: "", email: "", phone: "", message: "" });
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert(error.message || "Failed to send message. Please try again.");
     }
-
-    alert(data.message || "Message Sent Successfully!");
-    setFormData({ name: "", email: "", phone: "", message: "" });
-  } catch (error) {
-    console.error("Error submitting form:", error);
-    alert(error.message || "Failed to send message. Please try again.");
-  }
-};
+  };
 
   return (
     <div className="contactus-container">
@@ -59,7 +59,7 @@ const handleSubmit = async (e) => {
             <div className="contactus-form-group">
               <label htmlFor="name">Your Name</label>
               <input
-              className="inputName"
+                className="inputName"
                 type="text"
                 id="name"
                 name="name"
@@ -72,7 +72,7 @@ const handleSubmit = async (e) => {
             <div className="contactus-form-group">
               <label htmlFor="email">Your Email</label>
               <input
-              className="inputName"
+                className="inputName"
                 type="email"
                 id="email"
                 name="email"
@@ -85,7 +85,7 @@ const handleSubmit = async (e) => {
             <div className="contactus-form-group">
               <label htmlFor="email">Mobile Number</label>
               <input
-              className="inputName"
+                className="inputName"
                 type="Number"
                 id="phone"
                 name="phone"
@@ -116,20 +116,19 @@ const handleSubmit = async (e) => {
           <h3 className="contactus-map-title">Our Location</h3>
           <div className="contactus-map-container">
             <MapContainer
-              center={[13.025532, 77.594452]} // Coordinates for Dubai, UAE
+              center={[13.005107, 76.106826]} 
               zoom={13}
-              style={{ height: "400px", width: "100%" }} // Map size
+              style={{ height: "400px", width: "100%" }}
             >
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               />
-              <Marker position={[13.025532, 77.594452]}>
+              <Marker position={[13.005107, 76.106826]}>
                 <Popup>
-                  <b>Hospilab Technology Private Limited</b>
+                  <b>Expert Diagnostics Center</b>
                   <br />
-                  9, 1st Cross Road, Post, Gangenahalli, P&T Colony, RT Nagar,
-                  Bengaluru, Karnataka 560032
+                 2444+2JW, MG Rd, Krishnaraja Pura, Hassan, Karnataka 573201
                 </Popup>
               </Marker>
             </MapContainer>
@@ -138,10 +137,6 @@ const handleSubmit = async (e) => {
       </div>
     </div>
   );
-}
+};
 
-export default ContactUs
-
-
-
- 
+export default ContactUs;

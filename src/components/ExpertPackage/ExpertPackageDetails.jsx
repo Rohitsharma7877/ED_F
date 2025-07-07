@@ -2,19 +2,32 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./ExpertPackageDetails.css";
 import { RxDotFilled } from "react-icons/rx";
+import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
+import { toast } from "react-toastify";
 
 const ExpertPackageDetails = () => {
   const { id } = useParams(); // Get package ID from URL
   const [packageData, setPackageData] = useState(null); // State to store package details
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(""); // Error state
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const { addToCart } = useCart();
+  const { token } = useAuth();
+
+  useEffect(() => {
+    if (!token) {
+      toast.info("Please login to add items to cart");
+      // navigate('/login');
+    }
+  }, [token]);
 
   // Fetch package details from backend
   useEffect(() => {
     const fetchPackageDetails = async () => {
       try {
         const response = await fetch(
-          `https://ed-b-1.onrender.com/api/expertServiceLists/${id}`
+          `http://localhost:4000/api/expertServiceLists/${id}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch package details");
@@ -99,7 +112,29 @@ const ExpertPackageDetails = () => {
             </div>
           </div>
 
-          <button className="add-to-cart">Add to Cart</button>
+          <button
+            className={`add-to-cart ${isAddingToCart ? "loading" : ""}`}
+            disabled={isAddingToCart}
+            onClick={async () => {
+              setIsAddingToCart(true);
+              try {
+                await addToCart(packageData._id, packageData.testName, true);
+                toast.success(`${packageData.testName} added to cart`, {
+                  position: "top-right",
+                  autoClose: 3000,
+                });
+              } catch (error) {
+                toast.error(error.message, {
+                  position: "top-right",
+                  autoClose: 5000,
+                });
+              } finally {
+                setIsAddingToCart(false);
+              }
+            }}
+          >
+            {isAddingToCart ? <span className="spinner"></span> : "Add to Cart"}
+          </button>
         </div>
       </div>
     </div>

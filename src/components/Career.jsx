@@ -12,7 +12,7 @@ const Career = () => {
   useEffect(() => {
     const fetchJobRoles = async () => {
       try {
-        const response = await fetch("https://ed-b-1.onrender.com/api/careers");
+        const response = await fetch("http://localhost:4000/api/careers");
         const data = await response.json();
         if (response.ok) {
           setJobRoles(data.data);

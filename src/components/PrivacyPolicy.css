@@ -1,0 +1,120 @@
+/* Container */
+.term-container {
+  /* font-family: 'Segoe UI', sans-serif; */
+  background-color: #f8f8f8;
+  padding-top: 17vh;
+}
+
+/* Banner Section */
+.top-banner {
+  position: relative;
+  width: 100%;
+  height: 200px; /* Adjust as needed */
+  background-image: url('../components/assests/background2.jpg'); /* ✅ Use your image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4); /* ✅ Dark overlay */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner-title {
+  font-size: 3rem;
+  color: #ff3c00;
+  font-weight: bold;
+  font-family: 'Georgia', serif;
+}
+
+.banner-subtitle {
+  font-size: 1.5rem;
+  color: #cccccc;
+}
+
+
+/* Terms Content */
+.terms-content {
+  max-width: 900px;
+  margin: 3rem auto;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  line-height: 1.8;
+  text-align: left;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.terms-title,
+.terms-subtitle,
+.terms-paragraph,
+.terms-list {
+  text-align: start; /* start = left in LTR languages */
+}
+
+.terms-title {
+  font-size: 1.8rem;
+  color: #2d4a7d;
+  border-bottom: 4px solid #a7c1e0;
+  display: inline-block;
+  padding-bottom: 0.3rem;
+  margin-bottom: 1.5rem;
+}
+
+.terms-subtitle {
+  font-size: 1.2rem;
+  color: #a7c1e0;
+  margin-top: 2rem;
+}
+
+.terms-paragraph {
+  font-size: 2.2vh;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.terms-list {
+  margin-left: 2rem;
+  padding-left: 1rem;
+  font-size: 0.8rem;
+  color: #333;
+}
+
+.terms-list li {
+  margin-bottom: 0.8rem;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .top-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .doctor-image {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+
+  .search-section {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .location-select,
+  .search-input,
+  .upload-btn {
+    width: 100%;
+  }
+}

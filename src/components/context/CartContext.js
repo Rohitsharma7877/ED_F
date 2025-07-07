@@ -27,7 +27,7 @@ export const CartProvider = ({ children }) => {
   setIsLoading(true);
   setError(null);
   try {
-    const res = await axios.get("https://ed-b-1.onrender.com/person/cart", {
+    const res = await axios.get("http://localhost:4000/person/cart", {
       headers: { Authorization: `Bearer ${token}` },
     });
     
@@ -55,53 +55,59 @@ export const CartProvider = ({ children }) => {
     fetchCart();
   }, [fetchCart]);
 
-const addToCart = async (testId, testName) => {
-  // console.log('[CART] Attempting to add:', testId);
+const addToCart = async (testId, testName, isExpertPackage = false) => {
   setIsLoading(true);
   setError(null);
 
   try {
-    console.log('[CART] Adding test:', testId);
-
+    console.log("🛒 Adding:", { testId, isExpertPackage });
+    
     if (!token) {
-      throw new Error("Authentication required - please login");
+      throw new Error("Please login to add items to cart");
     }
 
     const response = await axios.post(
-      "https://ed-b-1.onrender.com/person/cart/add",
-      { testId },
+      "http://localhost:4000/person/cart/add",
+      { 
+        testId,
+        isExpertPackage 
+      },
       {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
-        timeout: 8000
+        timeout: 10000
       }
     );
 
     if (!response.data?.success) {
-      throw new Error(response.data?.error || "Failed to add to cart");
+      throw new Error(response.data.error || "Failed to add to cart");
     }
 
-    // Refresh cart data
     await fetchCart();
-    
-    return { 
-      success: true,
-      data: response.data
-    };
+    return response.data;
 
   } catch (error) {
-    const errorDetails = {
-      message: error.message,
-      response: error.response?.data,
-      config: error.config
-    };
+    let errorMessage = "Failed to add to cart";
     
-    console.error('[CART] Full error:', errorDetails);
-    setError(errorDetails.response?.error || error.message);
-    throw errorDetails;
-    
+    if (error.response) {
+      errorMessage = error.response.data?.error || 
+                   `Server error (${error.response.status})`;
+    } else if (error.request) {
+      errorMessage = "No response from server";
+    } else {
+      errorMessage = error.message;
+    }
+
+    console.error("❌ Cart error:", {
+      error: errorMessage,
+      details: error.config,
+      stack: error.stack
+    });
+
+    setError(errorMessage);
+    throw new Error(errorMessage);
   } finally {
     setIsLoading(false);
   }
@@ -112,7 +118,7 @@ const addToCart = async (testId, testName) => {
     setIsLoading(true);
     try {
       const response = await axios.post(
-        "https://ed-b-1.onrender.com/person/cart/remove",
+        "http://localhost:4000/person/cart/remove",
         { testId }, // ✅ Correct body
         {
           headers: {

@@ -21,7 +21,7 @@ function Header() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://ed-b-1.onrender.com/api/bookings",
+        "http://localhost:4000/api/bookings",
         formData
       );
 

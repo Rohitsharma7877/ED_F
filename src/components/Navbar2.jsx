@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaPlus, FaMinus, FaPhoneVolume } from "react-icons/fa6";
 import { IoMdCloudDownload } from "react-icons/io";
-// import { LuDot } from "react-icons/lu";
-// import doctor from './assests/indianGroupDoctors.jpg'
 import { IoClose } from "react-icons/io5";
 import { RxHamburgerMenu } from "react-icons/rx";
 import "./navbar2.css";
@@ -47,7 +45,6 @@ const Navbar2 = () => {
               All Test <span className="down-icon">▼</span>
             </Link>
           </li>
-        
 
           <li className="dropdown">
             <Link to="#">
@@ -110,7 +107,6 @@ const Navbar2 = () => {
             <Link to="/health-package">
               Expert Care Package <span className="down-icon">▼</span>
             </Link>
-            
           </li>
 
           {/* Download reports */}
@@ -121,11 +117,10 @@ const Navbar2 = () => {
             </Link>
           </li>
 
-
           <li>
             <Link to="/mobile" className="flex items-start gap-2">
               <FaPhoneVolume className="text-[18px] " />
-              <div className="text-left text-[#f0a500]">+91 0123456789</div>
+              <div className="text-left text-[#f0a500]">+91 817 2450 920</div>
             </Link>
           </li>
         </ul>
@@ -155,20 +150,20 @@ const Navbar2 = () => {
             <li>
               <div
                 className="submenu-header"
-                onClick={() => toggleSubmenu("labTest")}
+                onClick={() => toggleSubmenu("allTest")}
               >
-                <span>Lab Test</span>
-                {openSubmenu === "labTest" ? (
+                <span>All Test</span>
+                {openSubmenu === "allTest" ? (
                   <FaMinus className="submenu-icon" />
                 ) : (
                   <FaPlus className="submenu-icon" />
                 )}
               </div>
-              {openSubmenu === "labTest" && (
+              {openSubmenu === "allTest" && (
                 <ul className="slider-dropdown-menu">
                   <li>
-                    <Link to="#" onClick={closeSidebar}>
-                      Book Now
+                    <Link to="/all-test" onClick={closeSidebar}>
+                      View All Tests
                     </Link>
                   </li>
                 </ul>
@@ -292,7 +287,7 @@ const Navbar2 = () => {
             </li>
             <li>
               <Link to="/mobile" onClick={closeSidebar}>
-                +91 0123456789
+                +91 817 2450 920
               </Link>
             </li>
           </ul>

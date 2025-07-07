@@ -73,7 +73,7 @@ const handleBookNow = async (e) => {
   };
 
   try {
-    const response = await fetch("https://ed-b-1.onrender.com/api/service-bookings", {
+    const response = await fetch("http://localhost:4000/api/service-bookings", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -126,11 +126,11 @@ const handleCloseForm = () => {
       <div className="patients-contact-section">
         <div className="patients-contact-info">
           <FaPhoneVolume className="patients-contact-icon" />
-          <p>+91 coming soon</p>
+          <p>+91 817 2450 920</p>
         </div>
         <div className="patients-contact-info">
           <FaWhatsapp className="patients-contact-icon" />
-          <p>+91 coming soon</p>
+          <p>+91 817 2450 920</p>
         </div>
         <div className="patients-contact-info">
           <FaEnvelope className="patients-contact-icon" />

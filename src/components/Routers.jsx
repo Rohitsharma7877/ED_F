@@ -54,6 +54,9 @@ import Career from "./Career";
 import AdminCareer from "./Admin/AdminCareer";
 import AdminResumes from "./Admin/AdminResumes"; // Add this import
 import ResumeModal from "./ResumeModal";
+import AdminCart from './Admin/AdminCart'
+import PrivacyPolicy from "./PrivacyPolicy";
+
 
 const Routers = () => {
   // const { isLoggedIn } = useAuth();
@@ -74,6 +77,7 @@ const Routers = () => {
       <Route path="/test-details/:id" element={<TestDetails />} />
       <Route path="/expert-gallery" element={<GalleryHome />} />
       <Route path="/term-condition" element={<TermCondition />} />
+      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       <Route path="/career" element={<Career />} />
       <Route path="/submit-resume" element={<ResumeModal />} />
 
@@ -100,6 +104,7 @@ const Routers = () => {
         <Route path="view-contact-us" element={<ViewContact />} />
         <Route path="sub-category" element={<SubCategory />} />
         <Route path="expert-service-list" element={<ExpertServiceList />} />
+        <Route path="admincart" element={<AdminCart />} />
         <Route
           path="admin-offline-registration/view-offline-registrations"
           element={<FetchRegistrations />}

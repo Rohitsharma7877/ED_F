@@ -70,7 +70,7 @@ const AmbulanceServices = () => {
 
     try {
       const response = await fetch(
-        "https://ed-b-1.onrender.com/api/ambulance-services",
+        "http://localhost:4000/api/ambulance-services",
         {
           method: "POST",
           headers: {

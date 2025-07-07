@@ -58,7 +58,7 @@ const SignUp2 = () => {
     try {
       // Sending data to the backend API using Axios
       const response = await axios.post(
-        "https://ed-b-1.onrender.com/person/signup",
+        "http://localhost:4000/person/signup",
         formData
       );
 

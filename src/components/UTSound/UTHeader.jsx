@@ -26,7 +26,7 @@ const UTHeader = () => {
   useEffect(() => {
     const fetchUtsTests = async () => {
       try {
-        const response = await fetch("https://ed-b-1.onrender.com/api/subcategories");
+        const response = await fetch("http://localhost:4000/api/subcategories");
         const data = await response.json();
 
         if (response.ok) {
@@ -89,7 +89,7 @@ const UTHeader = () => {
 
     try {
       const response = await fetch(
-        "https://ed-b-1.onrender.com/api/service-bookings",
+        "http://localhost:4000/api/service-bookings",
         {
           method: "POST",
           headers: {
@@ -258,15 +258,15 @@ const UTHeader = () => {
                     </RadioGroup>
                   </FormControl>
                 </div>
-                <div className="uT-book-form-name">
+                {/* <div className="uT-book-form-name">
                   <label>Appointment Date:</label>
                   <input
                     type="date"
-                    name="appointmentDate" // Add name attribute
+                    name="appointmentDate" 
                     required
                     min={new Date().toISOString().split("T")[0]}
                   />
-                </div>
+                </div> */}
                 <button type="submit" className="uT-form-submit-btn">
                   Submit
                 </button>

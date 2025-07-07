@@ -12,7 +12,7 @@ const TestDetails = () => {
     const fetchTestDetails = async () => {
       try {
         const response = await fetch(
-          `https://ed-b-1.onrender.com/api/subcategories/${id}`
+          `http://localhost:4000/api/subcategories/${id}`
         );
         if (response.ok) {
           const data = await response.json();
@@ -44,7 +44,7 @@ const TestDetails = () => {
           <div className="test-details-box1">
             {test.image && (
               <img
-                src={`https://ed-b-1.onrender.com/uploads/${test.image}`}
+                src={`http://localhost:4000/uploads/${test.image}`}
                 alt={test.title}
                 className="test-image"
               />

@@ -34,7 +34,7 @@ const AllTest = () => {
       setLoading(true);
       try {
         const categoryResponse = await fetch(
-          "https://ed-b-1.onrender.com/api/categories"
+          "http://localhost:4000/api/categories"
         );
         const categoryResult = await categoryResponse.json();
         console.log("Category API Response:", categoryResult);
@@ -63,8 +63,8 @@ const AllTest = () => {
     try {
       const url =
         category === "All Test"
-          ? "https://ed-b-1.onrender.com/api/categories"
-          : `https://ed-b-1.onrender.com/api/categories?category=${category}`;
+          ? "http://localhost:4000/api/categories"
+          : `http://localhost:4000/api/categories?category=${category}`;
       const res = await fetch(url);
       const json = await res.json();
       setData(json.data);
@@ -77,7 +77,7 @@ const AllTest = () => {
     setExpandedCardId(card._id);
     try {
       const res = await fetch(
-        `https://ed-b-1.onrender.com/api/subcategories?category=${selectedCategory}&subCategory=${card.title}`
+        `http://localhost:4000/api/subcategories?category=${selectedCategory}&subCategory=${card.title}`
       );
       const json = await res.json();
       const filtered = json.data.filter(
@@ -230,7 +230,7 @@ const AllTest = () => {
                   <img
                     src={
                       card.image
-                        ? `https://ed-b-1.onrender.com/uploads/${card.image}`
+                        ? `http://localhost:4000/uploads/${card.image}`
                         : "default-image-url"
                     }
                     alt={card.title}

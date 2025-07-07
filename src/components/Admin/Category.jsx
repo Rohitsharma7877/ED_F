@@ -31,7 +31,7 @@ const Category = () => {
   // Fetch all categories from the backend
   const fetchCategories = async () => {
     try {
-      const response = await fetch("https://ed-b-1.onrender.com/api/categories");
+      const response = await fetch("http://localhost:4000/api/categories");
       const data = await response.json();
       if (response.ok) {
         setCategoriesList(data.data);
@@ -79,8 +79,8 @@ const Category = () => {
 
     try {
       const url = editIndex !== null
-        ? `https://ed-b-1.onrender.com/api/categories/${categoriesList[editIndex]._id}`
-        : "https://ed-b-1.onrender.com/api/categories";
+        ? `http://localhost:4000/api/categories/${categoriesList[editIndex]._id}`
+        : "http://localhost:4000/api/categories";
 
       const method = editIndex !== null ? "PUT" : "POST";
 
@@ -110,7 +110,7 @@ const Category = () => {
     setTitle(selectedRow.title);
     setDescription(selectedRow.description);
     setCategory(selectedRow.category);
-    setImage({ preview: selectedRow.image ? `https://ed-b-1.onrender.com/uploads/${selectedRow.image}` : null });
+    setImage({ preview: selectedRow.image ? `http://localhost:4000/uploads/${selectedRow.image}` : null });
     setEditIndex(index);
     formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
@@ -119,7 +119,7 @@ const Category = () => {
   const handleDelete = async (index) => {
     const categoryId = categoriesList[index]._id;
     try {
-      const response = await fetch(`https://ed-b-1.onrender.com/api/categories/${categoryId}`, {
+      const response = await fetch(`http://localhost:4000/api/categories/${categoryId}`, {
         method: "DELETE",
       });
 
@@ -320,7 +320,7 @@ const Category = () => {
                     <td>
                       {categoriesinput.image ? (
                         <img
-                          src={`https://ed-b-1.onrender.com/uploads/${categoriesinput.image}`}
+                          src={`http://localhost:4000/uploads/${categoriesinput.image}`}
                           alt="Uploaded Preview"
                           className="category-image"
                         />
